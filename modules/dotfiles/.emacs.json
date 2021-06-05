@@ -1,0 +1,22 @@
+{
+  "git": {
+    "directory": "~/workspace",
+    "repos": [
+      "tjmaynes/blog",
+      "tjmaynes/notebook",
+      "tjmaynes/career"
+    ]
+  },
+  "media": {
+    "music": {
+      "directory": "~/syncbox/music"
+    }
+  },
+  "writing": {
+    "directory": "~/workspace/tjmaynes/notebook",
+    "spellchecker-file": "~/.aspell.en.pws"
+  },
+  "theme": {
+    "bookmarks-file": "~/.emacs-bookmarks"
+  }
+}
