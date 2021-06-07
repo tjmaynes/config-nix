@@ -53,6 +53,7 @@ in {
       "zoom"
     ];
     masApps = {
+      Bitwarden = 1352778147;
       Xcode = 497799835;
       DaisyDisk = 411643860;
       Keynote = 409183694;
