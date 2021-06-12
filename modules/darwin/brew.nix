@@ -50,6 +50,7 @@ in {
       "obs"
       "slack"
       "spotify"
+      "visual-studio-code"
       "zoom"
     ];
     masApps = {

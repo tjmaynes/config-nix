@@ -1,5 +1,5 @@
 " ---- dot vimrc ----
-" Author: TJ Maynes <tjmaynes at gmail dot com>
+" Author: TJ Maynes <tj at tjmaynes dot com>
 " Website: https://tjmaynes.com/
 
 
@@ -112,8 +112,11 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'LnL7/vim-nix'
 
 Plug 'vim-python/python-syntax'
+Plug 'fatih/vim-go'
+
 Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
