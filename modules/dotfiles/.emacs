@@ -189,7 +189,7 @@
   (package-manager/ensure-packages-installed 'zenburn-theme)
   (load-theme 'zenburn t))
 
-(defun theme/default-setup (bookmarks-file)
+(defun theme/default-setup ()
   (setq inhibit-splash-screen t
 	initial-scratch-message ""
 	mac-allow-anti-aliasing t
@@ -199,7 +199,6 @@
 	scroll-preserve-screen-position 1
 	ring-bell-function 'ignore
 	display-time-day-and-date t
-	bookmark-default-file bookmarks-file
 	ns-use-proxy-icon nil
 	frame-title-format nil
 	default-frame-alist '((font . "Inconsolata-16")))
@@ -209,12 +208,11 @@
   (menu-bar-mode -1)
   (tool-bar-mode -1))
 
-(defun theme/setup (theme-config)
-  (let ((bookmarks-file (gethash "bookmarks-file" theme-config)))
-    (theme/default-setup bookmarks-file)
-    (if (display-graphic-p)
-	(theme/gui-setup)
-      (theme/cli-setup))))
+(defun theme/setup ()
+  (theme/default-setup)
+  (if (display-graphic-p)
+      (theme/gui-setup)
+    (theme/cli-setup)))
 
 (defun chat/connect (password)
   (package-manager/ensure-packages-installed 'erc)
@@ -240,48 +238,44 @@
     (erc-tls :server server :port port :password password
 	     :nick nickname :full-name fullname)))
 
-(defun writing/org-setup (org-directory)
+(defun writing/org-setup ()
   (package-manager/ensure-packages-installed 'org 'org-journal)
-  (let* ((org-agenda-file (utilities/ensure-file-location-exists org-directory "inbox.org")))
-    (setq initial-major-mode 'org-mode
-	  org-directory org-directory
-	  org-default-notes-file (utilities/ensure-file-location-exists org-directory "scratch.org")
-	  diary-file (utilities/ensure-file-location-exists org-directory "diary.org")
-	  org-startup-truncated nil)
-    (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
-    (setq org-capture-templates
-	  '(("t" "Todo" entry (file org-default-notes-file)
-	     "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
-	    ("m" "Meeting" entry (file org-default-notes-file)
-	     "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+  (setq initial-major-mode 'org-mode
+	org-startup-truncated nil)
+  (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+  (setq org-capture-templates
+	'(("t" "Todo" entry (file org-default-notes-file)
+	   "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
+	  ("m" "Meeting" entry (file org-default-notes-file)
+	   "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
 	    ("i" "Idea" entry (file org-default-notes-file)
 	     "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
 	    ("n" "Next Task" entry (file+headline org-default-notes-file "tasks")
 	     "** NEXT %? \nDEADLINE: %t")))
-    (setq org-todo-keywords
-	  '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-	    (sequence "WAITING(w@/!)" "INACTIVE(i@/!)" "|" "CANCELLED(c@/!)" "MEETING")))
-    (setq org-todo-state-tags-triggers
-	  '(("CANCELLED" ("CANCELLED" . t))
-	    ("WAITING" ("WAITING" . t))
-	    ("INACTIVE" ("WAITING") ("INACTIVE" . t))
-	    (done ("WAITING") ("INACTIVE"))
-	    ("TODO" ("WAITING") ("CANCELLED") ("INACTIVE"))
-	    ("NEXT" ("WAITING") ("CANCELLED") ("INACTIVE"))
-	    ("DONE" ("WAITING") ("CANCELLED") ("INACTIVE"))))
-    (setq org-todo-keyword-faces
-	  '(("TODO" :foreground "red" :weight bold)
+  (setq org-todo-keywords
+	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+	  (sequence "WAITING(w@/!)" "INACTIVE(i@/!)" "|" "CANCELLED(c@/!)" "MEETING")))
+  (setq org-todo-state-tags-triggers
+	'(("CANCELLED" ("CANCELLED" . t))
+	  ("WAITING" ("WAITING" . t))
+	  ("INACTIVE" ("WAITING") ("INACTIVE" . t))
+	  (done ("WAITING") ("INACTIVE"))
+	  ("TODO" ("WAITING") ("CANCELLED") ("INACTIVE"))
+	  ("NEXT" ("WAITING") ("CANCELLED") ("INACTIVE"))
+	  ("DONE" ("WAITING") ("CANCELLED") ("INACTIVE"))))
+  (setq org-todo-keyword-faces
+	'(("TODO" :foreground "red" :weight bold)
 	    ("NEXT" :foreground "blue" :weight bold)
 	    ("DONE" :foreground "forest green" :weight bold)
 	    ("WAITING" :foreground "orange" :weight bold)
 	    ("INACTIVE" :foreground "magenta" :weight bold)
 	    ("CANCELLED" :foreground "forest green" :weight bold)
-	    ("MEETING" :foreground "forest green" :weight bold)))))
+	    ("MEETING" :foreground "forest green" :weight bold))))
 
-(defun writing/spellchecker-setup (spellchecker-file)
+(defun writing/spellchecker-setup ()
   (setq ispell-program-name "aspell"
 	ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
-	ispell-personal-dictionary spellchecker-file)
+	ispell-personal-dictionary "")
   (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
   (add-to-list 'ispell-skip-region-alist '("#\\+begin_src" . "#\\+end_src"))
   (add-to-list 'ispell-skip-region-alist '("#\\+begin_quote" . "#\\+end_quote")))
@@ -291,19 +285,19 @@
   (setq-default TeX-engine 'xetex
 		TeX-PDF-mode t))
 
-(defun writing/setup (writing-config)
-  (writing/org-setup (gethash "directory" writing-config))
-  (writing/spellchecker-setup (gethash "spellchecker-file" writing-config))
+(defun writing/setup ()
+  (writing/org-setup)
+  (writing/spellchecker-setup)
   (writing/latex-setup))
 
-(defun media/music-setup (music-config)
+(defun media/music-setup ()
   (utilities/ensure-programs-installed 'mpv)
   (package-manager/ensure-packages-installed 'emms)
-  (setq emms-source-file-default-directory (gethash "directory" music-config)
+  (setq
    emms-player-list '(emms-player-mpv)
-	emms-info-asynchronously t
-	emms-show-format "♪ %s"
-	emms-playlist-default-major-mode 'emms-playlist-mode)
+   emms-info-asynchronously t
+   emms-show-format "♪ %s"
+   emms-playlist-default-major-mode 'emms-playlist-mode)
   (emms-standard)
   (emms-default-players))
 
@@ -331,8 +325,8 @@
   (add-hook 'nov-mode-hook 'visual-line-mode)
   (add-hook 'nov-mode-hook 'visual-fill-column-mode))
 
-(defun media/setup (media-config)
-  (media/music-setup (gethash "music" media-config))
+(defun media/setup ()
+  (media/music-setup)
   (media/rss-feed-setup)
   (media/ebook-setup))
 
@@ -358,22 +352,15 @@
     (require 'seq)
     (seq-map '(lambda (repo) (version-control/clone-repo repo directory)) repos)))
 
+(defun initialize () 
+  (development/set-exec-path-from-shell-PATH)
+  (package-manager/setup)
+  (theme/setup)
+  (key-bindings/setup)
+  (backup/setup)
+  (web-browser/setup)
+  (development/setup)
+  (writing/setup)
+  (media/setup))
 
-(defun initialize (config)
-  (let* ((writing-config (gethash "writing" config))
-	 (git-config (gethash "git" config))
-	 (media-config (gethash "media" config))
-	 (chat-config (gethash "chat" config))
-	 (theme-config (gethash "theme" config)))
-    (development/set-exec-path-from-shell-PATH)
-    (package-manager/setup)
-    (version-control/setup git-config)
-    (key-bindings/setup)
-    (backup/setup)
-    (web-browser/setup)
-    (theme/setup theme-config)
-    (development/setup)
-    (writing/setup writing-config)
-    (media/setup media-config)))
-
-(initialize (utilities/read-json-file "~/.emacs.json"))
+(initialize)

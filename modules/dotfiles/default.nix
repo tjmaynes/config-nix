@@ -26,7 +26,6 @@ in {
 
     file.".alacritty.yml".source = ./.alacritty.yml;
     file.".emacs".source = ./.emacs;
-    file.".emacs.json".source = ./.emacs.json;
     file.".offlineimap.py".source = ./.offlineimap.py;
     file.".offlineimaprc".source = ./.offlineimaprc;
     file.".signature".source = ./.signature;

@@ -1,4 +1,4 @@
-# config
+# Config
 > Configs for my workstations using nix, nix-darwin and home-manager. 
 
 ## Requirements
