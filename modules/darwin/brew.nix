@@ -47,7 +47,6 @@ in {
       "intellij-idea"
       "iterm2"
       "macvim"
-      "minecraft"
       "mpv"
       "obs"
       "slack"

@@ -1,14 +1,53 @@
 { config, pkgs, ... }:
 
-let home = builtins.getEnv "HOME";
+let 
+  home = builtins.getEnv "HOME";
+  initScript = ''
+    if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+    echo "Installing Vim Plug..."
+    curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+
+    if [[ ! -d "$HOME/.vim/plugged" ]]; then
+    echo "Installing Vim plugins..."
+    vim +'PlugInstall --sync' +qa
+    fi
+
+    function pclone() {
+    GIT_REPO=tjmaynes/$1
+
+    if [[ -z "$GIT_REPO" ]]; then
+      echo "Please provide a git repo as arg 1"  
+    elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
+      git clone git@github.com:$GIT_REPO $WORKSPACE_DIR/$GIT_REPO
+    fi
+
+    [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
+   }
+  '';
+  shellAliases = {
+    ".." = "cd ..";
+    "..." = "cd ../../";
+    "...." = "cd ../../../";
+    "....." = "cd ../../../../";
+    "......" = "cd ../../../../../";
+    "ll" = "ls -al";
+    "ns" = "nix-shell --command zsh";
+    "k" = "kubectl";
+  };
+  environmentVariables = {
+    EDITOR = "vim";
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
+    WORKSPACE_DIR = "${home}/workspace";
+  };
 
 in {
   imports = [ ../settings.nix ];
 
   home = {
     packages = with pkgs; [
-      adoptopenjdk-bin
       alacritty
+      docker
       ffmpeg
       git
       home-manager
@@ -17,6 +56,7 @@ in {
       mutt
       offlineimap
       pandoc
+      texlive.combined.scheme-full
       tmux
       vim
       unzip
@@ -39,7 +79,7 @@ in {
 
     direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv.enable = true;
     };
 
     tmux.enable = true;
@@ -73,6 +113,7 @@ in {
       extraConfig = {
         init.defaultBranch = "main";
         gpg.program = "gpg2";
+        core.editor = "vim";
       };
     };
 
@@ -105,64 +146,17 @@ in {
         ]; 
         prompt.theme = "steeef";
       };
-      initExtra = ''
-        if [[ -z "$(command -v brew)" ]]; then
-          echo "Installing Homebrew..."
-          ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
-        fi
-
-        if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-          echo "Installing Vim Plug..."
-          curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        fi
-
-        if [[ ! -d "$HOME/.vim/plugged" ]]; then
-          echo "Installing Vim plugins..."
-          vim +'PlugInstall --sync' +qa
-        fi
-      '';
-      shellAliases = {
-        "ns" = "nix-shell --command zsh";
-      };
-      sessionVariables = {
-        EDITOR = "vim";
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10";
-      };
+      initExtra = initScript;
+      shellAliases = shellAliases; 
+      sessionVariables = environmentVariables;
     };
 
     bash = {
       enable = true;
       historyFile = "${home}/.config/bash/.bash_history";
-      shellAliases = {
-        ".." = "cd ..";
-        "..." = "cd ../../";
-        "...." = "cd ../../../";
-        "....." = "cd ../../../../";
-        "......" = "cd ../../../../../";
-        "ll" = "ls -al";
-        "ns" = "nix-shell --command zsh";
-      };
-      initExtra = ''
-        if [[ -z "$(command -v brew)" ]]; then
-          echo "Installing Homebrew..."
-          ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
-        fi
-
-        if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-          echo "Installing Vim Plug..."
-          curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        fi
-
-        if [[ ! -d "$HOME/.vim/plugged" ]]; then
-          echo "Installing Vim plugins..."
-          vim +'PlugInstall --sync' +qa
-        fi
-      '';
-      sessionVariables = {
-        EDITOR = "vim";
-      };
+      initExtra = initScript;
+      shellAliases = shellAliases; 
+      sessionVariables = environmentVariables;
     };
-
-    texlive.enable = true;
   };
 }
