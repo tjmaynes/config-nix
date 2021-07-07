@@ -19,7 +19,7 @@ let
     if [[ -z "$GIT_REPO" ]]; then
       echo "Please provide a git repo as arg 1"  
     elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
-      git clone git@github.com:$GIT_REPO $WORKSPACE_DIR/$GIT_REPO
+      git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
     fi
 
     [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO

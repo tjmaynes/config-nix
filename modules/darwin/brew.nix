@@ -42,6 +42,7 @@ in {
       "alacritty"
       "bitwarden"
       "brave-browser"
+      "drawio"
       "epic-games"
       "krisp"
       "intellij-idea"
