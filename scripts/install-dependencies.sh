@@ -32,7 +32,7 @@ function install_nixos() {
 }
 
 function symlink_config_directory() {
-  if [ ! "$HOME/.config/nixpkgs" -ef "$(PWD)/profiles" ]; then
+  if [ ! "$HOME/.config/nixpkgs" -ef "$(PWD)/hosts" ]; then
     (mkdir -p "$HOME/.config" || true) && ln -s "$(PWD)/profiles" "$HOME/.config/nixpkgs"
   fi
 }
@@ -49,8 +49,8 @@ function install_home_manager() {
 }
 
 function symlink_darwin_configuration() {
-  if [ ! "$HOME/.nixpkgs/darwin-configuration.nix" -ef "$(PWD)/profiles/darwin.nix" ]; then
-    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(PWD)/profiles/darwin.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
+  if [ ! "$HOME/.nixpkgs/darwin-configuration.nix" -ef "$(PWD)/hosts/gaia.nix" ]; then
+    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(PWD)/hosts/gaia.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
   fi
 }
 
