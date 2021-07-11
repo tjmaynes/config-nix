@@ -17,6 +17,14 @@ with lib;
         default = "tj@tjmaynes.com";
         type = with types; uniq str;
       };
+      hostname = mkOption {
+        default = "kubrick";
+        type = with types; uniq str;
+      };
+      timeZone = mkOption {
+        default = "America/New_York";
+        type = with types; uniq str;
+      };
       fontName = mkOption {
         default = "Inconsolata";
         type = with types; uniq str;

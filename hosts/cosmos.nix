@@ -1,5 +1,7 @@
 { ... }:
 
-{
-  imports = [ ../modules/darwin ];
+{ 
+  imports = [ 
+    ../nixos/configuration.nix
+  ];
 }

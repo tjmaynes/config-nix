@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
-{
+let home = builtins.getEnv "HOME";
+
+in {
   fonts.enableFontDir = true;
   fonts.fonts = [ pkgs.inconsolata ];
 
@@ -10,6 +12,8 @@
   };
 
   system.defaults = {
+    screencapture.location = "${home}/libra/photos/screencaptures";
+
     dock = {
       autohide = true;
       orientation = "bottom";

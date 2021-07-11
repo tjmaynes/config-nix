@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }:
 
-let home = builtins.getEnv "HOME";
-
+let 
+  home = builtins.getEnv "HOME";
+  homebrewPath = "/opt/homebrew/bin";
 in {
-  programs.bash.interactiveShellInit = ''
-    command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
-  '';
-
   programs.zsh.shellInit = ''
-    command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    export PATH=${homebrewPath}:$PATH
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_NO_ANALYTICS=1
 
     if [[ ! -d "/Applications/Docker.app" ]]; then
       echo "Installing Docker..."
@@ -31,16 +30,20 @@ in {
 
   homebrew = {
     enable = lib.mkForce true;
+    brewPrefix = homebrewPath;
     autoUpdate = true;
     cleanup = "zap";
     extraConfig = ''
       cask_args appdir: "${home}/Applications"
       cask_args require_sha: true
     '';
-    taps = [ "homebrew/cask" ];
+    taps = [ 
+      "homebrew/cask" 
+      "AdoptOpenJDK/openjdk"
+    ];
     casks = [
+      "adoptopenjdk11"
       "alacritty"
-      "bitwarden"
       "brave-browser"
       "drawio"
       "epic-games"
@@ -48,7 +51,6 @@ in {
       "intellij-idea"
       "iterm2"
       "macvim"
-      "mpv"
       "obs"
       "slack"
       "spotify"

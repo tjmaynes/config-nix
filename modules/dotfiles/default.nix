@@ -1,29 +1,29 @@
 { config, pkgs, ... }:
 
-let 
+let
   home = builtins.getEnv "HOME";
   initScript = ''
     if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-    echo "Installing Vim Plug..."
-    curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      echo "Installing Vim Plug..."
+      curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
     if [[ ! -d "$HOME/.vim/plugged" ]]; then
-    echo "Installing Vim plugins..."
-    vim +'PlugInstall --sync' +qa
+      echo "Installing Vim plugins..."
+      vim +'PlugInstall --sync' +qa
     fi
 
     function pclone() {
-    GIT_REPO=tjmaynes/$1
+      GIT_REPO=tjmaynes/$1
 
-    if [[ -z "$GIT_REPO" ]]; then
-      echo "Please provide a git repo as arg 1"  
-    elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
-      git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
-    fi
+      if [[ -z "$GIT_REPO" ]]; then
+        echo "Please provide a git repo as arg 1"  
+      elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
+        git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
+      fi
 
-    [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
-   }
+      [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
+    }
   '';
   shellAliases = {
     ".." = "cd ..";
@@ -50,13 +50,13 @@ in {
       docker
       ffmpeg
       git
+      gnupg
       home-manager
       htop
       jq
+      mpv
       mutt
-      offlineimap
-      pandoc
-      texlive.combined.scheme-full
+      ripgrep
       tmux
       vim
       unzip
@@ -75,14 +75,13 @@ in {
 
   programs = {
     home-manager.enable = true;
+    tmux.enable = true;
     emacs.enable = true;
 
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
-
-    tmux.enable = true;
 
     git = {
       enable = true;

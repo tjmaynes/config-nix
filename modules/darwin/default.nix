@@ -1,23 +1,30 @@
-{ pkgs, ... }:
+{ config, options, pkgs, ... }:
 
 {
+  imports = [
+    ./homebrew.nix
+    ./preferences.nix
+  ];
+
   system.stateVersion = 4;
 
-  imports = [
-    ../nixpkgs.nix
-    ./home-manager.nix
-    ./preferences.nix
-    ./brew.nix
-  ];
+  nix.nixPath = [ "darwin=$HOME/.nix-defexpr/darwin" "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs" ] ++ options.nix.nixPath.default;
+  nix.extraOptions = ''
+    system = x86_64-darwin
+    extra-platforms = x86_64-darwin aarch64-darwin
+    build-users-group = nixbld
+  '';
+
+  time.timeZone = config.settings.timeZone;
+  networking.hostName = config.settings.hostname;
 
   environment = {
     shells = [ pkgs.zsh ];
     pathsToLink = [ "/Applications" ];
   };
 
-  programs.zsh.enable = true;
-  programs.tmux.enable = true;
-
-  services.nix-daemon.enable = true;
-  services.emacs.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 }

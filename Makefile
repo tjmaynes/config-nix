@@ -1,8 +1,11 @@
-install_dependencies:
-	./scripts/install-dependencies.sh
+deploy_gaia:
+	./scripts/deploy.sh "gaia"
 
-teardown:
-	./scripts/teardown.sh
+deploy_cosmos:
+	./scripts/deploy.sh "cosmos"
+
+deploy_infinity:
+	./scripts/deploy.sh "infinity"
 
 reload:
 	./scripts/reload.sh

@@ -6,10 +6,9 @@ function main() {
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     home-manager switch 
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    sudo rm -rf $HOME/.nix-defexpr/channels && mkdir -p $HOME/.nix-defexpr/channels
-    sudo chown -R root:staff /nix || true
-    sudo -i nix-channel --update
-    darwin-rebuild switch 
+    # TODO: Replace darwin-installer with darwin-rebuild switch
+    # Issue: error: file 'darwin' was not found in the Nix search path (add it using $NIX_PATH or -I)
+    ./result/bin/darwin-installer
   else
     echo "Operating system not supported!"
     exit 1
