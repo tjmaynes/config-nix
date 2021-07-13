@@ -34,6 +34,9 @@ let
     "ll" = "ls -al";
     "ns" = "nix-shell --command zsh";
     "k" = "kubectl";
+    "ls" = "lsd";
+    "cat" = "bat";
+    "ps" = "procs";
   };
   environmentVariables = {
     EDITOR = "vim";
@@ -47,15 +50,21 @@ in {
   home = {
     packages = with pkgs; [
       alacritty
+      bat
+      delta
       docker
+      dog
       ffmpeg
       git
       gnupg
       home-manager
       htop
       jq
+      lsd
       mpv
       mutt
+      nodejs-16_x
+      procs
       ripgrep
       tmux
       vim
@@ -110,9 +119,10 @@ in {
       };
       ignores = [".#*" "*.desktop" "*.lock"];
       extraConfig = {
-        init.defaultBranch = "main";
-        gpg.program = "gpg2";
         core.editor = "vim";
+        diff.tool = "delta";
+        gpg.program = "gpg2";
+        init.defaultBranch = "main";
       };
     };
 

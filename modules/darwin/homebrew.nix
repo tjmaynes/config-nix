@@ -9,6 +9,11 @@ in {
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+    export ANDROID_AVD_HOME=$HOME/.android/avd
+    export PATH=$ANDROID_SDK_ROOT/tools/bin:$PATH
+
     if [[ ! -d "/Applications/Docker.app" ]]; then
       echo "Installing Docker..."
       arch_name="$(uname -m)"
