@@ -7,7 +7,7 @@
 
 ## Background
 
-| Host name      | Usage                        | System                     | Progress |
+| Host name      | Usage                        | Tools                      | Progress |
 | :------------- | :--------------------------: | :------------------------: | :-------: |
 | gaia           | macos developer workstation  | nix-darwin / home-manager  | ✅ |
 | infinity       | cloud developer workstation  | nixos / home-manager       | 🚧 |
