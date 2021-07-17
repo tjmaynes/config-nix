@@ -108,8 +108,14 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'tpope/vim-markdown'
 Plug 'junegunn/goyo.vim'
-Plug 'ekalinin/Dockerfile.vim'
+
 Plug 'LnL7/vim-nix'
+
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
+Plug 'cappyzawa/starlark.vim'
+
+Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'vim-python/python-syntax'
 Plug 'fatih/vim-go'

@@ -31,13 +31,15 @@ in {
 
       open /Applications/Docker.app
     fi
+
+    [[ -z "$(command -v bazel)" ]] && arch -arm64 brew install bazel
   '';
 
   homebrew = {
     enable = lib.mkForce true;
     brewPrefix = homebrewPath;
     autoUpdate = true;
-    cleanup = "zap";
+    cleanup = "none";
     extraConfig = ''
       cask_args appdir: "${home}/Applications"
       cask_args require_sha: true
