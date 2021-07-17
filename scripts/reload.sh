@@ -8,7 +8,7 @@ function main() {
   elif [[ "$OSTYPE" == "darwin"* ]]; then
     # TODO: Replace darwin-installer with darwin-rebuild switch
     # Issue: error: file 'darwin' was not found in the Nix search path (add it using $NIX_PATH or -I)
-    ./result/bin/darwin-installer
+    echo "no" | ./result/bin/darwin-installer
   else
     echo "Operating system not supported!"
     exit 1
