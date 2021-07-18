@@ -55,6 +55,7 @@ in {
       "drawio"
       "epic-games"
       "krisp"
+      "imageoptim"
       "intellij-idea"
       "iterm2"
       "macvim"
