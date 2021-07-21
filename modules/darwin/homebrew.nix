@@ -54,6 +54,8 @@ in {
       "brave-browser"
       "drawio"
       "epic-games"
+      "gimp"
+      "inkscape"
       "krisp"
       "imageoptim"
       "intellij-idea"
