@@ -49,8 +49,10 @@ in {
 
   home = {
     packages = with pkgs; [
+      adoptopenjdk-openj9-bin-11
       alacritty
       bat
+      cmus
       delta
       docker
       dog
@@ -66,9 +68,12 @@ in {
       nodejs-16_x
       procs
       ripgrep
+      ruby
+      syncthing
       tmux
-      vim
       unzip
+      vim
+      watchman
       zip
       zsh
     ]; 

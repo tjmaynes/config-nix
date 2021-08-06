@@ -64,6 +64,8 @@ in {
       "obs"
       "slack"
       "spotify"
+      "steam"
+      "vcv-rack"
       "visual-studio-code"
       "zoom"
     ];
@@ -72,6 +74,7 @@ in {
       Xcode = 497799835;
       DaisyDisk = 411643860;
       Keynote = 409183694;
+      Numbers = 409203825;
       "Highland 2" = 1171820258;
     };
   };
