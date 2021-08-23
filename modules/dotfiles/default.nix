@@ -56,6 +56,7 @@ in {
       delta
       docker
       dog
+      dotnet-sdk_5
       ffmpeg
       git
       gnupg
