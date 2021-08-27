@@ -31,8 +31,6 @@ in {
 
       open /Applications/Docker.app
     fi
-
-    [[ -z "$(command -v bazel)" ]] && arch -arm64 brew install bazel
   '';
 
   homebrew = {
@@ -46,16 +44,12 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
-      "AdoptOpenJDK/openjdk"
     ];
     casks = [
-      "adoptopenjdk11"
       "alacritty"
       "brave-browser"
       "drawio"
       "epic-games"
-      "gimp"
-      "inkscape"
       "krisp"
       "imageoptim"
       "intellij-idea"
@@ -75,6 +69,7 @@ in {
       DaisyDisk = 411643860;
       Keynote = 409183694;
       Numbers = 409203825;
+      "Affinity Photo" = 824183456;
       "Highland 2" = 1171820258;
     };
   };

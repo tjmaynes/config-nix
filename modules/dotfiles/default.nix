@@ -56,7 +56,6 @@ in {
       delta
       docker
       dog
-      dotnet-sdk_5
       ffmpeg
       git
       gnupg
@@ -70,6 +69,7 @@ in {
       procs
       ripgrep
       ruby
+      rustup
       syncthing
       tmux
       unzip
