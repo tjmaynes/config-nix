@@ -9,10 +9,10 @@
 
 | Host name      | Usage                        | Tools                      | Progress |
 | :------------- | :--------------------------: | :------------------------: | :-------: |
-| gaia           | macos personal workstation   | nix-darwin / home-manager  | ✅ |
-| aether         | macos other workstation      | nix-darwin / home-manager  | ✅ |
-| infinity       | cloud developer workstation  | nixos / home-manager       | 🚧 |
-| cosmos         | personal server              | nixos                      | 🚧 |
+| gaia           | macos m1 personal (m1) workstation | nix-darwin / home-manager  | ✅ |
+| aether         | macos other (intel) workstation    | nix-darwin / home-manager  | ✅ |
+| infinity       | cloud developer workstation        | nixos / home-manager       | 🚧 |
+| cosmos         | personal server                    | nixos                      | 🚧 |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
