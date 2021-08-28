@@ -4,6 +4,7 @@
 ## Requirements
 
 - [GNU Make](https://www.gnu.org/software/make/)
+- [Nix](https://nixos.org/download.html)
 
 ## Background
 
