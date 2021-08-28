@@ -1,10 +1,7 @@
 { config, options, pkgs, ... }:
 
 {
-  imports = [
-    ./homebrew.nix
-    ./preferences.nix
-  ];
+  imports = [ ./preferences.nix ];
 
   system.stateVersion = 4;
 

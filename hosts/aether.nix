@@ -2,27 +2,33 @@
 
 let 
   home = builtins.getEnv "HOME";
-  homebrewPath = "/opt/homebrew/bin";
+  homebrewPath = "/usr/local/bin";
 in {
+  imports = [
+    <home-manager/nix-darwin>
+    ../nixos/configuration.nix
+    ../modules/darwin
+  ];
+
   programs.zsh.shellInit = ''
     export PATH=${homebrewPath}:$PATH
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
-    export ANDROID_HOME=$HOME/Library/Android/sdk
-    export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-    export ANDROID_AVD_HOME=$HOME/.android/avd
+    export ANDROID_HOME=${home}/Library/Android/sdk
+    export ANDROID_SDK_ROOT=${home}/Library/Android/sdk
+    export ANDROID_AVD_HOME=${home}/.android/avd
     export PATH=$ANDROID_SDK_ROOT/tools/bin:$PATH
 
     if [[ ! -d "/Applications/Docker.app" ]]; then
       echo "Installing Docker..."
       arch_name="$(uname -m)"
 
-      if [ "$arch_name" = "arm64" ]; then
-         curl -O https://desktop.docker.com/mac/stable/arm64/Docker.dmg
+      if [ "$arch_name" = "x86_64" ]; then
+        curl -O https://desktop.docker.com/mac/stable/x86_64/Docker.dmg
       else
-         echo "Unknown architecture detected: $arch_name"
-         exit 1
+        echo "Unknown architecture detected: $arch_name"
+        exit 1
       fi
 
       hdiutil attach Docker.dmg
@@ -46,31 +52,23 @@ in {
       "homebrew/cask" 
     ];
     casks = [
-      "alacritty"
-      "brave-browser"
-      "drawio"
-      "epic-games"
-      "krisp"
+      "adoptopenjdk11"
+      "google-chrome"
       "imageoptim"
       "intellij-idea"
       "iterm2"
+      "krisp"
       "macvim"
-      "obs"
       "slack"
-      "spotify"
-      "steam"
-      "vcv-rack"
       "visual-studio-code"
+      "webex"
       "zoom"
     ];
     masApps = {
       Bitwarden = 1352778147;
       Xcode = 497799835;
-      DaisyDisk = 411643860;
       Keynote = 409183694;
       Numbers = 409203825;
-      "Affinity Photo" = 824183456;
-      "Highland 2" = 1171820258;
     };
   };
 }

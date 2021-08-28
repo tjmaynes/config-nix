@@ -1,6 +1,9 @@
 deploy_gaia:
 	./scripts/deploy.sh "gaia"
 
+deploy_aether:
+	./scripts/deploy.sh "aether"
+
 deploy_cosmos:
 	./scripts/deploy.sh "cosmos"
 

@@ -49,7 +49,6 @@ in {
 
   home = {
     packages = with pkgs; [
-      adoptopenjdk-openj9-bin-11
       alacritty
       bat
       cmus
@@ -65,16 +64,13 @@ in {
       lsd
       mpv
       mutt
-      nodejs-16_x
       procs
       ripgrep
-      ruby
       rustup
       syncthing
       tmux
       unzip
       vim
-      watchman
       zip
       zsh
     ]; 
@@ -158,6 +154,7 @@ in {
           "python"
           "tmux"
           "gpg"
+          "rust"
         ]; 
         prompt.theme = "steeef";
       };

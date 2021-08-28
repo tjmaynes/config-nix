@@ -2,9 +2,17 @@
 
 set -e
 
-HOST=$1
+HOST_NAME=$1
 
-function setup_gaia() {
+function set_homebrew_path() {
+  if [ "$(uname -m)" = "arm64" ]; then
+    export PATH=/opt/homebrew/bin:$PATH
+  else
+    export PATH=/usr/local/bin:$PATH
+  fi
+}
+
+function setup_darwin_based_host() {
   if [[ "$OSTYPE" != "darwin"* ]]; then
     echo "Please run this script on a Darwin-based machine"
     exit 1
@@ -18,7 +26,7 @@ function setup_gaia() {
     xcode-select --install
   fi
 
-  export PATH=/opt/homebrew/bin:$PATH
+  set_homebrew_path
 
   if [[ -z "$(command -v brew)" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -37,8 +45,8 @@ function setup_gaia() {
     nix-channel --update
   fi
 
-  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/gaia.nix" ]]; then
-    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/gaia.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
+  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
+    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
   fi
 
   if [[ ! -f "$(pwd)/result/bin/darwin-installer" ]]; then
@@ -52,7 +60,9 @@ function setup_gaia() {
 }
 
 function main() {
-  setup_$HOST
+  if [ "$HOST_NAME" = "gaia" ] || [ "$HOST_NAME" = "aether" ]; then
+    setup_darwin_based_host
+  fi
 }
 
 main

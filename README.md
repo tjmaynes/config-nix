@@ -9,7 +9,8 @@
 
 | Host name      | Usage                        | Tools                      | Progress |
 | :------------- | :--------------------------: | :------------------------: | :-------: |
-| gaia           | macos developer workstation  | nix-darwin / home-manager  | ✅ |
+| gaia           | macos personal workstation   | nix-darwin / home-manager  | ✅ |
+| aether         | macos other workstation      | nix-darwin / home-manager  | ✅ |
 | infinity       | cloud developer workstation  | nixos / home-manager       | 🚧 |
 | cosmos         | personal server              | nixos                      | 🚧 |
 
@@ -23,6 +24,11 @@
 To deploy changes to `gaia`, run the following command:
 ```bash
 make deploy_gaia
+```
+
+To deploy changes to `aether`, run the following command:
+```bash
+make deploy_aether
 ```
 
 To deploy changes to `cosmos`, run the following command:
