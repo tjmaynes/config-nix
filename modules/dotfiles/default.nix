@@ -66,6 +66,7 @@ in {
       mutt
       procs
       ripgrep
+      ruby
       rustup
       syncthing
       tmux
@@ -154,7 +155,6 @@ in {
           "python"
           "tmux"
           "gpg"
-          "rust"
         ]; 
         prompt.theme = "steeef";
       };
