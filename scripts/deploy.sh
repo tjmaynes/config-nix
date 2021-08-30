@@ -37,6 +37,7 @@ function setup_darwin_based_host() {
   fi
 
   if [[ ! "$HOME/.config/nixpkgs" -ef "$(pwd)/hosts" ]]; then
+    rm -rf "$HOME/.config/nixpkgs"
     (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts" "$HOME/.config/nixpkgs"
   fi
 
@@ -46,6 +47,7 @@ function setup_darwin_based_host() {
   fi
 
   if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
+    rm -rf "$HOME/.nixpkgs/darwin-configuration.nix"
     (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
   fi
 

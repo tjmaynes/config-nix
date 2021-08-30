@@ -2,7 +2,6 @@
 
 let 
   home = builtins.getEnv "HOME";
-  homebrewPath = "/usr/local/bin";
 in {
   imports = [
     <home-manager/nix-darwin>
@@ -11,7 +10,6 @@ in {
   ];
 
   programs.zsh.shellInit = ''
-    export PATH=${homebrewPath}:$PATH
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
@@ -41,7 +39,6 @@ in {
 
   homebrew = {
     enable = lib.mkForce true;
-    brewPrefix = homebrewPath;
     autoUpdate = true;
     cleanup = "none";
     extraConfig = ''
