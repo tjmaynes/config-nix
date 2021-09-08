@@ -24,6 +24,8 @@ let
 
       [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
     }
+
+    export PATH=${home}/.cargo/bin:$PATH
   '';
   shellAliases = {
     ".." = "cd ..";

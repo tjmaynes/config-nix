@@ -111,14 +111,10 @@ Plug 'junegunn/goyo.vim'
 
 Plug 'LnL7/vim-nix'
 
-Plug 'google/vim-maktaba'
-Plug 'bazelbuild/vim-bazel'
-Plug 'cappyzawa/starlark.vim'
-
 Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'vim-python/python-syntax'
-Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
 
 Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'
