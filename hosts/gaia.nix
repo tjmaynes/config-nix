@@ -61,6 +61,7 @@ in {
       "obs"
       "spotify"
       "steam"
+      "telegram"
       "vcv-rack"
       "visual-studio-code"
     ];
