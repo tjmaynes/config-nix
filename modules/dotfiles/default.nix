@@ -53,11 +53,11 @@ in {
     packages = with pkgs; [
       alacritty
       bat
-      cmus
+      #cmus
       delta
       docker
       dog
-      ffmpeg
+      #ffmpeg
       git
       gnupg
       home-manager
