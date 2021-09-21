@@ -13,7 +13,6 @@
 | gaia           | macos m1 personal (m1) workstation | nix-darwin / home-manager  | ✅ |
 | aether         | macos other (intel) workstation    | nix-darwin / home-manager  | ✅ |
 | infinity       | cloud developer workstation        | nixos / home-manager       | 🚧 |
-| cosmos         | personal server                    | nixos                      | 🚧 |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
@@ -30,11 +29,6 @@ make deploy_gaia
 To deploy changes to `aether`, run the following command:
 ```bash
 make deploy_aether
-```
-
-To deploy changes to `cosmos`, run the following command:
-```bash
-make deploy_cosmos
 ```
 
 To deploy changes to `infinity`, run the following command:

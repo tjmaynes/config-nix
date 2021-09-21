@@ -1,7 +1,0 @@
-{ ... }:
-
-{ 
-  imports = [ 
-    ../nixos/configuration.nix
-  ];
-}
