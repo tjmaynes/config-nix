@@ -135,10 +135,8 @@ in {
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
-      dotDir = "${home}/.config/zsh";
       history = {
         expireDuplicatesFirst = true;
-        path = "${home}/.config/zsh/.zsh_history";
       };
       prezto = {
         enable = true;
