@@ -20,20 +20,10 @@ in {
 
     if [[ ! -d "/Applications/Docker.app" ]]; then
       echo "Installing Docker..."
-      arch_name="$(uname -m)"
-
-      if [ "$arch_name" = "x86_64" ]; then
-        curl -O https://desktop.docker.com/mac/stable/x86_64/Docker.dmg
-      else
-        echo "Unknown architecture detected: $arch_name"
-        exit 1
-      fi
+      curl -O https://desktop.docker.com/mac/main/amd64/Docker.dmg
 
       hdiutil attach Docker.dmg
-      cp -rf /Volumes/Docker/Docker.app /Applications
-      rm -rf Docker.dmg
-
-      open /Applications/Docker.app
+      cp -rf /Volumes/Docker/Docker.app /Applications && rm -rf Docker.dmg
     fi
   '';
 
