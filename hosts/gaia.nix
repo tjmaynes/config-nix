@@ -48,6 +48,7 @@ in {
       "imageoptim"
       "macvim"
       "obs"
+      "selfcontrol"
       "spotify"
       "steam"
       "telegram"
