@@ -64,6 +64,11 @@ function setup_darwin_based_host() {
 function main() {
   if [ "$HOST_NAME" = "gaia" ] || [ "$HOST_NAME" = "aether" ]; then
     setup_darwin_based_host
+  elif [ "$HOST_NAME" = "infinity" ]; then
+    echo "Coming soon!"
+  else
+    echo "Host name $HOST_NAME has not been setup yet!"
+    exit 1
   fi
 }
 
