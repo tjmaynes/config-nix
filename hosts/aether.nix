@@ -40,6 +40,7 @@ in {
     ];
     casks = [
       "adoptopenjdk11"
+      "flycut"
       "google-chrome"
       "imageoptim"
       "intellij-idea"

@@ -45,6 +45,7 @@ in {
       "alacritty"
       "brave-browser"
       "discord"
+      "flycut"
       "imageoptim"
       "macvim"
       "obs"
