@@ -17,6 +17,10 @@ with lib;
         default = "tj@tjmaynes.com";
         type = with types; uniq str;
       };
+      is_m1_mac = mkOption {
+        type = types.bool;
+        default = false;
+      };
       hostname = mkOption {
         default = "kubrick";
         type = with types; uniq str;

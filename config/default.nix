@@ -47,7 +47,7 @@ let
   };
 
 in {
-  imports = [ ../settings.nix ];
+  imports = [ ../modules/settings.nix ];
 
   home = {
     packages = with pkgs; [
