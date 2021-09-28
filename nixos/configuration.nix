@@ -23,4 +23,11 @@
 
   programs.zsh.enable = true;
   programs.tmux.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  time.timeZone = config.settings.timeZone;
+  networking.hostName = config.settings.hostname;
 }

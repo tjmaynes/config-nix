@@ -3,9 +3,7 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  settings = {
-    is_m1_mac = true
-  };
+  settings = { is_m1_mac = true };
 
   imports = [
     <home-manager/nix-darwin>
@@ -31,6 +29,7 @@ in {
       "discord"
       "flycut"
       "imageoptim"
+      "inky"
       "macvim"
       "obs"
       "selfcontrol"

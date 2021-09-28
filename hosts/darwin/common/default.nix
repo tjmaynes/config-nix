@@ -15,16 +15,8 @@
     build-users-group = nixbld
   '';
 
-  time.timeZone = config.settings.timeZone;
-  networking.hostName = config.settings.hostname;
-
   environment = {
     shells = [ pkgs.zsh ];
     pathsToLink = [ "/Applications" ];
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
   };
 }
