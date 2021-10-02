@@ -3,7 +3,10 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  settings = { is_m1_mac = true };
+  settings = {
+   hostname = "gaia";
+   is_m1_mac = true;
+  };
 
   imports = [
     <home-manager/nix-darwin>
@@ -28,6 +31,7 @@ in {
       "brave-browser"
       "discord"
       "flycut"
+      "gimp"
       "imageoptim"
       "inky"
       "macvim"
@@ -44,9 +48,6 @@ in {
       Xcode = 497799835;
       DaisyDisk = 411643860;
       Keynote = 409183694;
-      Numbers = 409203825;
-      "Affinity Photo" = 824183456;
-      "Highland 2" = 1171820258;
     };
   };
 }

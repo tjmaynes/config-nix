@@ -53,12 +53,14 @@ in {
     packages = with pkgs; [
       alacritty
       bat
-      #cmus
+      cmus
       delta
       docker
       dog
-      #ffmpeg
+      ffmpeg
       git
+      gitfs
+      gollum
       gnupg
       home-manager
       htop
@@ -67,6 +69,7 @@ in {
       mpv
       mutt
       procs
+      python39
       ripgrep
       ruby
       rustup

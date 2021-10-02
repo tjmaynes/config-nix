@@ -41,14 +41,14 @@ function setup_darwin_based_host() {
     (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts/darwin" "$HOME/.config/nixpkgs"
   fi
 
-  if [[ -z "$(command -v home-manager)" ]]; then
-    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
-    nix-channel --update
-  fi
-
   if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/darwin/$HOST_NAME.nix" ]]; then
     rm -rf "$HOME/.nixpkgs/darwin-configuration.nix"
     (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/darwin/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
+  fi
+
+  if [[ -z "$(command -v home-manager)" ]]; then
+    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
+    nix-channel --update
   fi
 
   if [[ ! -f "$(pwd)/result/bin/darwin-installer" ]]; then
