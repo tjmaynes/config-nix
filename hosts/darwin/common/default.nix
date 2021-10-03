@@ -28,6 +28,11 @@
     users.${config.settings.username} = (import ../../../config);
   };
 
+  nix.package = pkgs.nix;
+
+  networking.hostName = config.settings.hostname;
+  time.timeZone = config.settings.timeZone;
+
   services.nix-daemon.enable = true;
   services.emacs.enable = true;
 

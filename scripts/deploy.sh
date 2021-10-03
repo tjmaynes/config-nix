@@ -3,6 +3,7 @@
 set -e
 
 HOST_NAME=$1
+NIXOS_USERNAME=$2
 
 function set_homebrew_path() {
   if [ "$(uname -m)" = "arm64" ]; then
@@ -61,11 +62,46 @@ function setup_darwin_based_host() {
   ./result/bin/darwin-installer
 }
 
+function setup_nixos_based_host() {
+  if [ "whoami" = "root" ]; then
+    if ! id "$NIXOS_USERNAME" &>/dev/null; then
+      adduser "$NIXOS_USERNAME"
+      usermod -aG sudo "$NIXOS_USERNAME"
+    fi
+
+    su "$NIXOS_USERNAME"
+  fi
+
+  if [[ -z "$(command -v nix)" ]]; then
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+  fi
+
+  source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/nixos/$HOST_NAME.nix" ]]; then
+    rm -rf "$HOME/.config/nixpkgs"
+    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/nixos/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
+  fi
+
+  if [[ -z "$(command -v home-manager)" ]]; then
+    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
+    nix-channel --update
+  fi
+}
+
 function main() {
+  if [[ -z "$HOST_NAME" ]]; then
+    echo "Please provide a HOST_NAME arg"
+    exit 1
+  elif [[ -z "$NIXOS_USERNAME" ]]; then
+    echo "Please provide a NIXOS_USERNAME arg"
+    exit 1
+  fi
+
   if [ "$HOST_NAME" = "gaia" ] || [ "$HOST_NAME" = "aether" ]; then
     setup_darwin_based_host
   elif [ "$HOST_NAME" = "infinity" ]; then
-    echo "Coming soon!"
+    setup_nixos_based_host
   else
     echo "Host name $HOST_NAME has not been setup yet!"
     exit 1
