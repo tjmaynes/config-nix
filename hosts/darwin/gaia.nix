@@ -9,7 +9,6 @@ in {
   };
 
   imports = [
-    <home-manager/nix-darwin>
     ../../nixos/configuration.nix
     ./common
   ];

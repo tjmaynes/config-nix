@@ -4,7 +4,6 @@ let
   home = builtins.getEnv "HOME";
 in {
   imports = [
-    <home-manager/nix-darwin>
     ../../nixos/configuration.nix
     ./common
   ];

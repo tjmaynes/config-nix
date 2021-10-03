@@ -2,6 +2,7 @@
 
 {
   imports = [ 
+    <home-manager/nix-darwin>
     ./preferences.nix
     ./homebrew.nix
   ];
@@ -18,5 +19,22 @@
   environment = {
     shells = [ pkgs.zsh ];
     pathsToLink = [ "/Applications" ];
+  };
+
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+
+    users.${config.settings.username} = (import ../../../config);
+  };
+
+  services.nix-daemon.enable = true;
+  services.emacs.enable = true;
+
+  programs.zsh.enable = true;
+  programs.tmux.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 }
