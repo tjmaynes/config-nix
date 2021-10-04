@@ -4,10 +4,8 @@ set -e
 
 function main() {
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    home-manager switch 
+    nixos-rebuild switch 
   elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # TODO: Replace darwin-installer with darwin-rebuild switch
-    # Issue: error: file 'darwin' was not found in the Nix search path (add it using $NIX_PATH or -I)
     echo "no" | ./result/bin/darwin-installer
   else
     echo "Operating system not supported!"

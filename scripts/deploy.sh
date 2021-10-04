@@ -37,14 +37,14 @@ function setup_darwin_based_host() {
     sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
   fi
 
-  if [[ ! "$HOME/.config/nixpkgs" -ef "$(pwd)/hosts/darwin" ]]; then
+  if [[ ! "$HOME/.config/nixpkgs" -ef "$(pwd)/hosts" ]]; then
     rm -rf "$HOME/.config/nixpkgs"
-    (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts/darwin" "$HOME/.config/nixpkgs"
+    (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts" "$HOME/.config/nixpkgs"
   fi
 
-  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/darwin/$HOST_NAME.nix" ]]; then
+  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
     rm -rf "$HOME/.nixpkgs/darwin-configuration.nix"
-    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/darwin/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
+    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
   fi
 
   if [[ -z "$(command -v home-manager)" ]]; then
@@ -78,9 +78,9 @@ function setup_nixos_based_host() {
 
   source $HOME/.nix-profile/etc/profile.d/nix.sh
 
-  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/nixos/$HOST_NAME.nix" ]]; then
+  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
     rm -rf "$HOME/.config/nixpkgs"
-    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/nixos/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
+    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
   fi
 
   if [[ -z "$(command -v home-manager)" ]]; then

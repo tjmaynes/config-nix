@@ -53,14 +53,14 @@ in {
     packages = with pkgs; [
       alacritty
       bat
-      cmus
+      #cmus
       delta
       docker
       dog
-      ffmpeg
+      #ffmpeg
       git
       gitfs
-      gollum
+      #gollum
       gnupg
       home-manager
       htop
@@ -77,6 +77,8 @@ in {
       tmux
       unzip
       vim
+      yarn2nix
+      yarn
       zip
       zsh
     ]; 

@@ -25,7 +25,7 @@
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.${config.settings.username} = (import ../../../config);
+    users.${config.settings.username} = (import ../config);
   };
 
   nix.package = pkgs.nix;

@@ -4,8 +4,8 @@ let
   home = builtins.getEnv "HOME";
 in {
   imports = [
-    ../../nixos/configuration.nix
-    ./common
+    ../nixos/configuration.nix
+    ../darwin
   ];
 
   homebrew = {
