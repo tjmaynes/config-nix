@@ -68,6 +68,7 @@ in {
       lsd
       mpv
       mutt
+      nodejs-14_x
       procs
       python39
       ripgrep
