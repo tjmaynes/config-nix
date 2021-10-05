@@ -18,6 +18,10 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
+      "vmware-tanzu/tanzu"
+    ];
+    brews = [
+      "tanzu-community-edition"
     ];
     casks = [
       "adoptopenjdk11"
