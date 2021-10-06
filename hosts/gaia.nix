@@ -28,7 +28,6 @@ in {
     casks = [
       "alacritty"
       "brave-browser"
-      "discord"
       "flycut"
       "gimp"
       "imageoptim"
