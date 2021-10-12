@@ -17,7 +17,7 @@ in {
     enable = lib.mkForce true;
     brewPrefix = "/opt/homebrew/bin";
     autoUpdate = true;
-    cleanup = "none";
+    cleanup = "zap";
     extraConfig = ''
       cask_args appdir: "${home}/Applications"
       cask_args require_sha: true
@@ -28,15 +28,13 @@ in {
     casks = [
       "alacritty"
       "brave-browser"
-      "flycut"
       "gimp"
       "imageoptim"
-      "inky"
+      "inkscape"
       "macvim"
       "obs"
       "selfcontrol"
       "spotify"
-      "steam"
       "telegram"
       "vcv-rack"
       "visual-studio-code"

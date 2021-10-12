@@ -59,8 +59,6 @@ in {
       dog
       #ffmpeg
       git
-      gitfs
-      #gollum
       gnupg
       home-manager
       htop
