@@ -13,6 +13,40 @@ in {
     ../darwin
   ];
 
+  home-manager.users.${config.settings.username} = {
+    home = {
+      packages = with pkgs; [
+        alacritty
+        bat
+        delta
+        docker
+        dog
+        git
+        gnupg
+        go
+        home-manager
+        htop
+        jq
+        lsd
+        mpv
+        mutt
+        nodejs-14_x
+        procs
+        ripgrep
+        ruby
+        rustup
+        syncthing
+        tmux
+        unzip
+        vim
+        yarn2nix
+        yarn
+        zip
+        zsh
+      ];
+    };
+  };
+
   homebrew = {
     enable = lib.mkForce true;
     brewPrefix = "/opt/homebrew/bin";

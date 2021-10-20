@@ -50,38 +50,6 @@ in {
   imports = [ ../modules/settings.nix ];
 
   home = {
-    packages = with pkgs; [
-      alacritty
-      bat
-      #cmus
-      delta
-      docker
-      dog
-      #ffmpeg
-      git
-      gnupg
-      home-manager
-      htop
-      jq
-      lsd
-      mpv
-      mutt
-      nodejs-14_x
-      procs
-      python39
-      ripgrep
-      ruby
-      rustup
-      syncthing
-      tmux
-      unzip
-      vim
-      yarn2nix
-      yarn
-      zip
-      zsh
-    ]; 
-
     file.".alacritty.yml".source = ./.alacritty.yml;
     file.".emacs".source = ./.emacs;
     file.".offlineimap.py".source = ./.offlineimap.py;

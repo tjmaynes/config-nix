@@ -8,6 +8,42 @@ in {
     ../darwin
   ];
 
+  home-manager.users.${config.settings.username} = {
+    home = {
+      packages = with pkgs; [
+        alacritty
+        bat
+        cmus
+        delta
+        docker
+        dog
+        ffmpeg
+        git
+        gnupg
+        go_1_17
+        home-manager
+        htop
+        jq
+        lsd
+        mpv
+        mutt
+        nodejs-14_x
+        procs
+        python39
+        ripgrep
+        ruby
+        rustup
+        tmux
+        unzip
+        vim
+        yarn2nix
+        yarn
+        zip
+        zsh
+      ];
+    };
+  };
+
   homebrew = {
     enable = lib.mkForce true;
     autoUpdate = true;
@@ -19,9 +55,6 @@ in {
     taps = [ 
       "homebrew/cask" 
       "vmware-tanzu/tanzu"
-    ];
-    brews = [
-      "tanzu-community-edition"
     ];
     casks = [
       "adoptopenjdk11"
