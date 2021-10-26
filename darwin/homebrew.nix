@@ -22,5 +22,30 @@ in {
       hdiutil attach Docker.dmg
       cp -rf /Volumes/Docker/Docker.app /Applications && rm -rf Docker.dmg
     fi
+
+    if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+      echo "Installing Vim Plug..."
+      curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+
+    if [[ ! -d "$HOME/.vim/plugged" ]]; then
+      echo "Installing Vim plugins..."
+      vim +'PlugInstall --sync' +qa
+    fi
+
+    function pclone() {
+      GIT_REPO=tjmaynes/$1
+
+      if [[ -z "$GIT_REPO" ]]; then
+        echo "Please provide a git repo as arg 1"  
+      elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
+        git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
+      fi
+
+      [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
+    }
+
+    export PATH=${home}/.cargo/bin:$PATH
+    export PATH=${home}/go/bin:$PATH
   '';
 }

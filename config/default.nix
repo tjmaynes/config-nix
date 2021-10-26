@@ -2,31 +2,6 @@
 
 let
   home = builtins.getEnv "HOME";
-  initScript = ''
-    if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-      echo "Installing Vim Plug..."
-      curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    fi
-
-    if [[ ! -d "$HOME/.vim/plugged" ]]; then
-      echo "Installing Vim plugins..."
-      vim +'PlugInstall --sync' +qa
-    fi
-
-    function pclone() {
-      GIT_REPO=tjmaynes/$1
-
-      if [[ -z "$GIT_REPO" ]]; then
-        echo "Please provide a git repo as arg 1"  
-      elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
-        git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
-      fi
-
-      [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
-    }
-
-    export PATH=${home}/.cargo/bin:$PATH
-  '';
   shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../../";
@@ -130,7 +105,6 @@ in {
         ]; 
         prompt.theme = "steeef";
       };
-      initExtra = initScript;
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
     };
@@ -138,7 +112,6 @@ in {
     bash = {
       enable = true;
       historyFile = "${home}/.config/bash/.bash_history";
-      initExtra = initScript;
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
     };
