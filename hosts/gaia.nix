@@ -23,7 +23,6 @@ in {
         dog
         git
         gnupg
-        go
         home-manager
         htop
         jq
@@ -32,8 +31,8 @@ in {
         mutt
         nodejs-14_x
         procs
+        python39
         ripgrep
-        ruby
         rustup
         syncthing
         tmux
