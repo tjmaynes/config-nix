@@ -20,7 +20,6 @@ in {
         ffmpeg
         git
         gnupg
-        go_1_17
         home-manager
         htop
         jq
@@ -29,7 +28,6 @@ in {
         mutt
         nodejs-14_x
         procs
-        python39
         ripgrep
         ruby
         rustup
@@ -54,11 +52,9 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
-      "vmware-tanzu/tanzu"
     ];
     casks = [
       "adoptopenjdk11"
-      "flycut"
       "google-chrome"
       "imageoptim"
       "intellij-idea"

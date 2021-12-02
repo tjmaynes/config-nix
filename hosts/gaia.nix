@@ -75,7 +75,8 @@ in {
     ];
     masApps = {
       Bitwarden = 1352778147;
-#      Xcode = 497799835;
+      GarageBand = 682658836;
+      Xcode = 497799835;
       DaisyDisk = 411643860;
       Keynote = 409183694;
     };

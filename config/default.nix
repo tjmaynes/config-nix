@@ -69,7 +69,7 @@ in {
         s = "status -s -uno";
         gl = "log --oneline --graph";
       };
-      ignores = [".#*" "*.desktop" "*.lock"];
+      ignores = [".#*" "*.desktop"];
       extraConfig = {
         core.editor = "vim";
         diff.tool = "delta";
