@@ -61,6 +61,7 @@ in {
       "iterm2"
       "krisp"
       "macvim"
+      "pop"
       "slack"
       "visual-studio-code"
       "webex"
