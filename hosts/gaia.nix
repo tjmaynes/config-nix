@@ -34,7 +34,6 @@ in {
         python39
         ripgrep
         rustup
-        syncthing
         tmux
         unzip
         vim
@@ -60,8 +59,10 @@ in {
     ];
     casks = [
       "alacritty"
+      "blender"
       "brave-browser"
       "gimp"
+      "godot"
       "imageoptim"
       "inkscape"
       "iterm2"
