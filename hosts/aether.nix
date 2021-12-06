@@ -45,13 +45,16 @@ in {
   homebrew = {
     enable = lib.mkForce true;
     autoUpdate = true;
-    cleanup = "none";
+    cleanup = "zap";
     extraConfig = ''
       cask_args appdir: "${home}/Applications"
       cask_args require_sha: true
     '';
     taps = [ 
       "homebrew/cask" 
+    ];
+    brews = [
+      "postgresql"
     ];
     casks = [
       "adoptopenjdk11"
