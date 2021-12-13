@@ -23,6 +23,7 @@ in {
         dog
         git
         gnupg
+        go
         home-manager
         htop
         jq

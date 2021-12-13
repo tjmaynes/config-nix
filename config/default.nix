@@ -102,6 +102,8 @@ in {
           "python"
           "tmux"
           "gpg"
+          "helper"
+          "docker"
         ]; 
         prompt.theme = "steeef";
       };
