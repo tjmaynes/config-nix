@@ -66,6 +66,7 @@ in {
       "godot"
       "imageoptim"
       "inkscape"
+      "intellij-idea"
       "iterm2"
       "macvim"
       "obs"

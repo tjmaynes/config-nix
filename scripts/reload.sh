@@ -7,7 +7,7 @@ function main() {
     nixos-rebuild switch 
   elif [[ "$OSTYPE" == "darwin"* ]] && [[ -n "$(command -v darwin-rebuild)" ]]; then
     darwin-rebuild switch
-    brew update && brew update
+    brew update && brew upgrade
   else
     echo "Operating system not supported!"
     exit 1
