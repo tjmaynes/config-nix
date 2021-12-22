@@ -4,8 +4,8 @@ let
   home = builtins.getEnv "HOME";
 in {
   settings = {
-   hostname = "gaia";
-   is_m1_mac = true;
+    hostname = "gaia";
+    is_m1_mac = true;
   };
 
   imports = [
@@ -23,7 +23,6 @@ in {
         dog
         git
         gnupg
-        go
         home-manager
         htop
         jq
@@ -66,7 +65,6 @@ in {
       "godot"
       "imageoptim"
       "inkscape"
-      "intellij-idea"
       "iterm2"
       "macvim"
       "obs"
