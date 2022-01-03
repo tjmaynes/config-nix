@@ -18,6 +18,7 @@ in {
       packages = with pkgs; [
         alacritty
         bat
+        cocoapods
         delta
         docker
         dog

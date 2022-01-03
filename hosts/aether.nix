@@ -13,7 +13,7 @@ in {
       packages = with pkgs; [
         alacritty
         bat
-        cmus
+        cocoapods
         delta
         docker
         dog
