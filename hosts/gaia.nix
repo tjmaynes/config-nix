@@ -67,6 +67,7 @@ in {
       "imageoptim"
       "inkscape"
       "iterm2"
+      "licecap"
       "macvim"
       "obs"
       "selfcontrol"
