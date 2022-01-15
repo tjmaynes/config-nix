@@ -62,6 +62,7 @@ in {
       "alacritty"
       "blender"
       "brave-browser"
+      "drawio"
       "gimp"
       "godot"
       "imageoptim"
