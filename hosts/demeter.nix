@@ -21,8 +21,10 @@ in {
         delta
         docker
         dog
+        dotnet-sdk
         git
         gnupg
+        go
         home-manager
         htop
         jq

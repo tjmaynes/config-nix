@@ -16,6 +16,7 @@ in {
         cocoapods
         delta
         docker
+        dotnet-sdk
         dog
         ffmpeg
         git
