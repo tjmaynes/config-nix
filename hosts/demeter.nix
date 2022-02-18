@@ -16,6 +16,7 @@ in {
     home = {
       packages = with pkgs; [
         alacritty
+        azure-cli
         bat
         cocoapods
         delta
