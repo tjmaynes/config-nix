@@ -8,11 +8,12 @@
 
 ## Background
 
-| Host name      | Usage                        | Tools                      | Progress |
-| :------------- | :--------------------------: | :------------------------: | :------: |
-| gaia           | macos m1 personal (m1) workstation | nix-darwin / home-manager  | ✅ |
-| aether         | macos other (intel) workstation    | nix-darwin / home-manager  | ✅ |
-| infinity       | cloud developer workstation        | nixos / home-manager       | 🚧 |
+| Host name      | Usage                              | Tools                      | Progress |
+| :------------- | :--------------------------------: | :------------------------: | :------: |
+| gaia           | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
+| demeter        | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
+| aether         | macos intel (work) workstation     | nix-darwin / home-manager  | ✅ |
+| infinity       | vm developer workstation           | nixos / home-manager       | 🚧 |
 | kubix          | nextcloud server                   | nixos                      | 🚧 | 
 
 ## Usage
@@ -25,6 +26,11 @@
 To deploy changes to `gaia`, run the following command:
 ```bash
 make deploy_gaia
+```
+
+To deploy changes to `demeter`, run the following command:
+```bash
+make deploy_demeter
 ```
 
 To deploy changes to `aether`, run the following command:

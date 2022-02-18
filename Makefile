@@ -9,5 +9,8 @@ deploy_aether:
 deploy_infinity:
 	./scripts/deploy.sh "infinity" "$(USERNAME)"
 
+deploy_demeter:
+	./scripts/deploy.sh "demeter" "$(USERNAME)"
+
 reload:
 	./scripts/reload.sh
