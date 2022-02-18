@@ -59,12 +59,10 @@ in {
       "homebrew/cask" 
     ];
     casks = [
-      "alacritty"
       "blender"
       "brave-browser"
       "drawio"
       "gimp"
-      "godot"
       "imageoptim"
       "inkscape"
       "iterm2"
@@ -83,6 +81,7 @@ in {
       Xcode = 497799835;
       DaisyDisk = 411643860;
       Keynote = 409183694;
+      AnimoogZSynthesizer = 1586841361;
     };
   };
 }
