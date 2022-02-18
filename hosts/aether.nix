@@ -12,6 +12,7 @@ in {
     home = {
       packages = with pkgs; [
         alacritty
+        azure-cli
         bat
         cocoapods
         delta
@@ -65,7 +66,9 @@ in {
       "iterm2"
       "krisp"
       "macvim"
+      "microsoft-remote-desktop"
       "pop"
+      "sf-symbols"
       "slack"
       "visual-studio-code"
       "webex"
