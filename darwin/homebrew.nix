@@ -36,13 +36,12 @@ in {
     function pclone() {
       GIT_REPO=tjmaynes/$1
 
-      if [[ -z "$GIT_REPO" ]]; then
+      if [[ -z "$1" ]]; then
         echo "Please provide a git repo as arg 1"  
       elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
         git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
+        [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
       fi
-
-      [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
     }
 
     export PATH=${home}/.cargo/bin:$PATH
