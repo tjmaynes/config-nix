@@ -171,20 +171,12 @@
   (package-manager/ensure-packages-installed 'multi-term 'auto-complete)
   (ac-config-default))
 
-(defun development/rust-setup ()
-  (package-manager/ensure-packages-installed 'rust-mode)
-  (add-hook 'rust-mode-hook
-            (setq indent-tabs-mode nil
-		  rust-format-on-save t)
-	    (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)))
-
 (defun development/setup ()
   (development/general-setup)
   (development/file-setup)
   (development/html-setup)
   (development/elisp-setup)
   (development/clojure-setup)
-  (development/rust-setup)
   (development/devops-setup))
 
 (defun theme/gui-setup ()
