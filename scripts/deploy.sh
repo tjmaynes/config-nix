@@ -5,12 +5,45 @@ set -e
 HOST_NAME=$1
 NIXOS_USERNAME=$2
 
-function set_homebrew_path() {
-  if [ "$(uname -m)" = "arm64" ]; then
-    export PATH=/opt/homebrew/bin:$PATH
-  else
-    export PATH=/usr/local/bin:$PATH
+function check_requirements() {
+  if [[ -z "$HOST_NAME" ]]; then
+    echo "Please provide a HOST_NAME arg"
+    exit 1
+  elif [[ -z "$NIXOS_USERNAME" ]]; then
+    echo "Please provide a NIXOS_USERNAME arg"
+    exit 1
   fi
+}
+
+function setup_home_manager() {
+  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
+    rm -rf "$HOME/.config/nixpkgs/home.nix"
+    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
+  fi
+
+  if [[ -z "$(command -v home-manager)" ]]; then
+    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
+    nix-channel --update
+    nix-shell '<home-manager>' -A install
+  fi
+}
+
+function setup_nix_darwin() {
+  if [[ ! "$HOME/.config/nixpkgs" -ef "$(pwd)/hosts" ]]; then
+    rm -rf "$HOME/.config/nixpkgs"
+    (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts" "$HOME/.config/nixpkgs"
+  fi
+
+  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
+    rm -rf "$HOME/.nixpkgs/darwin-configuration.nix"
+    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
+  fi
+
+  if [[ ! -f "$(pwd)/result/bin/darwin-installer" ]]; then
+    nix-build -I nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs "https://github.com/LnL7/nix-darwin/archive/master.tar.gz" -A installer
+  fi
+
+  ./result/bin/darwin-installer
 }
 
 function setup_darwin_based_host() {
@@ -22,12 +55,17 @@ function setup_darwin_based_host() {
   export PATH=/usr/sbin:$PATH
   export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
   export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$NIX_PATH
+  export NIX_PATH=nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:$NIX_PATH
 
   if [[ -z "$(command -v git)" ]]; then
     xcode-select --install
   fi
 
-  set_homebrew_path
+  if [ "$(uname -m)" = "arm64" ]; then
+    export PATH=/opt/homebrew/bin:$PATH
+  else
+    export PATH=/usr/local/bin:$PATH
+  fi
 
   if [[ -z "$(command -v brew)" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -37,29 +75,14 @@ function setup_darwin_based_host() {
     sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
   fi
 
-  if [[ ! "$HOME/.config/nixpkgs" -ef "$(pwd)/hosts" ]]; then
-    rm -rf "$HOME/.config/nixpkgs"
-    (mkdir -p "$HOME/.config" || true) && ln -s "$(pwd)/hosts" "$HOME/.config/nixpkgs"
-  fi
-
-  if [[ ! "$(readlink $HOME/.nixpkgs/darwin-configuration.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
-    rm -rf "$HOME/.nixpkgs/darwin-configuration.nix"
-    (mkdir -p "$HOME/.nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.nixpkgs/darwin-configuration.nix"
-  fi
-
-  if [[ -z "$(command -v home-manager)" ]]; then
-    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
-    nix-channel --update
-  fi
-
-  if [[ ! -f "$(pwd)/result/bin/darwin-installer" ]]; then
-    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-  fi
-
   [[ -f "/etc/nix/nix.conf" ]] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
   [[ -f "/etc/shells" ]] && sudo mv /etc/shells /etc/shells.backup
 
-  ./result/bin/darwin-installer
+  nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
+  nix-channel --update
+
+  setup_home_manager
+  setup_nix_darwin
 }
 
 function setup_nixos_based_host() {
@@ -90,15 +113,9 @@ function setup_nixos_based_host() {
 }
 
 function main() {
-  if [[ -z "$HOST_NAME" ]]; then
-    echo "Please provide a HOST_NAME arg"
-    exit 1
-  elif [[ -z "$NIXOS_USERNAME" ]]; then
-    echo "Please provide a NIXOS_USERNAME arg"
-    exit 1
-  fi
+  check_requirements
 
-  if [ "$HOST_NAME" = "gaia" ] || [ "$HOST_NAME" = "aether" ]; then
+  if [[ "$HOST_NAME" -eq "gaia" ]] || [[ "$HOST_NAME" -eq "aether" ]] || [[ "$HOST_NAME" -eq "demeter" ]]; then
     setup_darwin_based_host
   elif [ "$HOST_NAME" = "infinity" ]; then
     setup_nixos_based_host
