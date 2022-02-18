@@ -1,6 +1,9 @@
 # Macos
 .DS_Store
 
+hosts/home.nix
+
 # Generated
 .config/
 result
+*.dmg
