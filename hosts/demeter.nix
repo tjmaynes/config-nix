@@ -16,7 +16,6 @@ in {
     home = {
       packages = with pkgs; [
         alacritty
-        azure-cli
         bat
         cocoapods
         delta
@@ -66,6 +65,7 @@ in {
       "gimp"
       "imageoptim"
       "inkscape"
+      "intellij-idea"
       "iterm2"
       "licecap"
       "macvim"
