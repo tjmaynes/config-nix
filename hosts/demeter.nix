@@ -70,6 +70,7 @@ in {
       "licecap"
       "macvim"
       "obs"
+      "postman"
       "selfcontrol"
       "spotify"
       "telegram"

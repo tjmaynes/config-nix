@@ -44,6 +44,9 @@ in {
       fi
     }
 
+    export PATH=${home}/.dotnet/tools:$PATH
+    export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
+
     export PATH=${home}/.cargo/bin:$PATH
     export PATH=${home}/go/bin:$PATH
   '';
