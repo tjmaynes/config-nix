@@ -17,25 +17,20 @@ in {
       packages = with pkgs; [
         alacritty
         bat
-        cocoapods
         delta
         docker
         dog
-        dotnet-sdk
         git
         gnupg
-        go
         home-manager
         htop
         jq
         lsd
-        mpv
         mutt
         nodejs-14_x
         procs
         python39
         ripgrep
-        rustup
         tmux
         unzip
         vim
@@ -59,31 +54,28 @@ in {
       "homebrew/cask" 
     ];
     casks = [
-      "blender"
       "brave-browser"
       "drawio"
       "gimp"
       "imageoptim"
-      "inkscape"
       "intellij-idea"
       "iterm2"
-      "licecap"
       "macvim"
+      "mpv"
       "obs"
-      "postman"
       "selfcontrol"
       "spotify"
-      "telegram"
       "vcv-rack"
       "visual-studio-code"
+      "vmware-fusion"
     ];
     masApps = {
-      Bitwarden = 1352778147;
-      GarageBand = 682658836;
-      Xcode = 497799835;
-      DaisyDisk = 411643860;
-      Keynote = 409183694;
       AnimoogZSynthesizer = 1586841361;
+      Bitwarden = 1352778147;
+      DaisyDisk = 411643860;
+      GarageBand = 682658836;
+      Keynote = 409183694;
+      Xcode = 497799835;
     };
   };
 }
