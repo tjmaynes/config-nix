@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -86,30 +86,40 @@ function setup_darwin_based_host() {
 }
 
 function setup_nixos_based_host() {
-  if [ "whoami" = "root" ]; then
+  if [[ ! -f "/etc/nixos/configuration.nix" ]]; then
+    parted /dev/sda -- mklabel gpt
+    parted /dev/sda -- mkpart primary 512MiB -8GiB
+    parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+    parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
+    parted /dev/sda -- set 3 esp on
+
+    mkfs.ext4 -L nixos /dev/sda1
+    mkswap -L swap /dev/sda2
+    swapon /dev/sda2
+    mkfs.fat -F 32 -n boot /dev/sda3        # (for UEFI systems only)
+    mount /dev/disk/by-label/nixos /mnt
+    mkdir -p /mnt/boot                      # (for UEFI systems only)
+    mount /dev/disk/by-label/boot /mnt/boot # (for UEFI systems only)
+
+    nixos-generate-config --root /mnt
+
+    nano /mnt/etc/nixos/configuration.nix
+
+    nixos-install
+
+    reboot
+  fi
+
+  if [[ "whoami" -eq "root" ]]; then
     if ! id "$NIXOS_USERNAME" &>/dev/null; then
-      adduser "$NIXOS_USERNAME"
-      usermod -aG sudo "$NIXOS_USERNAME"
+      useradd -c '"$NIXOS_USERNAME"' -m "$NIXOS_USERNAME"
+      passwd "$NIXOS_USERNAME"
     fi
 
     su "$NIXOS_USERNAME"
   fi
 
-  if [[ -z "$(command -v nix)" ]]; then
-    sh <(curl -L https://nixos.org/nix/install) --daemon
-  fi
-
-  source $HOME/.nix-profile/etc/profile.d/nix.sh
-
-  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
-    rm -rf "$HOME/.config/nixpkgs"
-    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
-  fi
-
-  if [[ -z "$(command -v home-manager)" ]]; then
-    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
-    nix-channel --update
-  fi
+  setup_home_manager
 }
 
 function main() {
@@ -117,7 +127,7 @@ function main() {
 
   if [[ "$HOST_NAME" -eq "gaia" ]] || [[ "$HOST_NAME" -eq "aether" ]] || [[ "$HOST_NAME" -eq "demeter" ]]; then
     setup_darwin_based_host
-  elif [ "$HOST_NAME" = "infinity" ]; then
+  elif [[ "$HOST_NAME" -eq "infinity" ]]; then
     setup_nixos_based_host
   else
     echo "Host name $HOST_NAME has not been setup yet!"
