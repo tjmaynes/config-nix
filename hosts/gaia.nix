@@ -13,32 +13,14 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        alacritty
-        bat
         cocoapods
         delta
-        docker
-        dog
-        git
-        gnupg
-        home-manager
-        htop
-        jq
-        lsd
-        mpv
         mutt
-        nodejs-14_x
-        procs
+        nodejs
         python39
-        ripgrep
         rustup
-        tmux
-        unzip
-        vim
         yarn2nix
         yarn
-        zip
-        zsh
       ];
     };
   };
@@ -65,12 +47,14 @@ in {
       "iterm2"
       "licecap"
       "macvim"
+      "mpv"
       "obs"
       "selfcontrol"
       "spotify"
       "telegram"
       "vcv-rack"
       "visual-studio-code"
+      "vmware-fusion"
     ];
     masApps = {
       Bitwarden = 1352778147;

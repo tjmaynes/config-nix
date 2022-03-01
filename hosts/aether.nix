@@ -8,34 +8,13 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        alacritty
-        bat
         cocoapods
         delta
-        docker
         dotnet-sdk
-        dog
-        ffmpeg
-        git
-        gnupg
-        home-manager
-        htop
-        jq
-        lsd
-        mpv
-        mutt
-        nodejs-14_x
-        procs
-        ripgrep
+        nodejs
         ruby
-        rustup
-        tmux
-        unzip
-        vim
         yarn2nix
         yarn
-        zip
-        zsh
       ];
     };
   };
@@ -55,6 +34,7 @@ in {
       "postgresql"
     ];
     casks = [
+      "alacritty"
       "adoptopenjdk11"
       "google-chrome"
       "imageoptim"
@@ -67,6 +47,7 @@ in {
       "sf-symbols"
       "slack"
       "visual-studio-code"
+      "vmware-fusion"
       "webex"
       "zoom"
     ];

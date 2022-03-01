@@ -12,26 +12,12 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        bat
         delta
-        docker
-        dog
-        git
-        gnupg
-        htop
-        jq
-        lsd
-        nodejs-14_x
-        procs
+        nodejs
         python39
-        ripgrep
-        tmux
-        unzip
-        vim
+        rustup
         yarn2nix
         yarn
-        zip
-        zsh
       ];
     };
   };

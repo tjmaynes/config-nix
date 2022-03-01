@@ -1,16 +1,21 @@
 USERNAME := tjmaynes
 
-deploy_gaia:
-	./scripts/deploy.sh "gaia" "$(USERNAME)"
+install_gaia:
+	./scripts/install.sh "gaia" "$(USERNAME)"
 
-deploy_aether:
-	./scripts/deploy.sh "aether" "$(USERNAME)"
+install_aether:
+	./scripts/install.sh "aether" "$(USERNAME)"
 
-deploy_infinity:
-	./scripts/deploy.sh "infinity" "$(USERNAME)"
+install_demeter:
+	./scripts/install.sh "demeter" "$(USERNAME)"
 
-deploy_demeter:
-	./scripts/deploy.sh "demeter" "$(USERNAME)"
+install_glaucus:
+	./scripts/install.sh "glaucus" "$(USERNAME)" "vmware-fusion"
+
+install_atlas:
+	./scripts/install.sh "atlas" "$(USERNAME)" "vmware-fusion"
 
 reload:
 	./scripts/reload.sh
+
+.PHONY: install_* reload

@@ -8,12 +8,9 @@
     ./startup.nix
   ];
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowBroken = false;
-    tarball-ttl = 604800;
-  };
+  nixpkgs.config = import ../modules/nixpkgs.nix;
 
+  nix.package = pkgs.nix;
   nix.nixPath = [ "darwin=$HOME/.nix-defexpr/darwin" "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs" ] ++ options.nix.nixPath.default;
   nix.extraOptions = ''
     system = x86_64-darwin
@@ -32,8 +29,6 @@
 
     users.${config.settings.username} = (import ../config);
   };
-
-  nix.package = pkgs.nix;
 
   networking.hostName = config.settings.hostname;
   time.timeZone = config.settings.timeZone;

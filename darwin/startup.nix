@@ -10,26 +10,6 @@ in {
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
-    if [[ ! -d "/Applications/Docker.app" ]]; then
-      echo "Installing Docker..."
-      curl -O https://desktop.docker.com/mac/main/${dockerVersion}/Docker.dmg
-
-      hdiutil attach Docker.dmg
-      cp -rf /Volumes/Docker/Docker.app /Applications && rm -rf Docker.dmg
-    fi
-
-    if [[ -n "$(command -v vim)" ]]; then
-      if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-        echo "Installing Vim Plug..."
-        curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      fi
-
-      if [[ ! -d "$HOME/.vim/plugged" ]]; then
-        echo "Installing Vim plugins..."
-        vim +'PlugInstall --sync' +qa
-      fi
-    fi
-
     if [[ -n "$(command -v dotnet)" ]]; then
       export PATH=${home}/.dotnet/tools:$PATH
       export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
@@ -38,6 +18,30 @@ in {
     if [[ -n "$(command -v cargo)" ]]; then
       export PATH=${home}/.cargo/bin:$PATH
     fi
+
+    function setup_docker() {
+      if [[ ! -d "/Applications/Docker.app" ]]; then
+        echo "Installing Docker..."
+        curl -O https://desktop.docker.com/mac/main/${dockerVersion}/Docker.dmg
+
+        hdiutil attach Docker.dmg
+        cp -rf /Volumes/Docker/Docker.app /Applications && rm -rf Docker.dmg
+      fi
+    }
+
+    function setup_vim() {
+      if [[ -n "$(command -v vim)" ]]; then
+        if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+          echo "Installing Vim Plug..."
+          curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        fi
+
+        if [[ ! -d "$HOME/.vim/plugged" ]]; then
+          echo "Installing Vim plugins..."
+          vim +'PlugInstall --sync' +qa
+        fi
+      fi
+    }
 
     function pclone() {
       GIT_REPO=tjmaynes/$1
@@ -50,5 +54,8 @@ in {
         [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
       fi
     }
+
+    setup_docker
+    setup_vim
   '';
 }

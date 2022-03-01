@@ -4,6 +4,7 @@
 hosts/home.nix
 
 # Generated
+hardware/
 .config/
 result
 *.dmg

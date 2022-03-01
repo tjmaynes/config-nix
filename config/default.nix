@@ -6,8 +6,7 @@ let
     ".." = "cd ..";
     "..." = "cd ../../";
     "...." = "cd ../../../";
-    "....." = "cd ../../../../";
-    "......" = "cd ../../../../../";
+    "....." = "cd ../../../../"; "......" = "cd ../../../../../";
     "ll" = "ls -al";
     "ns" = "nix-shell --command zsh";
     "k" = "kubectl";
@@ -32,6 +31,24 @@ in {
     file.".signature".source = ./.signature;
     file.".tmux.conf".source = ./.tmux.conf;
     file.".vimrc".source = ./.vimrc;
+
+    packages = with pkgs; [
+      bat
+      gnumake
+      gnupg
+      git
+      home-manager
+      htop
+      jq
+      lsd
+      procs
+      ripgrep
+      tmux
+      unzip
+      vim
+      zip
+      zsh
+    ];
   };
 
   programs = {
@@ -112,7 +129,7 @@ in {
     };
 
     bash = {
-      enable = true;
+      enable = false;
       historyFile = "${home}/.config/bash/.bash_history";
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;

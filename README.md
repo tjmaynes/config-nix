@@ -8,42 +8,51 @@
 
 ## Background
 
-| Host name      | Usage                              | Tools                      | Progress |
-| :------------- | :--------------------------------: | :------------------------: | :------: |
-| gaia           | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
-| demeter        | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
-| aether         | macos intel (work) workstation     | nix-darwin / home-manager  | ✅ |
-| infinity       | vm developer workstation           | nixos / home-manager       | 🚧 |
-| kubix          | nextcloud server                   | nixos                      | 🚧 | 
+| Host name                                                  | Usage                              | Tools                      | Progress |
+| :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :------: |
+| [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
+| [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
+| [aether](https://en.wikipedia.org/wiki/Aether_(mythology)) | macos intel (work) workstation     | nix-darwin / home-manager  | ✅ |
+| [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vm developer workstation           | nixos / home-manager       | ✅ |
+| [atlas](https://en.wikipedia.org/wiki/Argo)                | server                             | nixos                      | 🚧 |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
-> Before deploying `gaia`, please run the following command to install `rosetta2` which is needed for the `nix-darwin` installation:
+> Before installing `gaia`, please run the following command to install `rosetta2` which is needed for the `nix-darwin` installation:
 > ```bash
 > softwareupdate --install-rosetta --agree-to-license
 > ```
 
-To deploy changes to `gaia`, run the following command:
+To install `gaia` on an M1 Mac, run the following command:
 ```bash
-make deploy_gaia
+make install_gaia
 ```
 
-To deploy changes to `demeter`, run the following command:
+To install `demeter` on an Intel Mac, run the following command:
 ```bash
-make deploy_demeter
+make install_demeter
 ```
 
-To deploy changes to `aether`, run the following command:
+To install `aether` on an Intel Mac, run the following command:
 ```bash
-make deploy_aether
+make install_aether
 ```
 
-To deploy changes to `infinity`, run the following command:
+To install `glaucus` on VMware Fusion, run the following command:
 ```bash
-make deploy_infinity
+make install_glaucus
 ```
 
-To reload with local changes, run the following command:
+To install `atlas`, run the following command:
+```bash
+make install_atlas
+```
+
+To reload local changes, run the following command:
 ```bash
 make reload
 ```
+
+## Notes
+
+I learned quite a bit of Nixos-specific concepts from Malloc47's [config repo](https://github.com/malloc47/config).
