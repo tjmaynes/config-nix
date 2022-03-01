@@ -3,10 +3,7 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  imports = [
-    ../nixos/configuration.nix
-    ../darwin
-  ];
+  imports = [ ../darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {

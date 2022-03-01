@@ -3,11 +3,16 @@
 {
   imports = [ 
     <home-manager/nix-darwin>
+    ../modules/settings.nix
     ./preferences.nix
-    ./homebrew.nix
+    ./startup.nix
   ];
 
-  system.stateVersion = 4;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = false;
+    tarball-ttl = 604800;
+  };
 
   nix.nixPath = [ "darwin=$HOME/.nix-defexpr/darwin" "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs" ] ++ options.nix.nixPath.default;
   nix.extraOptions = ''
@@ -42,4 +47,6 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  system.stateVersion = 4;
 }

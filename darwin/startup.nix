@@ -10,11 +10,6 @@ in {
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
-    export ANDROID_HOME=${home}/Library/Android/sdk
-    export ANDROID_SDK_ROOT=${home}/Library/Android/sdk
-    export ANDROID_AVD_HOME=${home}/.android/avd
-    export PATH=$ANDROID_SDK_ROOT/tools/bin:$PATH
-
     if [[ ! -d "/Applications/Docker.app" ]]; then
       echo "Installing Docker..."
       curl -O https://desktop.docker.com/mac/main/${dockerVersion}/Docker.dmg
@@ -23,14 +18,25 @@ in {
       cp -rf /Volumes/Docker/Docker.app /Applications && rm -rf Docker.dmg
     fi
 
-    if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-      echo "Installing Vim Plug..."
-      curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [[ -n "$(command -v vim)" ]]; then
+      if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+        echo "Installing Vim Plug..."
+        curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      fi
+
+      if [[ ! -d "$HOME/.vim/plugged" ]]; then
+        echo "Installing Vim plugins..."
+        vim +'PlugInstall --sync' +qa
+      fi
     fi
 
-    if [[ ! -d "$HOME/.vim/plugged" ]]; then
-      echo "Installing Vim plugins..."
-      vim +'PlugInstall --sync' +qa
+    if [[ -n "$(command -v dotnet)" ]]; then
+      export PATH=${home}/.dotnet/tools:$PATH
+      export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
+    fi
+
+    if [[ -n "$(command -v cargo)" ]]; then
+      export PATH=${home}/.cargo/bin:$PATH
     fi
 
     function pclone() {
@@ -40,14 +46,9 @@ in {
         echo "Please provide a git repo as arg 1"  
       elif [[ ! -d "$WORKSPACE_DIR/$GIT_REPO" ]]; then
         git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$GIT_REPO
+
         [[ -d "$WORKSPACE_DIR/$GIT_REPO" ]] && cd $WORKSPACE_DIR/$GIT_REPO
       fi
     }
-
-    export PATH=${home}/.dotnet/tools:$PATH
-    export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
-
-    export PATH=${home}/.cargo/bin:$PATH
-    export PATH=${home}/go/bin:$PATH
   '';
 }

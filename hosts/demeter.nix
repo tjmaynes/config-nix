@@ -7,26 +7,20 @@ in {
     hostname = "demeter";
   };
 
-  imports = [
-    ../nixos/configuration.nix
-    ../darwin
-  ];
+  imports = [ ../darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        alacritty
         bat
         delta
         docker
         dog
         git
         gnupg
-        home-manager
         htop
         jq
         lsd
-        mutt
         nodejs-14_x
         procs
         python39
