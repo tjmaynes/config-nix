@@ -16,17 +16,14 @@ function check_requirements() {
   fi
 }
 
-function install_home_manager() {
-  if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
-    rm -rf "$HOME/.config/nixpkgs/home.nix"
-    (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
-  fi
+function install_nixpkgs() {
+  nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
+  nix-channel --update
+}
 
-  if [[ -z "$(command -v home-manager)" ]]; then
-    nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
-    nix-channel --update
-    #nix-shell '<home-manager>' -A install
-  fi
+function install_home_manager() {
+  nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
+  nix-channel --update
 }
 
 function install_nix_darwin() {
@@ -79,15 +76,13 @@ function install_darwin_based_host() {
   [[ -f "/etc/nix/nix.conf" ]] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
   [[ -f "/etc/shells" ]] && sudo mv /etc/shells /etc/shells.backup
 
-  nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
-  nix-channel --update
-
+  install_nixpkgs
   install_home_manager
   install_nix_darwin
 }
 
 function install_nixos_based_host() {
-  if [[ ! -d "/mnt/etc/nixos" ]]; then
+  if [[ ! -d "/etc/nixos" ]]; then
     parted /dev/sda -- mklabel gpt
     parted /dev/sda -- mkpart primary 512MiB -8GiB
     parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
@@ -120,6 +115,19 @@ function install_nixos_based_host() {
     fi
 
     reboot
+  else
+    sudo nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
+    sudo nix-channel --update
+
+    sudo nix-channel --add "https://github.com/nix-community/home-manager/archive/master.tar.gz" home-manager
+    sudo nix-channel --update
+
+    if [[ ! "/etc/nixos/configuration.nix" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
+      (sudo rm -rf /etc/nixos/configuration.nix) && sudo ln -s "$(pwd)/hosts/$HOST_NAME.nix" "/etc/nixos/configuration.nix"
+      (sudo mkdir hardware || true) && sudo cp -rf /etc/nixos/hardware-configuration.nix "$(pwd)/hardware/$NIXOS_HARDWARE_PROFILE.nix"
+    fi
+
+    nixos-rebuild switch
   fi
 }
 

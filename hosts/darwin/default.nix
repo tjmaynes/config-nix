@@ -1,17 +1,16 @@
-{ config, options, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [ 
     <home-manager/nix-darwin>
-    ../modules/settings.nix
+    ../../modules
     ./preferences.nix
     ./startup.nix
   ];
 
-  nixpkgs.config = import ../modules/nixpkgs.nix;
+  networking.hostName = config.settings.hostname;
+  time.timeZone = config.settings.timeZone;
 
-  nix.package = pkgs.nix;
-  nix.nixPath = [ "darwin=$HOME/.nix-defexpr/darwin" "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs" ] ++ options.nix.nixPath.default;
   nix.extraOptions = ''
     system = x86_64-darwin
     extra-platforms = x86_64-darwin aarch64-darwin
@@ -27,11 +26,8 @@
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.${config.settings.username} = (import ../config);
+    users.${config.settings.username} = (import ../../config);
   };
-
-  networking.hostName = config.settings.hostname;
-  time.timeZone = config.settings.timeZone;
 
   services.nix-daemon.enable = true;
   services.emacs.enable = true;
@@ -42,6 +38,4 @@
     enable = true;
     enableSSHSupport = true;
   };
-
-  system.stateVersion = 4;
 }

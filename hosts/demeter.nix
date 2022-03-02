@@ -3,19 +3,20 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  settings = {
-    hostname = "demeter";
-  };
+  settings = { hostname = "demeter"; };
 
-  imports = [ ../darwin ];
+  imports = [ ./darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
         delta
+        dotnet-sdk
         nodejs
         python39
         rustup
+        vagrant
+        packer
         yarn2nix
         yarn
       ];
@@ -35,14 +36,14 @@ in {
     ];
     casks = [
       "brave-browser"
-      "drawio"
       "gimp"
       "imageoptim"
       "intellij-idea"
       "iterm2"
-      "macvim"
+      "ledger-live"
       "mpv"
       "obs"
+      "rider"
       "selfcontrol"
       "spotify"
       "vcv-rack"
@@ -53,9 +54,10 @@ in {
       AnimoogZSynthesizer = 1586841361;
       Bitwarden = 1352778147;
       DaisyDisk = 411643860;
-      GarageBand = 682658836;
       Keynote = 409183694;
       Xcode = 497799835;
     };
   };
+
+  system.stateVersion = 4;
 }

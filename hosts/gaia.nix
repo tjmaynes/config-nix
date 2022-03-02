@@ -8,14 +8,13 @@ in {
     is_m1_mac = true;
   };
 
-  imports = [ ../darwin ];
+  imports = [ ./darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
         cocoapods
         delta
-        mutt
         nodejs
         python39
         rustup
@@ -65,4 +64,6 @@ in {
       AnimoogZSynthesizer = 1586841361;
     };
   };
+
+  system.stateVersion = 4;
 }

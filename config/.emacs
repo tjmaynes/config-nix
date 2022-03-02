@@ -171,13 +171,18 @@
   (package-manager/ensure-packages-installed 'multi-term 'auto-complete)
   (ac-config-default))
 
+(defun development/nix-setup ()
+  (package-manager/ensure-packages-installed 'nix-mode)
+  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode)))
+
 (defun development/setup ()
   (development/general-setup)
   (development/file-setup)
   (development/html-setup)
   (development/elisp-setup)
   (development/clojure-setup)
-  (development/devops-setup))
+  (development/devops-setup)
+  (development/nix-setup))
 
 (defun theme/gui-setup ()
   (package-manager/ensure-packages-installed 'circadian 'solarized-theme)
@@ -201,7 +206,7 @@
 	display-time-day-and-date t
 	ns-use-proxy-icon nil
 	frame-title-format nil
-	default-frame-alist '((font . "Inconsolata-16")))
+	default-frame-alist '((font . "Inconsolata-12")))
   (ido-mode t)
   (fset 'yes-or-no-p 'y-or-n-p)
   (display-time)

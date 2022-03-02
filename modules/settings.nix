@@ -1,4 +1,4 @@
-{config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 
 with lib;
 
@@ -38,8 +38,12 @@ with lib;
         type = with types; uniq str;
       };
       fontSize = mkOption {
-        default = 12;
-        type = types.int;
+        default = 12.0;
+        type = types.float;
+      };
+      terminal = mkOption {
+        default = "alacritty";
+        type = with types; uniq str;
       };
     };
   };

@@ -10,11 +10,11 @@
 
 | Host name                                                  | Usage                              | Tools                      | Progress |
 | :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :------: |
+| [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vmware fusion dev workstation      | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
 | [aether](https://en.wikipedia.org/wiki/Aether_(mythology)) | macos intel (work) workstation     | nix-darwin / home-manager  | ✅ |
-| [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vm developer workstation           | nixos / home-manager       | ✅ |
-| [atlas](https://en.wikipedia.org/wiki/Argo)                | server                             | nixos                      | 🚧 |
+| [atlas](https://en.wikipedia.org/wiki/Argo)                | nextcloud server                   | nixos                      | 🚧 |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
@@ -54,5 +54,25 @@ make reload
 ```
 
 ## Notes
+- In NixOS, only root can add new system-wide packages, so after rebooting VMware Fusion for the first time, run the following commands:
+```bash
+# login as root
 
-I learned quite a bit of Nixos-specific concepts from Malloc47's [config repo](https://github.com/malloc47/config).
+# change password
+passwd "your-username"
+
+# reboot
+reboot
+
+# login as user
+
+# create new keys
+ssh-keygen -t ed25519 -C "your-email"
+cat ~/.ssh/id_rsa.pub | pbcopy
+
+# clone config repo
+pclone config
+make install_glacus
+```
+- I learned quite a bit of NixOS-specific concepts from Malloc47's [config repo](https://github.com/malloc47/config).
+- Learning how to setup nextcloud on NixOS via this [blog post](https://jacobneplokh.com/how-to-setup-nextcloud-on-nixos/).

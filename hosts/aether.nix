@@ -3,7 +3,7 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  imports = [ ../darwin ];
+  imports = [ ./darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {
@@ -58,4 +58,6 @@ in {
       Numbers = 409203825;
     };
   };
+
+  system.stateVersion = 4;
 }
