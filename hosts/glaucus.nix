@@ -60,17 +60,18 @@ in {
         alacritty
         bitwarden
         brave
+        clojure
         cmus
         delta
         docker
-        dotnet-sdk
         drawio
         feh
         ffmpeg
         gimp
         jetbrains.idea-community
-        jetbrains.rider
         inkscape
+        jdk11
+        leiningen
         mpv
         nodejs
         packer
