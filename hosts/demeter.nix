@@ -10,15 +10,7 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        delta
         dotnet-sdk
-        nodejs
-        python39
-        rustup
-        vagrant
-        packer
-        yarn2nix
-        yarn
       ];
     };
   };
@@ -38,7 +30,7 @@ in {
       "brave-browser"
       "gimp"
       "imageoptim"
-      "intellij-idea"
+      "rider"
       "iterm2"
       "ledger-live"
       "mpv"
@@ -51,11 +43,9 @@ in {
       "vmware-fusion"
     ];
     masApps = {
-      AnimoogZSynthesizer = 1586841361;
       Bitwarden = 1352778147;
       DaisyDisk = 411643860;
       Keynote = 409183694;
-      Xcode = 497799835;
     };
   };
 

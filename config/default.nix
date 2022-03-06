@@ -34,6 +34,7 @@ in {
 
     packages = with pkgs; [
       bat
+      delta
       gnumake
       gnupg
       git

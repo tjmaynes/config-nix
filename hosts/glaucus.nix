@@ -29,6 +29,8 @@ in {
   services.xserver.dpi = 140;
 
   hardware.video.hidpi.enable = true;
+  environment.variables.GDK_SCALE = "3.0";
+  environment.variables.GDK_DPI_SCALE = "0.25";
 
   virtualisation.vmware.guest.enable = true;
   virtualisation.docker.enable = true;
@@ -54,31 +56,37 @@ in {
     shell = pkgs.zsh;
   };
 
+  services.syncthing = {
+    enable = true;
+    user = "${config.settings.username}";
+    dataDir = "/home/${config.settings.username}/libra";
+  };
+  
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
         alacritty
         bitwarden
         brave
-        clojure
         cmus
         delta
         docker
+        dotnet-sdk
         drawio
         feh
         ffmpeg
         gimp
-        jetbrains.idea-community
+        jetbrains.rider
         inkscape
-        jdk11
-        leiningen
         mpv
-        nodejs
+        mutt
+        nodejs-16_x
+        offlineimap
         packer
         pandoc
         pavucontrol
         python39
-        rustup
+        syncthing
         texlive.combined.scheme-full
         vagrant
         vscode

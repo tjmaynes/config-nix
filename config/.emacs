@@ -88,7 +88,7 @@
   (global-set-key (kbd "C-c 3") 'w3m-goto-url)
   (global-set-key (kbd "C-c n") 'elfeed)
   (global-set-key (kbd "C-c w") 'w3m-browse-url)
-  (global-set-key (kbd "C-c t") 'multi-term)
+  (global-set-key (kbd "C-c t") 'eshell)
   (global-set-key (kbd "C-c r") 'irc)
   (global-set-key (kbd "C-c e p") 'emms-play-directory)
   (global-set-key (kbd "C-c e <left>") 'emms-previous)
@@ -168,7 +168,7 @@
 	  exec-path (split-string path-from-shell path-separator))))
 
 (defun development/general-setup ()
-  (package-manager/ensure-packages-installed 'multi-term 'auto-complete)
+  (package-manager/ensure-packages-installed 'auto-complete)
   (ac-config-default))
 
 (defun development/nix-setup ()
