@@ -11,6 +11,9 @@ in {
     home = {
       packages = with pkgs; [
         dotnet-sdk
+        nodejs-16_x
+        yarn2nix
+        yarn
       ];
     };
   };

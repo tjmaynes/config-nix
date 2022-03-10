@@ -16,6 +16,7 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 6443 ];
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -61,6 +62,11 @@ in {
     user = "${config.settings.username}";
     dataDir = "/home/${config.settings.username}/libra";
   };
+
+  services.k3s = {
+    enable = true;
+    role = "server";
+  };
   
   home-manager.users.${config.settings.username} = {
     home = {
@@ -76,7 +82,9 @@ in {
         feh
         ffmpeg
         gimp
-        jetbrains.rider
+        k3s
+        kubectl
+        jetbrains.idea-ultimate
         inkscape
         mpv
         mutt
@@ -127,6 +135,9 @@ in {
     programs.zsh.initExtra = ''
       alias pbcopy='xclip -selection clipboard'
       alias pbpaste='xclip -selection clipboard -o'
+
+      export PATH=$HOME/.npm-packages/bin:$PATH
+      export NODE_PATH=$HOME/.npm-packages/lib/node_modules
 
       if [[ -n "$(command -v dotnet)" ]]; then
         export PATH=${home}/.dotnet/tools:$PATH

@@ -31,6 +31,7 @@ in {
     file.".signature".source = ./.signature;
     file.".tmux.conf".source = ./.tmux.conf;
     file.".vimrc".source = ./.vimrc;
+    file.".npmrc".source = ./.npmrc;
 
     packages = with pkgs; [
       bat

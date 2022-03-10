@@ -113,8 +113,11 @@ Plug 'LnL7/vim-nix'
 
 Plug 'ekalinin/Dockerfile.vim'
 
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 Plug 'vim-python/python-syntax'
-Plug 'rust-lang/rust.vim'
 
 Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'

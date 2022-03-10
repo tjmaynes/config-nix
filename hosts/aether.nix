@@ -11,7 +11,7 @@ in {
         cocoapods
         delta
         dotnet-sdk
-        nodejs
+        nodejs-16_x
         ruby
         yarn2nix
         yarn
