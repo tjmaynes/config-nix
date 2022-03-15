@@ -11,7 +11,7 @@ in {
     home = {
       packages = with pkgs; [
         dotnet-sdk
-        nodejs-16_x
+        nodejs-14_x
         yarn2nix
         yarn
       ];
@@ -41,6 +41,7 @@ in {
       "rider"
       "selfcontrol"
       "spotify"
+      "sysex-librarian"
       "vcv-rack"
       "visual-studio-code"
       "vmware-fusion"
