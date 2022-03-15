@@ -10,6 +10,10 @@ in {
     export HOMEBREW_NO_AUTO_UPDATE=1
     export HOMEBREW_NO_ANALYTICS=1
 
+    export PATH=$HOME/.npm-packages/bin:$PATH
+    export NODE_PATH=$HOME/.npm-packages/lib/node_modules
+    export DOTNET_CLI_TELEMETRY_OPTOUT=true
+
     if [[ -n "$(command -v dotnet)" ]]; then
       export PATH=${home}/.dotnet/tools:$PATH
       export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
