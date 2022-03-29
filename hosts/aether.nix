@@ -44,6 +44,7 @@ in {
       "macvim"
       "microsoft-remote-desktop"
       "pop"
+      "rider"
       "sf-symbols"
       "slack"
       "visual-studio-code"

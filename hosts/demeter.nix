@@ -10,7 +10,7 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        dotnet-sdk
+        go
         nodejs-14_x
         yarn2nix
         yarn
@@ -33,7 +33,7 @@ in {
       "brave-browser"
       "gimp"
       "imageoptim"
-      "rider"
+      "intellij-idea"
       "iterm2"
       "ledger-live"
       "mpv"
@@ -47,8 +47,10 @@ in {
       "vmware-fusion"
     ];
     masApps = {
+      AnimoogZSynthesizer = 1586841361;
       Bitwarden = 1352778147;
       DaisyDisk = 411643860;
+      FinalCutPro = 424389933;
       Keynote = 409183694;
     };
   };
