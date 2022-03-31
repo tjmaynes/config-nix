@@ -45,6 +45,7 @@ in {
       "vcv-rack"
       "visual-studio-code"
       "vmware-fusion"
+      "zoom"
     ];
     masApps = {
       AnimoogZSynthesizer = 1586841361;
