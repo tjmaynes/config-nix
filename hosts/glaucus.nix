@@ -77,10 +77,10 @@ in {
         cmus
         delta
         docker
-        dotnet-sdk
         drawio
         feh
         ffmpeg
+        go_1_17
         gimp
         k3s
         kubectl
@@ -98,6 +98,7 @@ in {
         texlive.combined.scheme-full
         vagrant
         vscode
+        virtualbox
         xclip
         yarn2nix
         yarn
