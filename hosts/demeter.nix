@@ -38,6 +38,7 @@ in {
       "intellij-idea"
       "iterm2"
       "ledger-live"
+      "macvim"
       "mpv"
       "obs"
       "rider"

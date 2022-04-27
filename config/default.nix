@@ -13,7 +13,6 @@ let
     "ls" = "lsd";
     "cat" = "bat";
     "ps" = "procs";
-    "open_pdf" = "mupdf";
   };
   environmentVariables = {
     EDITOR = "vim";
@@ -44,7 +43,6 @@ in {
       htop
       jq
       lsd
-      mupdf
       procs
       ripgrep
       tmux
