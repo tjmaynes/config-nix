@@ -14,9 +14,11 @@ in {
     export NODE_PATH=$HOME/.npm-packages/lib/node_modules
     export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
+    export GOPATH=$HOME/go
+    export PATH=$GOPATH/bin:$PATH
+
     if [[ -n "$(command -v dotnet)" ]]; then
       export PATH=${home}/.dotnet/tools:$PATH
-      export DOTNET_PATH=$(nix-store -q --references $(which dotnet) | grep dotnet | head)
     fi
 
     if [[ -n "$(command -v cargo)" ]]; then
