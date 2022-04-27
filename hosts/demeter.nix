@@ -56,6 +56,7 @@ in {
       DaisyDisk = 411643860;
       FinalCutPro = 424389933;
       Keynote = 409183694;
+      Highland2 = 1171820258;
     };
   };
 

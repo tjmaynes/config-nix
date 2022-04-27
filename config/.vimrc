@@ -106,6 +106,7 @@ Plug 'tpope/vim-surround'
 Plug 'jamessan/vim-gnupg'
 Plug 'editorconfig/editorconfig-vim'
 
+Plug 'kblin/vim-fountain'
 Plug 'tpope/vim-markdown'
 Plug 'junegunn/goyo.vim'
 
