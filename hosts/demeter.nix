@@ -33,6 +33,7 @@ in {
     ];
     casks = [
       "brave-browser"
+      "drawio"
       "gimp"
       "imageoptim"
       "intellij-idea"
@@ -41,7 +42,6 @@ in {
       "macvim"
       "mpv"
       "obs"
-      "rider"
       "selfcontrol"
       "spotify"
       "sysex-librarian"
@@ -51,12 +51,12 @@ in {
       "zoom"
     ];
     masApps = {
+      FinalCutPro = 424389933;
+      Highland2 = 1171820258;
+      Keynote = 409183694;
       AnimoogZSynthesizer = 1586841361;
       Bitwarden = 1352778147;
       DaisyDisk = 411643860;
-      FinalCutPro = 424389933;
-      Keynote = 409183694;
-      Highland2 = 1171820258;
     };
   };
 
