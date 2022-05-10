@@ -42,6 +42,7 @@ in {
       "macvim"
       "mpv"
       "obs"
+      "steam"
       "selfcontrol"
       "spotify"
       "sysex-librarian"
