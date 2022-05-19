@@ -33,6 +33,7 @@ in {
     ];
     casks = [
       "brave-browser"
+      "discord"
       "drawio"
       "gimp"
       "imageoptim"
@@ -41,6 +42,7 @@ in {
       "ledger-live"
       "macvim"
       "mpv"
+      "nvidia-geforce-now"
       "obs"
       "steam"
       "selfcontrol"
@@ -49,6 +51,7 @@ in {
       "vcv-rack"
       "visual-studio-code"
       "vmware-fusion"
+      "xnviewmp"
       "zoom"
     ];
     masApps = {
