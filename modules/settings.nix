@@ -30,7 +30,7 @@ with lib;
         type = with types; uniq str;
       };
       timeZone = mkOption {
-        default = "America/New_York";
+        default = "America/Chicago";
         type = with types; uniq str;
       };
       fontName = mkOption {
