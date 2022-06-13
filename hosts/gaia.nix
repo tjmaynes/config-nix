@@ -13,11 +13,9 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
-        cocoapods
-        delta
+        go
         nodejs
         python39
-        rustup
         yarn2nix
         yarn
       ];
@@ -37,31 +35,35 @@ in {
       "homebrew/cask" 
     ];
     casks = [
-      "blender"
       "brave-browser"
+      "discord"
       "drawio"
       "gimp"
       "imageoptim"
-      "inkscape"
+      "goland"
       "iterm2"
-      "licecap"
+      "ledger-live"
       "macvim"
       "mpv"
+      "nvidia-geforce-now"
       "obs"
+      "steam"
       "selfcontrol"
       "spotify"
-      "telegram"
+      "sysex-librarian"
       "vcv-rack"
       "visual-studio-code"
       "vmware-fusion"
+      "xnviewmp"
+      "zoom"
     ];
     masApps = {
-      Bitwarden = 1352778147;
-      GarageBand = 682658836;
-      Xcode = 497799835;
-      DaisyDisk = 411643860;
+      FinalCutPro = 424389933;
+      Highland2 = 1171820258;
       Keynote = 409183694;
       AnimoogZSynthesizer = 1586841361;
+      Bitwarden = 1352778147;
+      DaisyDisk = 411643860;
     };
   };
 

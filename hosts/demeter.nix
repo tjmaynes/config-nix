@@ -10,7 +10,9 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
+        go
         nodejs-14_x
+        python39
         yarn2nix
         yarn
       ];
@@ -27,9 +29,6 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
-    ];
-    brews = [
-      "go"
     ];
     casks = [
       "brave-browser"
