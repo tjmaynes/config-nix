@@ -3,9 +3,6 @@ USERNAME := tjmaynes
 install_gaia:
 	./scripts/install.sh "gaia" "$(USERNAME)"
 
-install_aether:
-	./scripts/install.sh "aether" "$(USERNAME)"
-
 install_demeter:
 	./scripts/install.sh "demeter" "$(USERNAME)"
 

@@ -13,7 +13,6 @@
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vmware fusion dev workstation      | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
-| [aether](https://en.wikipedia.org/wiki/Aether_(mythology)) | macos intel (work) workstation     | nix-darwin / home-manager  | ✅ |
 | [atlas](https://en.wikipedia.org/wiki/Argo)                | nextcloud server                   | nixos                      | 🚧 |
 
 ## Usage
