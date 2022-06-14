@@ -10,6 +10,7 @@ in {
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [
+        ffmpeg
         go
         nodejs-14_x
         python39
@@ -29,6 +30,9 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
+    ];
+    brews = [
+      "cmus"
     ];
     casks = [
       "brave-browser"
