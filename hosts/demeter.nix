@@ -47,6 +47,7 @@ in {
       "mpv"
       "nvidia-geforce-now"
       "obs"
+      "retroarch-metal"
       "steam"
       "selfcontrol"
       "spotify"
