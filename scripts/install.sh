@@ -4,7 +4,6 @@ set -e
 
 HOST_NAME=$1
 NIXOS_USERNAME=$2
-NIXOS_HARDWARE_PROFILE=$3
 
 function check_requirements() {
   if [[ -z "$HOST_NAME" ]]; then
@@ -101,7 +100,6 @@ function install_nixos_based_host() {
 
     if [[ ! "/mnt/etc/nixos/configuration.nix" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
       (rm -rf /mnt/etc/nixos/configuration.nix) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "/mnt/etc/nixos/configuration.nix"
-      (mkdir hardware || true) && cp -rf /mnt/etc/nixos/hardware-configuration.nix "$(pwd)/hardware/$NIXOS_HARDWARE_PROFILE.nix"
     fi
 
     install_home_manager
@@ -124,7 +122,6 @@ function install_nixos_based_host() {
 
     if [[ ! "/etc/nixos/configuration.nix" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
       (sudo rm -rf /etc/nixos/configuration.nix) && sudo ln -s "$(pwd)/hosts/$HOST_NAME.nix" "/etc/nixos/configuration.nix"
-      (sudo mkdir hardware || true) && sudo cp -rf /etc/nixos/hardware-configuration.nix "$(pwd)/hardware/$NIXOS_HARDWARE_PROFILE.nix"
     fi
 
     nixos-rebuild switch

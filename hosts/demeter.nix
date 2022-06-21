@@ -11,11 +11,6 @@ in {
     home = {
       packages = with pkgs; [
         ffmpeg
-        go
-        nodejs-14_x
-        python39
-        yarn2nix
-        yarn
       ];
     };
   };
@@ -37,25 +32,17 @@ in {
     casks = [
       "brave-browser"
       "discord"
-      "drawio"
-      "gimp"
-      "imageoptim"
-      "intellij-idea"
-      "iterm2"
       "ledger-live"
       "macvim"
       "mpv"
+      "notion"
       "nvidia-geforce-now"
       "obs"
-      "retroarch-metal"
-      "steam"
       "selfcontrol"
       "spotify"
       "sysex-librarian"
       "vcv-rack"
-      "visual-studio-code"
       "vmware-fusion"
-      "xnviewmp"
       "zoom"
     ];
     masApps = {

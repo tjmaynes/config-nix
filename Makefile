@@ -7,10 +7,10 @@ install_demeter:
 	./scripts/install.sh "demeter" "$(USERNAME)"
 
 install_glaucus:
-	./scripts/install.sh "glaucus" "$(USERNAME)" "vmware-fusion"
+	./scripts/install.sh "glaucus" "$(USERNAME)"
 
 install_atlas:
-	./scripts/install.sh "atlas" "$(USERNAME)" "vmware-fusion"
+	./scripts/install.sh "atlas" "$(USERNAME)"
 
 reload:
 	./scripts/reload.sh
