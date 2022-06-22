@@ -10,7 +10,13 @@ install_glaucus:
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
 install_atlas:
-	./scripts/install.sh "atlas" "$(USERNAME)"
+	./scripts/install-atlas.sh
+
+stop_atlas:
+	./scripts/stop-atlas.sh
+
+backup_atlas:
+	./scripts/backup-atlas.sh
 
 reload:
 	./scripts/reload.sh

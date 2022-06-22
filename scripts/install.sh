@@ -128,6 +128,9 @@ function install_nixos_based_host() {
   fi
 }
 
+function install_docker_based_host() {
+}
+
 function main() {
   check_requirements
 
@@ -145,7 +148,7 @@ function main() {
       install_nixos_based_host
       ;;
     "atlas")
-      install_nixos_based_host
+      install_docker_based_host
       ;;
     *)
       echo "Host name $HOST_NAME has not been setup yet!"
