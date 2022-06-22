@@ -12,12 +12,15 @@ function check_requirements() {
 function stop_program() {
   PROGRAM=$1  
 
-  if [[ ! -d "hosts/atlas/$PROGRAM" ]]; then
-    echo "$PROGRAM does not exist on path: hosts/atlas/$PROGRAM"
+  if [[ ! -d "$(pwd)/$PROGRAM" ]]; then
+    echo "$PROGRAM does not exist on path: $(pwd)/$PROGRAM"
+    exit 1
+  elif [[ ! -f "$(pwd)/$PROGRAM/docker-compose.yml" ]]; then
+    echo "$PROGRAM does not contain docker-compose.yml on path: $(pwd)/$PROGRAM"
     exit 1
   fi
 
-  pushd hosts/atlas/$PROGRAM
+  pushd $(pwd)/$PROGRAM
   docker compose down
   popd
 }

@@ -8,3 +8,4 @@ hardware/
 .config/
 result
 *.dmg
+hosts/atlas/backups/
