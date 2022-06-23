@@ -4,10 +4,13 @@ include .env.$(ENVIRONMENT)
 export $(shell sed 's/=.*//' .env.$(ENVIRONMENT))
 
 install:
-	./scripts/install.sh
+	./scripts/$@.sh
 
 stop:
-	./scripts/stop.sh
+	./scripts/$@.sh
 
 backup:
-	./scripts/backup.sh
+	./scripts/$@.sh
+
+restore:
+	./scripts/$@.sh

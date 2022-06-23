@@ -31,35 +31,9 @@ function print_postamble() {
   echo "Finished backing up: '$CONTAINER_NAME'"
 }
 
-function backup_gitea_volume() {
+function backup_gitea() {
   print_preamble "gitea"
 
-  docker exec -u git -i "gitea" \
-    bash -c "/app/gitea/gitea dump --type tar.gz --file /tmp/gitea.tar.gz"
-
-  docker cp gitea:/tmp/gitea.tar.gz "$BACKUP_DIRECTORY/gitea.tar.gz"
-
-  print_postamble "gitea" 
-}
-
-function backup_gitea_db_volume() {
-  print_preamble "gitea-db"
-
-  docker exec -i "gitea-db" \
-    bash -c "pg_dump -U $GITEA_USER $GITEA_DATABASE > dump.sql"
-
-  docker cp gitea-db:/gitea-db.sql "$BACKUP_DIRECTORY/gitea/dump.sql"
-
-  docker cp gitea-db:/var/lib/postgresql/data "$BACKUP_DIRECTORY/gitea/postgresql"
-
-  tar -cf $BACKUP_DIRECTORY/gitea-db.tar.gz -C $BACKUP_DIRECTORY/gitea .
-
-  rm -rf $BACKUP_DIRECTORY/gitea
-
-  print_postamble "gitea-db" 
-}
-
-function backup_gitea() {
   if [[ -z "$GITEA_USER" ]]; then
     echo "Please set an environment variable for 'GITEA_USER' before running this script"
     exit 1
@@ -70,8 +44,12 @@ function backup_gitea() {
 
   create_directory_if_not_exists "gitea"
 
-  backup_gitea_volume
-  backup_gitea_db_volume
+  docker exec -u git -i "gitea" \
+    bash -c "/app/gitea/gitea dump --type tar.gz --file /tmp/gitea.tar.gz"
+
+  docker cp gitea:/tmp/gitea.tar.gz "$BACKUP_DIRECTORY/gitea.tar.gz"
+
+  print_postamble "gitea" 
 }
 
 function main() {
