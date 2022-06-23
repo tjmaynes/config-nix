@@ -2,13 +2,11 @@
 
 set -e
 
-BACKUP_DIRECTORY="$(ls -td backups/*/ | head -1)"
-
 function check_requirements() {
   if [[ -z "$(command -v docker)" ]]; then
     echo "Please install 'docker' before running this script."
     exit 1
-  elif [[ -z "$BACKUP_DIRECTORY" ]]; then
+  elif [[ ! -d "$BACKUP_DIRECTORY" ]]; then
     echo "No backup directories do not exist in the file system. Nothing to restore!"
     exit 1
   fi
@@ -35,7 +33,9 @@ function unpack_tarred_backup() {
   tar -xf $BACKUP_DIRECTORY/$BACKUP_NAME.tar.gz -C $BACKUP_DIRECTORY/$BACKUP_NAME
 }
 
-function restore_gitea_db() {
+function restore_gitea() {
+  unpack_tarred_backup "gitea"
+
   print_preamble "gitea-db"
 
   if [[ -z "$GITEA_USER" ]]; then
@@ -52,14 +52,8 @@ function restore_gitea_db() {
     bash -c "psql -U $GITEA_USER -d $GITEA_DATABASE --set ON_ERROR_STOP=on < /tmp/gitea-db.sql"
 
   print_postamble "gitea-db" 
-}
-
-function restore_gitea() {
-  restore_gitea_db
 
   print_preamble "gitea"
-
-  unpack_tarred_backup "gitea"
 
   docker cp "$BACKUP_DIRECTORY/gitea/data" gitea:/tmp/backup-data
 
@@ -84,6 +78,8 @@ function restore_gitea() {
 
 function main() {
   check_requirements
+
+  BACKUP_DIRECTORY="$(ls -td $BACKUP_DIRECTORY/*/ | head -1)"
 
   restore_gitea
 }

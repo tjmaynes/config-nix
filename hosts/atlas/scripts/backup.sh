@@ -2,12 +2,12 @@
 
 set -e
 
-TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-BACKUP_DIRECTORY="$(pwd)/backups/$TIMESTAMP"
-
 function check_requirements() {
   if [[ -z "$(command -v docker)" ]]; then
     echo "Please install 'docker' before running this script."
+    exit 1
+  elif [[ ! -d "$BACKUP_DIRECTORY" ]]; then
+    echo "No backup directories do not exist in the file system. Nothing to restore!"
     exit 1
   fi
 }
@@ -45,6 +45,9 @@ function backup_gitea() {
 
 function main() {
   check_requirements
+  
+  TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+  BACKUP_DIRECTORY="$BACKUP_DIRECTORY/$TIMESTAMP"
 
   if [[ ! -d "$BACKUP_DIRECTORY" ]]; then
     echo "Creating backup directory: $BACKUP_DIRECTORY"
