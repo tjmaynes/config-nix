@@ -14,3 +14,5 @@ backup:
 
 restore:
 	./scripts/$@.sh
+
+init: install restore

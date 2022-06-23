@@ -12,13 +12,6 @@ function check_requirements() {
   fi
 }
 
-function create_directory_if_not_exists() {
-  if [[ ! -d "$BACKUP_DIRECTORY/$1" ]]; then
-    echo "Creating backup directory: $BACKUP_DIRECTORY/$1"
-    mkdir -p "$BACKUP_DIRECTORY/$1"
-  fi
-}
-
 function print_preamble() {
   CONTAINER_NAME=$1
 
@@ -42,8 +35,6 @@ function backup_gitea() {
     exit 1
   fi
 
-  create_directory_if_not_exists "gitea"
-
   docker exec -u git -i "gitea" \
     bash -c "/app/gitea/gitea dump --type tar.gz --file /tmp/gitea.tar.gz"
 
@@ -54,6 +45,11 @@ function backup_gitea() {
 
 function main() {
   check_requirements
+
+  if [[ ! -d "$BACKUP_DIRECTORY" ]]; then
+    echo "Creating backup directory: $BACKUP_DIRECTORY"
+    mkdir -p "$BACKUP_DIRECTORY"
+  fi
 
   backup_gitea
 }

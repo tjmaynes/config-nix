@@ -8,6 +8,9 @@ function check_requirements() {
   if [[ -z "$(command -v docker)" ]]; then
     echo "Please install 'docker' before running this script."
     exit 1
+  elif [[ -z "$BACKUP_DIRECTORY" ]]; then
+    echo "No backup directories do not exist in the file system. Nothing to restore!"
+    exit 1
   fi
 }
 
@@ -32,8 +35,8 @@ function unpack_tarred_backup() {
   tar -xf $BACKUP_DIRECTORY/$BACKUP_NAME.tar.gz -C $BACKUP_DIRECTORY/$BACKUP_NAME
 }
 
-function restore_gitea() {
-  print_preamble "gitea"
+function restore_gitea_db() {
+  print_preamble "gitea-db"
 
   if [[ -z "$GITEA_USER" ]]; then
     echo "Please set an environment variable for 'GITEA_USER' before running this script"
@@ -43,18 +46,31 @@ function restore_gitea() {
     exit 1
   fi
 
+  docker cp "$BACKUP_DIRECTORY/gitea/gitea-db.sql" gitea-db:/tmp
+
+  docker exec -i "gitea-db" \
+    bash -c "psql -U $GITEA_USER -d $GITEA_DATABASE --set ON_ERROR_STOP=on < /tmp/gitea-db.sql"
+
+  print_postamble "gitea-db" 
+}
+
+function restore_gitea() {
+  restore_gitea_db
+
+  print_preamble "gitea"
+
   unpack_tarred_backup "gitea"
 
-  docker cp "$BACKUP_DIRECTORY/gitea/data" gitea:/tmp/backup/data
+  docker cp "$BACKUP_DIRECTORY/gitea/data" gitea:/tmp/backup-data
 
   docker exec -i "gitea" \
-    bash -c "cp -rf /tmp/backup/data /data/gitea"
+    bash -c "cp -rf /tmp/backup-data /data/gitea"
 
   if [[ -d "$BACKUP_DIRECTORY/gitea/repos" ]]; then
-    docker cp "$BACKUP_DIRECTORY/gitea/repos" gitea:/tmp/backup/repos
+    docker cp "$BACKUP_DIRECTORY/gitea/repos" gitea:/tmp/backup-repos
 
     docker exec -i "gitea" \
-      bash -c "cp -rf /tmp/backup/repos /data/git/repositories"
+      bash -c "cp -rf /tmp/backup-repos /data/git/repositories"
   fi
 
   docker exec -i "gitea" \
@@ -64,15 +80,6 @@ function restore_gitea() {
     bash -c "/usr/local/bin/gitea -c '/data/gitea/conf/app.ini' admin regenerate hooks"
 
   print_postamble "gitea" 
-
-  print_preamble "gitea-db"
-
-  docker cp "$BACKUP_DIRECTORY/gitea/gitea-db.sql" gitea-db:/tmp
-
-  docker exec -i "gitea-db" \
-    bash -c "psql -U $GITEA_USER -d $GITEA_DATABASE --set ON_ERROR_STOP=on < /tmp/gitea-db.sql"
-
-  print_postamble "gitea-db" 
 }
 
 function main() {
