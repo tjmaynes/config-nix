@@ -9,3 +9,4 @@ hardware/
 result
 *.dmg
 hosts/atlas/backups/
+hosts/atlas/.env.production
