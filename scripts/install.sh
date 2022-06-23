@@ -135,9 +135,6 @@ function main() {
     "gaia")
       install_darwin_based_host 
       ;;
-    "aether")
-      install_darwin_based_host
-      ;;
     "demeter")
       install_darwin_based_host
       ;;

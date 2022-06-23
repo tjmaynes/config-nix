@@ -9,15 +9,6 @@ install_demeter:
 install_glaucus:
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
-install_atlas:
-	cd hosts/atlas && make install
-
-backup_atlas:
-	cd hosts/atlas && make backup
-
-stop_atlas:
-	cd hosts/atlas && make stop
-
 reload:
 	./scripts/reload.sh
 
