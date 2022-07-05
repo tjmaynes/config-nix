@@ -43,6 +43,7 @@ in {
       "sysex-librarian"
       "vcv-rack"
       "vmware-fusion"
+      "visual-studio-code"
       "zoom"
     ];
     masApps = {
