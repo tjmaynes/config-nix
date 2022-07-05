@@ -8,7 +8,7 @@
 
 ## Background
 
-| Host name                                                  | Usage                              | Tools                      | Progress |
+| Host name                                                  | Usage                              | Tools                      | Status |
 | :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :------: |
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vmware fusion dev workstation      | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
