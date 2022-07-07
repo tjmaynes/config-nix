@@ -32,6 +32,7 @@ in {
     casks = [
       "brave-browser"
       "discord"
+      "jellyfin-media-player"
       "ledger-live"
       "macvim"
       "mpv"
