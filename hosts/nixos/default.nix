@@ -18,5 +18,5 @@
 
   programs.zsh.enable = true;
 
-  home-manager.users.${config.settings.username} = (import ../../config);
+  home-manager.users.${config.settings.username} = (import ../../modules/home-manager.nix);
 }

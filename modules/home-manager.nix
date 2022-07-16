@@ -2,6 +2,8 @@
 
 let
   home = builtins.getEnv "HOME";
+  projectRoot = builtins.getEnv "PWD";
+  dotfilesDir = "${projectRoot}/dotfiles";
   shellAliases = {
     ".." = "cd ..";
     "..." = "cd ../../";
@@ -25,16 +27,16 @@ in {
   imports = [ ../modules/settings.nix ];
 
   home = {
-    file.".alacritty.yml".source = ./.alacritty.yml;
-    file.".emacs".source = ./.emacs;
-    file.".offlineimap.py".source = ./.offlineimap.py;
-    file.".offlineimaprc".source = ./.offlineimaprc;
-    file.".signature".source = ./.signature;
-    file.".tmux.conf".source = ./.tmux.conf;
-    file.".vimrc".source = ./.vimrc;
-    file.".npmrc".source = ./.npmrc;
-    file.".bash-fns.sh".source = ./fns.sh;
-    file.".startup.sh".source = ./startup.sh;
+    file.".alacritty.yml".source = "${dotfilesDir}/.alacritty.yml";
+    file.".emacs".source = "${dotfilesDir}/.emacs";
+    file.".offlineimap.py".source = "${dotfilesDir}/.offlineimap.py";
+    file.".offlineimaprc".source = "${dotfilesDir}/.offlineimaprc";
+    file.".signature".source = "${dotfilesDir}/.signature";
+    file.".tmux.conf".source = "${dotfilesDir}/.tmux.conf";
+    file.".vimrc".source = "${dotfilesDir}/.vimrc";
+    file.".npmrc".source = "${dotfilesDir}/.npmrc";
+    file.".common-fns.sh".source = "${dotfilesDir}/.common-fns.sh";
+    file.".startup.sh".source = "${dotfilesDir}/.startup.sh";
 
     packages = with pkgs; [
       bat

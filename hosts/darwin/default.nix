@@ -27,7 +27,7 @@ in {
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.${config.settings.username} = (import ../../config);
+    users.${config.settings.username} = (import ../../modules/home-manager.nix);
   };
 
   services.nix-daemon.enable = true;
