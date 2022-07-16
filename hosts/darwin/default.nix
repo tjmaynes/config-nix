@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
-{
+let
+  home = builtins.getEnv "HOME";
+in {
   imports = [ 
     <home-manager/nix-darwin>
     ../../modules
     ./preferences.nix
-    ./startup.nix
   ];
 
   networking.hostName = config.settings.hostname;
@@ -38,4 +39,8 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.zsh.shellInit = ''
+    . ${home}/.startup.sh
+  '';
 }

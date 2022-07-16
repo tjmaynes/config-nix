@@ -17,9 +17,10 @@ let
   environmentVariables = {
     EDITOR = "vim";
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
+    GIT_USERNAME = "${config.settings.username}";
     WORKSPACE_DIR = "${home}/workspace";
+    WORKSPACE_BACKUP_DIR = "${home}/workspace/${config.settings.username}-backups";
   };
-
 in {
   imports = [ ../modules/settings.nix ];
 
@@ -32,6 +33,8 @@ in {
     file.".tmux.conf".source = ./.tmux.conf;
     file.".vimrc".source = ./.vimrc;
     file.".npmrc".source = ./.npmrc;
+    file.".bash-fns.sh".source = ./fns.sh;
+    file.".startup.sh".source = ./startup.sh;
 
     packages = with pkgs; [
       bat

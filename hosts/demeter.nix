@@ -32,6 +32,7 @@ in {
     casks = [
       "brave-browser"
       "discord"
+      "iterm2"
       "jellyfin-media-player"
       "ledger-live"
       "macvim"
@@ -43,6 +44,8 @@ in {
       "spotify"
       "sysex-librarian"
       "vcv-rack"
+      "vagrant"
+      "virtualbox"
       "vmware-fusion"
       "visual-studio-code"
       "zoom"

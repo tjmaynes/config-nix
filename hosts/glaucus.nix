@@ -130,55 +130,7 @@ in {
     services.emacs.enable = true;
 
     programs.zsh.initExtra = ''
-      alias pbcopy='xclip -selection clipboard'
-      alias pbpaste='xclip -selection clipboard -o'
-
-      export PATH=$HOME/.npm-packages/bin:$PATH
-      export NODE_PATH=$HOME/.npm-packages/lib/node_modules
-      export DOTNET_CLI_TELEMETRY_OPTOUT=true
-
-      export GOPATH=$HOME/workspace/go
-      export PATH=$GOPATH/bin:$PATH
-
-      if [[ -n "$(command -v dotnet)" ]]; then
-        export PATH=${home}/.dotnet/tools:$PATH
-      fi
-
-      function setup_vim() {
-        if [[ -n "$(command -v vim)" ]]; then
-          if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
-            echo "Installing Vim Plug..."
-            curl -Lo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-          fi
-
-          if [[ ! -d "$HOME/.vim/plugged" ]]; then
-            echo "Installing Vim plugins..."
-            vim +'PlugInstall --sync' +qa
-          fi
-        fi
-      }
-
-      function pclone() {
-        REPO_NAME=$1
-        GIT_REPO=${config.settings.username}/$REPO_NAME
-        WORKSPACE_DIR=$HOME/workspace/${config.settings.username}
-
-        echo $WORKSPACE_DIR
-
-        if [[ -z "$WORKSPACE_DIR" ]]; then
-          mkdir -p "$WORKSPACE_DIR"
-        fi
-
-        if [[ -z "$REPO_NAME" ]]; then
-          echo "Please provide a git repo as arg 1"  
-        elif [[ ! -d "$WORKSPACE_DIR/$REPO_NAME" ]]; then
-          git clone git@github.com:$GIT_REPO.git $WORKSPACE_DIR/$REPO_NAME
-
-          [[ -d "$WORKSPACE_DIR/$REPO_NAME" ]] && cd $WORKSPACE_DIR/$REPO_NAME
-        fi
-      }
-
-      setup_vim
+      . ${home}/.startup.sh
     '';
   };
 }
