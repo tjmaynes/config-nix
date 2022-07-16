@@ -39,8 +39,4 @@ in {
     enable = true;
     enableSSHSupport = true;
   };
-
-  programs.zsh.shellInit = ''
-    . ${home}/.startup.sh
-  '';
 }

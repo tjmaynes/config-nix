@@ -18,7 +18,7 @@ let
     EDITOR = "vim";
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
     GIT_USERNAME = "${config.settings.username}";
-    WORKSPACE_DIR = "${home}/workspace";
+    WORKSPACE_DIR = "${home}/workspace/${config.settings.username}";
     WORKSPACE_BACKUP_DIR = "${home}/workspace/${config.settings.username}-backups";
   };
 in {
@@ -131,6 +131,9 @@ in {
       };
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
+      initExtra = ''
+        . ${home}/.startup.sh
+      '';
     };
 
     bash = {

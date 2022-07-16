@@ -128,9 +128,5 @@ in {
 
     programs.emacs.enable = true;
     services.emacs.enable = true;
-
-    programs.zsh.initExtra = ''
-      . ${home}/.startup.sh
-    '';
   };
 }
