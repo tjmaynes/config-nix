@@ -10,12 +10,12 @@
 
 ## Background
 
-| Host name                                                  | Usage                              | Tools                      | Status |
+| Host                                                       | Usage                              | Tools                      | Status |
 | :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :------: |
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vmware fusion dev workstation      | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
-| [atlas](https://en.wikipedia.org/wiki/atlas)                 | home server                        | docker-compose             | ✅ |
+| [atlas](https://en.wikipedia.org/wiki/atlas)               | home server                        | docker-compose             | ✅ |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
