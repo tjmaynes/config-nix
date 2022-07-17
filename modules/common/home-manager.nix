@@ -21,7 +21,7 @@ let
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
     GIT_USERNAME = "${config.settings.username}";
     WORKSPACE_DIR = "${home}/workspace/${config.settings.username}";
-    WORKSPACE_BACKUP_DIR = "${home}/workspace/backups/${config.settings.username}";
+    BACKUP_DIR = "${home}/backups/${config.settings.username}";
   };
 in {
   imports = [ ./settings.nix ];
