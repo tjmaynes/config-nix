@@ -141,6 +141,9 @@ function main() {
     "glaucus")
       install_nixos_based_host
       ;;
+    "atlas")
+      cd hosts/atlas && make start
+      ;;
     *)
       echo "Host name $HOST_NAME has not been setup yet!"
       exit 1

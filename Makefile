@@ -10,7 +10,7 @@ install_glaucus:
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
 install_atlas:
-	cd hosts/atlas && make start
+	./scripts/install.sh "atlas" "$(USERNAME)"
 
 reload:
 	./scripts/reload.sh
