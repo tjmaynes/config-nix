@@ -35,8 +35,7 @@ in {
     file.".tmux.conf".source = "${dotfilesDir}/.tmux.conf";
     file.".vimrc".source = "${dotfilesDir}/.vimrc";
     file.".npmrc".source = "${dotfilesDir}/.npmrc";
-    file.".common-fns.sh".source = "${dotfilesDir}/.common-fns.sh";
-    file.".startup.sh".source = "${dotfilesDir}/.startup.sh";
+    file.".startup.sh".source = "${dotfilesDir}/startup.sh";
 
     packages = with pkgs; [
       bat
