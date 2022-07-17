@@ -3,7 +3,7 @@
 {
   imports = [ 
     <home-manager/nixos>
-    ../../modules
+    ../common
   ];
 
   time.timeZone = config.settings.timeZone;
@@ -18,5 +18,5 @@
 
   programs.zsh.enable = true;
 
-  home-manager.users.${config.settings.username} = (import ../../modules/home-manager.nix);
+  home-manager.users.${config.settings.username} = (import ../common/home-manager.nix);
 }

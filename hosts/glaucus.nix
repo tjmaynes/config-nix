@@ -8,7 +8,7 @@ in {
 
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
-    ./nixos
+    ../modules/nixos
   ];
 
   boot.loader.systemd-boot.enable = true;

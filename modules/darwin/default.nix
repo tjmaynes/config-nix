@@ -5,7 +5,7 @@ let
 in {
   imports = [ 
     <home-manager/nix-darwin>
-    ../../modules
+    ../common
     ./preferences.nix
   ];
 
@@ -27,7 +27,7 @@ in {
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.${config.settings.username} = (import ../../modules/home-manager.nix);
+    users.${config.settings.username} = (import ../common/home-manager.nix);
   };
 
   services.nix-daemon.enable = true;

@@ -24,7 +24,7 @@ let
     WORKSPACE_BACKUP_DIR = "${home}/workspace/${config.settings.username}-backups";
   };
 in {
-  imports = [ ../modules/settings.nix ];
+  imports = [ ./settings.nix ];
 
   home = {
     file.".alacritty.yml".source = "${dotfilesDir}/.alacritty.yml";

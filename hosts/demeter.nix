@@ -5,7 +5,7 @@ let
 in {
   settings = { hostname = "demeter"; };
 
-  imports = [ ./darwin ];
+  imports = [ ../modules/darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {

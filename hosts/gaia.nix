@@ -8,7 +8,7 @@ in {
     is_m1_mac = true;
   };
 
-  imports = [ ./darwin ];
+  imports = [ ../modules/darwin ];
 
   home-manager.users.${config.settings.username} = {
     home = {
