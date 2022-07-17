@@ -21,7 +21,7 @@ let
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
     GIT_USERNAME = "${config.settings.username}";
     WORKSPACE_DIR = "${home}/workspace/${config.settings.username}";
-    WORKSPACE_BACKUP_DIR = "${home}/workspace/${config.settings.username}-backups";
+    WORKSPACE_BACKUP_DIR = "${home}/workspace/backups/${config.settings.username}";
   };
 in {
   imports = [ ./settings.nix ];
@@ -35,7 +35,7 @@ in {
     file.".tmux.conf".source = "${dotfilesDir}/.tmux.conf";
     file.".vimrc".source = "${dotfilesDir}/.vimrc";
     file.".npmrc".source = "${dotfilesDir}/.npmrc";
-    file.".startup.sh".source = "${dotfilesDir}/startup.sh";
+    file.".bash_onstart.sh".source = "${dotfilesDir}/.bash_onstart.sh";
 
     packages = with pkgs; [
       bat
@@ -133,7 +133,7 @@ in {
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
       initExtra = ''
-        . ${home}/.startup.sh
+        . ${home}/.bash_onstart.sh
       '';
     };
 
