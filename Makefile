@@ -9,6 +9,9 @@ install_demeter:
 install_glaucus:
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
+install_atlas:
+	cd hosts/atlas && make start
+
 reload:
 	./scripts/reload.sh
 

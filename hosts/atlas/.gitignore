@@ -1,0 +1,11 @@
+# Macos
+.DS_Store
+
+# Vagrant
+.vagrant
+
+# Generated
+backups/
+.env.production
+tmp/
+*.log

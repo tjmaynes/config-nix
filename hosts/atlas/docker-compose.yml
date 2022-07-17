@@ -1,0 +1,100 @@
+version: "3.5"
+
+services:
+  gitea:
+    image: gitea/gitea:1.16.8
+    container_name: gitea-web
+    restart: always
+    ports:
+      - ${GITEA_PORT}:3000
+      - ${GITEA_SSH_PORT}:22
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=db:5432
+      - GITEA__database__NAME=${GITEA_DATABASE}
+      - GITEA__database__USER=${GITEA_USER}
+      - GITEA__database__PASSWD=${GITEA_DATABASE_PASSWORD}
+    volumes:
+      - ${GITEA_BASE_DIRECTORY}/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - gitea-db
+    labels:
+      - flame.type=application
+      - flame.name=Gitea
+      - flame.url=${GITEA_URL}
+      - flame.icon=icon-name
+
+  gitea-db:
+    image: postgres:14
+    container_name: gitea-db
+    restart: always
+    ports:
+      - ${GITEA_DATABASE_PORT}:5432
+    environment:
+      - POSTGRES_USER=${GITEA_USER}
+      - POSTGRES_PASSWORD=${GITEA_DATABASE_PASSWORD}
+      - POSTGRES_DB=${GITEA_DATABASE}
+    volumes:
+      - ${GITEA_DATABASE_BASE_DIRECTORY}:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${GITEA_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  jellyfin:
+    image: linuxserver/jellyfin:amd64-10.8.1
+    container_name: jellyfin-server
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ${JELLYFIN_BASE_DIRECTORY}/config:/config
+      - ${JELLYFIN_MEDIA_DIRECTORY}:/media
+      # - ${JELLYFIN_MEDIA_DIRECTORY}/media2:/media2:ro
+    environment:
+      - TZ=${TIMEZONE}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_SERVER_URL}
+
+  tinyMediaManager:
+    image: tinymediamanager/tinymediamanager:4.2.8
+    container_name: tinyMediaManager-web
+    restart: always
+    ports:
+      - ${TINYMEDIAMANAGER_PORT}:4000
+    volumes:
+      - ${TINYMEDIAMANAGER_BASE_DIRECTORY}/data:/config
+      - ${TINYMEDIAMANAGER_MOVIES_DIRECTORY}:/media/movies
+      - ${TINYMEDIAMANAGER_TVSHOWS_DIRECTORY}:/media/tvshows
+    environment:
+      - TZ=${TIMEZONE}
+      - PUID=1000
+      - PGID=1000
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer-web
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - ${PORTAINER_PORT}:9000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${PORTAINER_BASE_DIRECTORY}/data:/data
+
+  flame:
+    image: pawelmalak/flame:2.3.0
+    container_name: flame-web
+    restart: unless-stopped
+    volumes:
+      - ${FLAME_BASE_DIRECTORY}/data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - ${FLAME_PORT}:5005
+    environment:
+      - PASSWORD=${FLAME_PASSWORD}
