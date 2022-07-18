@@ -5,8 +5,6 @@
 
 - [GNU Make](https://www.gnu.org/software/make/)
 - [Nix](https://nixos.org/download.html)
-- [Docker](https://www.docker.com/#)
-- [Vagrant](https://www.vagrantup.com/)
 
 ## Background
 
@@ -15,7 +13,6 @@
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | vmware fusion dev workstation      | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos m1 (personal) workstation    | nix-darwin / home-manager  | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation | nix-darwin / home-manager  | ✅ |
-| [atlas](https://en.wikipedia.org/wiki/atlas)               | home server                        | docker-compose             | ✅ |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
