@@ -36,11 +36,6 @@ To install `glaucus` on VMware Fusion, run the following command:
 make install_glaucus
 ```
 
-To install `atlas`, run the following command:
-```bash
-make install_atlas
-```
-
 To reload local changes, run the following command:
 ```bash
 make reload
