@@ -3,7 +3,7 @@
 let home = builtins.getEnv "HOME";
 
 in {
-  fonts.enableFontDir = true;
+  fonts.fontDir.enable = true;
   fonts.fonts = [ pkgs.inconsolata ];
 
   system.keyboard = {

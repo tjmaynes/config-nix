@@ -12,6 +12,8 @@ in {
 
   home-manager.users.${config.settings.username} = {
     home = {
+      stateVersion = "22.05";
+
       packages = with pkgs; [
         go
         nodejs
@@ -36,20 +38,14 @@ in {
     ];
     casks = [
       "google-chrome"
+      "krisp"
       "drawio"
       "goland"
       "iterm2"
       "macvim"
-      "obs"
+      "tuple"
       "visual-studio-code"
       "vmware-fusion"
-      "zoom"
     ];
-    masApps = {
-      Keynote = 409183694;
-      Bitwarden = 1352778147;
-    };
   };
-
-  system.stateVersion = 4;
 }

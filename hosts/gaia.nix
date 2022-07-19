@@ -66,6 +66,4 @@ in {
       DaisyDisk = 411643860;
     };
   };
-
-  system.stateVersion = 4;
 }
