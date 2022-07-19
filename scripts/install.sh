@@ -141,6 +141,9 @@ function main() {
     "glaucus")
       install_nixos_based_host
       ;;
+    "hera")
+      install_darwin_based_host
+      ;;
     *)
       echo "Host name $HOST_NAME has not been setup yet!"
       exit 1

@@ -9,6 +9,9 @@ install_demeter:
 install_glaucus:
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
+install_hera:
+	./scripts/install.sh "hera" "$(USERNAME)"
+
 reload:
 	./scripts/reload.sh
 
