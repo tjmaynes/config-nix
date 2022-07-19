@@ -7,14 +7,6 @@ in {
 
   imports = [ ../modules/darwin ];
 
-  home-manager.users.${config.settings.username} = {
-    home = {
-      packages = with pkgs; [
-        ffmpeg
-      ];
-    };
-  };
-
   homebrew = {
     enable = lib.mkForce true;
     autoUpdate = true;

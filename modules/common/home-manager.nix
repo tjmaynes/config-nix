@@ -40,6 +40,7 @@ in {
     packages = with pkgs; [
       bat
       delta
+      ffmpeg
       gnumake
       gnupg
       git
