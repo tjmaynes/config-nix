@@ -5,7 +5,6 @@ let
 in {
   settings = {
     hostname = "hera";
-    is_apple_silicon = true;
     git_username = "tjmaynes-indebted";
   };
 

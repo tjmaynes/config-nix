@@ -25,10 +25,6 @@ with lib;
         default = "TJ Maynes";
         type = with types; uniq str;
       };
-      is_apple_silicon = mkOption {
-        type = types.bool;
-        default = false;
-      };
       hostname = mkOption {
         default = "kubrick";
         type = with types; uniq str;

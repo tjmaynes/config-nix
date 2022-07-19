@@ -5,7 +5,6 @@ let
 in {
   settings = {
     hostname = "gaia";
-    is_apple_silicon = true;
   };
 
   imports = [ ../modules/darwin ];
