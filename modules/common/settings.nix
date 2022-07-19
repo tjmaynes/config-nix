@@ -21,7 +21,7 @@ with lib;
         default = "TJ Maynes";
         type = with types; uniq str;
       };
-      is_m1_mac = mkOption {
+      is_apple_silicon = mkOption {
         type = types.bool;
         default = false;
       };
