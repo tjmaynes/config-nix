@@ -51,12 +51,14 @@ in {
       "zoom"
     ];
     masApps = {
-      FinalCutPro = 424389933;
-      Highland2 = 1171820258;
-      Keynote = 409183694;
+      Amphetamine = 937984704;
       AnimoogZSynthesizer = 1586841361;
       Bitwarden = 1352778147;
       DaisyDisk = 411643860;
+      Darkroom = 953286746;
+      FinalCutPro = 424389933;
+      Highland2 = 1171820258;
+      Keynote = 409183694;
     };
   };
 
