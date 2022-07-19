@@ -6,6 +6,7 @@ in {
   settings = {
     hostname = "hera";
     is_apple_silicon = true;
+    git_username = "tjmaynes-indebted";
   };
 
   imports = [ ../modules/darwin ];
@@ -36,6 +37,7 @@ in {
     '';
     taps = [ 
       "homebrew/cask" 
+      "jamesjoshuahill/tap"
     ];
     brews = [
       "jamesjoshuahill/tap/git-co-author"

@@ -19,8 +19,8 @@ let
   environmentVariables = {
     EDITOR = "vim";
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
-    GIT_USERNAME = "${config.settings.username}";
-    WORKSPACE_DIR = "${home}/workspace/${config.settings.username}";
+    GIT_USERNAME = "${config.settings.git_username}";
+    WORKSPACE_DIR = "${home}/workspace/${config.settings.git_username}";
     BACKUP_DIR = "${home}/backups";
   };
 in {

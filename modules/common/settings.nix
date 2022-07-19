@@ -17,6 +17,10 @@ with lib;
         default = "tj@tjmaynes.com";
         type = with types; uniq str;
       };
+      git_username = mkOption {
+        default = "tjmaynes";
+        type = with types; uniq str;
+      };
       description = mkOption {
         default = "TJ Maynes";
         type = with types; uniq str;
