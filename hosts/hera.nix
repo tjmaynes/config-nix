@@ -15,6 +15,7 @@ in {
       stateVersion = "22.05";
 
       packages = with pkgs; [
+        awscli2
         go
         nodejs
         python39
@@ -36,13 +37,17 @@ in {
     taps = [ 
       "homebrew/cask" 
     ];
+    brews = [
+      "jamesjoshuahill/tap/git-co-author"
+    ];
     casks = [
-      "google-chrome"
-      "krisp"
       "drawio"
       "goland"
+      "google-chrome"
+      "krisp"
       "iterm2"
       "macvim"
+      "tailscale"
       "tuple"
       "visual-studio-code"
       "vmware-fusion"
