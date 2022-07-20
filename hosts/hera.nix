@@ -16,6 +16,7 @@ in {
 
       packages = with pkgs; [
         awscli2
+        aws-vault
         go
         nodejs
         python39
