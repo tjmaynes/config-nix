@@ -17,8 +17,6 @@
   services.nix-daemon.enable = true;
   services.emacs.enable = true;
 
-  home-manager.users.${config.settings.username} = (import ./home-manager.nix);
-
   programs.zsh.enable = true;
   programs.tmux.enable = true;
 }

@@ -15,7 +15,7 @@ function check_requirements() {
   fi
 }
 
-function backup_nix_configs() {
+function backup_etc_dir() {
   [[ -f "/etc/nix/nix.conf" ]] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
   [[ -f "/etc/shells" ]] && sudo mv /etc/shells /etc/shells.backup
 }
@@ -77,7 +77,7 @@ function install_darwin_based_host() {
     /bin/sh -c "$(curl -fsSL https://nixos.org/nix/install)" --darwin-use-unencrypted-nix-store-volume --daemon
   fi
 
-  backup_nix_configs
+  backup_etc_dir
 
   install_nixpkgs
   install_home_manager
@@ -142,7 +142,7 @@ function install_arch_based_host() {
     /bin/sh -c "$(curl -fsSL https://nixos.org/nix/install)" --daemon
   fi
 
-  backup_nix_configs
+  backup_etc_dir
 
   install_nixpkgs
   install_home_manager
