@@ -7,6 +7,14 @@ in {
 
   imports = [ ../modules/darwin ];
 
+  home-manager.users.${config.settings.username} = {
+    home = {
+      packages = with pkgs; [
+        texlive.combined.scheme-full
+      ];
+    };
+  };
+
   homebrew = {
     enable = lib.mkForce true;
     autoUpdate = true;

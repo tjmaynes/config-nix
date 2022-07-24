@@ -13,6 +13,7 @@ in {
         go
         nodejs
         python39
+        texlive.combined.scheme-full
         yarn2nix
         yarn
       ];
