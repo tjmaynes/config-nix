@@ -3,9 +3,7 @@
 let 
   home = builtins.getEnv "HOME";
 in {
-  settings = {
-    hostname = "gaia";
-  };
+  settings = { hostname = "gaia"; };
 
   imports = [ ../modules/darwin ];
 

@@ -9,8 +9,9 @@ in {
     ./preferences.nix
   ];
 
-  networking.hostName = config.settings.hostname;
-  time.timeZone = config.settings.timeZone;
+  environment = {
+    pathsToLink = [ "/Applications" ];
+  };
 
   nix.extraOptions = ''
     system = x86_64-darwin
@@ -18,23 +19,12 @@ in {
     build-users-group = nixbld
   '';
 
-  environment = {
-    shells = [ pkgs.zsh ];
-    pathsToLink = [ "/Applications" ];
-  };
-
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-
-    users.${config.settings.username} = (import ../common/home-manager.nix);
   };
 
-  services.nix-daemon.enable = true;
-  services.emacs.enable = true;
-
   programs.zsh.enable = true;
-  programs.tmux.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
