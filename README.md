@@ -13,7 +13,7 @@
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)      | vmware fusion dev workstation               | nixos / home-manager       | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)            | macos apple silicon (personal) workstation  | nix-darwin / home-manager  | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)      | macos intel (personal) workstation          | nix-darwin / home-manager  | ✅ |
-| [hera](https://en.wikipedia.org/wiki/Hera)            | macos apple silicon (work) workstation      | nix-darwin / home-manager  | ✅ |
+| [lotus](https://en.wikipedia.org/wiki/Lotus-eaters)   | gaming console                              | steamos 3.0 / home-manager | 🚧 |
 
 ## Usage
 > *For MacOS Users on Apple Silicon Chips*:
@@ -32,9 +32,9 @@ To install `demeter` on an Intel Mac, run the following command:
 make install_demeter
 ```
 
-To install `hera` on Silicon Mac, run the following command:
+To install `lotus` on Arch, run the following command:
 ```bash
-make install_hera
+make install_lotus
 ```
 
 To install `glaucus` on VMware Fusion, run the following command:

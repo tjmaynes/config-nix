@@ -15,6 +15,11 @@ function check_requirements() {
   fi
 }
 
+function backup_nix_configs() {
+  [[ -f "/etc/nix/nix.conf" ]] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
+  [[ -f "/etc/shells" ]] && sudo mv /etc/shells /etc/shells.backup
+}
+
 function install_nixpkgs() {
   nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
   nix-channel --update
@@ -58,7 +63,7 @@ function install_darwin_based_host() {
     xcode-select --install
   fi
 
-  if [ "$(uname -m)" = "arm64" ]; then
+  if [[ "$(uname -m)" = "arm64" ]]; then
     export PATH=/opt/homebrew/bin:$PATH
   else
     export PATH=/usr/local/bin:$PATH
@@ -72,8 +77,7 @@ function install_darwin_based_host() {
     /bin/sh -c "$(curl -fsSL https://nixos.org/nix/install)" --darwin-use-unencrypted-nix-store-volume --daemon
   fi
 
-  [[ -f "/etc/nix/nix.conf" ]] && sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
-  [[ -f "/etc/shells" ]] && sudo mv /etc/shells /etc/shells.backup
+  backup_nix_configs
 
   install_nixpkgs
   install_home_manager
@@ -128,6 +132,22 @@ function install_nixos_based_host() {
   fi
 }
 
+function install_arch_based_host() {
+  if [[ "$(uname -r)" != "ARCH"* ]]; then
+    echo "Please run this script on a Arch linux-based machine"
+    exit 1
+  fi
+
+  if [[ -z "$(command -v nix)" ]]; then
+    /bin/sh -c "$(curl -fsSL https://nixos.org/nix/install)" --daemon
+  fi
+
+  backup_nix_configs
+
+  install_nixpkgs
+  install_home_manager
+}
+
 function main() {
   check_requirements
 
@@ -141,8 +161,8 @@ function main() {
     "glaucus")
       install_nixos_based_host
       ;;
-    "hera")
-      install_darwin_based_host
+    "lotus")
+      install_arch_based_host
       ;;
     *)
       echo "Host name $HOST_NAME has not been setup yet!"
