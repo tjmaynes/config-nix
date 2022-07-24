@@ -12,8 +12,8 @@ install_demeter: install_submodules
 install_glaucus: install_submodules
 	./scripts/install.sh "glaucus" "$(USERNAME)"
 
-install_hera: install_submodules
-	./scripts/install.sh "hera" "$(USERNAME)"
+install_lotus: install_submodules
+	./scripts/install.sh "lotus" "$(USERNAME)"
 
 reload:
 	./scripts/reload.sh
