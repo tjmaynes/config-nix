@@ -24,7 +24,7 @@ let
     BACKUP_DIR = "${home}/backups";
   };
 in {
-  imports = [ ./settings.nix ];
+  imports = [ ../common/settings.nix ];
 
   home = {
     file.".alacritty.yml".source = "${dotfilesDir}/.alacritty.yml";
@@ -135,6 +135,10 @@ in {
       sessionVariables = environmentVariables;
       initExtra = ''
         . ${home}/.bash_onstart.sh
+        
+        if [[ -f "${home}/.bash_extra.sh" ]]; then
+          . ${home}/.bash_extra.sh
+        fi
       '';
     };
 

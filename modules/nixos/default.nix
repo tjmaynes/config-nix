@@ -8,5 +8,5 @@
 
   networking.networkmanager.enable = true;
 
-  home-manager.users.${config.settings.username} = (import ../common/home-manager.nix);
+  home-manager.users.${config.settings.username} = (import ../home-manager);
 }

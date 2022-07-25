@@ -23,7 +23,7 @@ in {
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.${config.settings.username} = (import ../common/home-manager.nix);
+    users.${config.settings.username} = (import ../home-manager);
   };
 
   programs.zsh.enable = true;
