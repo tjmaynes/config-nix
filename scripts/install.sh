@@ -3,14 +3,18 @@
 set -e
 
 HOST_NAME=$1
-NIXOS_USERNAME=$2
+HOST_TYPE=$2
+HOST_USERNAME=$3
 
 function check_requirements() {
   if [[ -z "$HOST_NAME" ]]; then
-    echo "Please provide a HOST_NAME arg"
+    echo "Please provide a 'HOST_NAME' arg"
     exit 1
-  elif [[ -z "$NIXOS_USERNAME" ]]; then
-    echo "Please provide a NIXOS_USERNAME arg"
+  elif [[ -z "$HOST_TYPE" ]]; then
+    echo "Please provide a 'HOST_TYPE' arg"
+    exit 1
+  elif [[ -z "$HOST_USERNAME" ]]; then
+    echo "Please provide a 'HOST_USERNAME' arg"
     exit 1
   fi
 }
@@ -110,9 +114,9 @@ function install_nixos_based_host() {
     nixos-install
 
     if [[ "whoami" -eq "root" ]]; then
-      if ! id "$NIXOS_USERNAME" &>/dev/null; then
-        useradd -c '"$NIXOS_USERNAME"' -m "$NIXOS_USERNAME"
-        passwd "$NIXOS_USERNAME"
+      if ! id "$HOST_USERNAME" &>/dev/null; then
+        useradd -c '"$HOST_USERNAME"' -m "$HOST_USERNAME"
+        passwd "$HOST_USERNAME"
       fi
     fi
 
@@ -151,21 +155,18 @@ function install_arch_based_host() {
 function main() {
   check_requirements
 
-  case "$HOST_NAME" in
-    "gaia")
+  case "$HOST_TYPE" in
+    "darwin")
       install_darwin_based_host 
       ;;
-    "demeter")
-      install_darwin_based_host
-      ;;
-    "glaucus")
+    "nixos")
       install_nixos_based_host
       ;;
-    "lotus")
+    "arch")
       install_arch_based_host
       ;;
     *)
-      echo "Host name $HOST_NAME has not been setup yet!"
+      echo "Host type $HOST_TYPE has not been setup yet!"
       exit 1
       ;;
   esac

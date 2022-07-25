@@ -4,16 +4,16 @@ install_submodules:
 	git submodule update --init --recursive
 
 install_gaia: install_submodules
-	./scripts/install.sh "gaia" "$(USERNAME)"
+	./scripts/install.sh "gaia" "darwin" "$(USERNAME)"
 
 install_demeter: install_submodules
-	./scripts/install.sh "demeter" "$(USERNAME)"
+	./scripts/install.sh "demeter" "darwin" "$(USERNAME)"
 
 install_glaucus: install_submodules
-	./scripts/install.sh "glaucus" "$(USERNAME)"
+	./scripts/install.sh "glaucus" "nixos" "$(USERNAME)"
 
 install_lotus: install_submodules
-	./scripts/install.sh "lotus" "$(USERNAME)"
+	./scripts/install.sh "lotus" "arch" "$(USERNAME)"
 
 reload:
 	./scripts/reload.sh
