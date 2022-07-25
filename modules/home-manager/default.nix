@@ -70,7 +70,7 @@ in {
 
     git = {
       enable = true;
-      userName = config.settings.name;
+      userName = config.settings.gitUsername;
       userEmail = config.settings.email;
       aliases = {
         co = "checkout";
