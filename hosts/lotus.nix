@@ -13,6 +13,7 @@ in {
 
       packages = with pkgs; [
         emulationstation
+        jellyfin-media-player
       ];
     };
   };
