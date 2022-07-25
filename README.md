@@ -16,12 +16,6 @@
 | [lotus](https://en.wikipedia.org/wiki/Lotus-eaters)   | gaming console                              | steamos 3.0 / home-manager | 🚧 |
 
 ## Usage
-> *For MacOS Users on Apple Silicon Chips*:
-> Before installing `gaia`, please run the following command to install `rosetta2` which is needed for the `nix-darwin` installation:
-> ```bash
-> softwareupdate --install-rosetta --agree-to-license
-> ```
-
 To install `gaia` on an Silicon Mac, run the following command:
 ```bash
 make install_gaia
