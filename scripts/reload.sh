@@ -3,6 +3,8 @@
 set -e
 
 function main() {
+  git submodule update --remote
+
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     nixos-rebuild switch 
   elif [[ "$OSTYPE" == "darwin"* ]] && [[ -n "$(command -v darwin-rebuild)" ]]; then
