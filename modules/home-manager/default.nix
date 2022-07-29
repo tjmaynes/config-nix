@@ -27,15 +27,15 @@ in {
   imports = [ ../common/settings.nix ];
 
   home = {
-    file.".alacritty.yml".source = "${dotfilesDir}/.alacritty.yml";
-    file.".emacs".source = "${dotfilesDir}/.emacs";
-    file.".offlineimap.py".source = "${dotfilesDir}/.offlineimap.py";
-    file.".offlineimaprc".source = "${dotfilesDir}/.offlineimaprc";
-    file.".signature".source = "${dotfilesDir}/.signature";
-    file.".tmux.conf".source = "${dotfilesDir}/.tmux.conf";
-    file.".vimrc".source = "${dotfilesDir}/.vimrc";
-    file.".npmrc".source = "${dotfilesDir}/.npmrc";
-    file.".bash_onstart.sh".source = "${dotfilesDir}/.bash_onstart.sh";
+    file.".alacritty.yml".source = "${dotfilesDir}/system/.alacritty.yml";
+    file.".emacs".source = "${dotfilesDir}/system/.emacs";
+    file.".offlineimap.py".source = "${dotfilesDir}/system/.offlineimap.py";
+    file.".offlineimaprc".source = "${dotfilesDir}/system/.offlineimaprc";
+    file.".signature".source = "${dotfilesDir}/system/.signature";
+    file.".tmux.conf".source = "${dotfilesDir}/system/.tmux.conf";
+    file.".vimrc".source = "${dotfilesDir}/system/.vimrc";
+    file.".npmrc".source = "${dotfilesDir}/system/.npmrc";
+    file.".bash_onstart.sh".source = "${dotfilesDir}/system/.bash_onstart.sh";
 
     packages = with pkgs; [
       bat

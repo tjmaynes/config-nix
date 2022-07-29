@@ -31,6 +31,7 @@ in {
     ];
     casks = [
       "brave-browser"
+      "calibre"
       "discord"
       "iterm2"
       "jellyfin-media-player"
