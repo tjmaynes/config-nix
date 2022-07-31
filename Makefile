@@ -12,9 +12,6 @@ install_demeter: install_submodules
 install_glaucus: install_submodules
 	./scripts/install.sh "glaucus" "nixos" "$(USERNAME)"
 
-install_lotus: install_submodules
-	./scripts/install.sh "lotus" "arch" "$(USERNAME)"
-
 reload:
 	./scripts/reload.sh
 
