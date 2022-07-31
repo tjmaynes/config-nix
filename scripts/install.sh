@@ -155,6 +155,8 @@ function install_arch_based_host() {
 function main() {
   check_requirements
 
+  git submodule update --init --recursive
+
   case "$HOST_TYPE" in
     "darwin")
       install_darwin_based_host 

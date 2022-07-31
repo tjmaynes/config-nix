@@ -1,15 +1,12 @@
 USERNAME := tjmaynes
 
-install_submodules:
-	git submodule update --init --recursive
-
-install_gaia: install_submodules
+install_gaia:
 	./scripts/install.sh "gaia" "darwin" "$(USERNAME)"
 
-install_demeter: install_submodules
+install_demeter:
 	./scripts/install.sh "demeter" "darwin" "$(USERNAME)"
 
-install_glaucus: install_submodules
+install_glaucus:
 	./scripts/install.sh "glaucus" "nixos" "$(USERNAME)"
 
 reload:
