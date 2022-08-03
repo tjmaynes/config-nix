@@ -39,18 +39,32 @@ make reload
 - In NixOS, only root can add new system-wide packages, so after rebooting VMware Fusion for the first time, run the following commands:
 ```bash
 # login as root
+sudo -i
+
+# install deps
+nix-shell -p git
+nix-shell -p gnumake
+
+# clone
+git clone https://github.com/tjmaynes/config.git
+
+# run installer
+make install_glaucus
 
 # change password
-passwd "your-username"
+passwd "tjmaynes"
 
 # reboot
 reboot
 
-# login as user
+# login as user in GUI
+
+# open terminal
+ctrl+enter
 
 # create new keys
 ssh-keygen -t ed25519 -C "your-email"
-cat ~/.ssh/id_rsa.pub | pbcopy
+cat ~/.ssh/id_ed25519.pub | pbcopy
 
 # clone config repo
 pclone config

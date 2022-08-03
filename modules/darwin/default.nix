@@ -26,6 +26,7 @@ in {
     users.${config.settings.username} = (import ../home-manager);
   };
 
+  services.nix-daemon.enable = true;
   programs.zsh.enable = true;
   programs.gnupg.agent = {
     enable = true;

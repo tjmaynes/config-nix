@@ -14,7 +14,6 @@
   networking.hostName = config.settings.hostname;
   time.timeZone = config.settings.timeZone;
 
-  services.nix-daemon.enable = true;
   services.emacs.enable = true;
 
   programs.zsh.enable = true;
