@@ -10,3 +10,7 @@ result
 *.dmg
 hosts/atlas/backups/
 hosts/atlas/.env.production
+
+# Editors
+.idea/
+.vscode/

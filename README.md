@@ -8,11 +8,12 @@
 
 ## Background
 
-| Host                                                  | Usage                                       | Tools                      | Status |
-| :---------------------------------------------------- | :-----------------------------------------: | :------------------------: | :----: |
-| [glaucus](https://en.wikipedia.org/wiki/Glaucus)      | vmware fusion dev workstation               | nixos / home-manager       | ✅ |
-| [gaia](https://en.wikipedia.org/wiki/Gaia)            | macos apple silicon (personal) workstation  | nix-darwin / home-manager  | ✅ |
-| [demeter](https://en.wikipedia.org/wiki/Demeter)      | macos intel (personal) workstation          | nix-darwin / home-manager  | ✅ |
+| Host                                                  | Usage                                       | Tools                       | Status |
+| :---------------------------------------------------- | :-----------------------------------------: | :-------------------------: | :----: |
+| [apollo](https://en.wikipedia.org/wiki/apollo)        | ubuntu dev workstation                      | ubuntu / home-manager       | ✅ |
+| [glaucus](https://en.wikipedia.org/wiki/Glaucus)      | full nixos dev workstation                  | nixos / home-manager        | ✅ |
+| [gaia](https://en.wikipedia.org/wiki/Gaia)            | macos apple silicon (personal) workstation  | nix-darwin / home-manager   | ✅ |
+| [demeter](https://en.wikipedia.org/wiki/Demeter)      | macos intel (personal) workstation          | nix-darwin / home-manager   | ✅ |
 
 ## Usage
 To install `gaia` on an Silicon Mac, run the following command:
@@ -25,9 +26,14 @@ To install `demeter` on an Intel Mac, run the following command:
 make install_demeter
 ```
 
-To install `glaucus` on VMware Fusion, run the following command:
+To install `glaucus` on a new NixOS machine, run the following command:
 ```bash
 make install_glaucus
+```
+
+To install `apollo` on a new Ubuntu machine, run the following command:
+```bash
+make install_apollo
 ```
 
 To reload local changes, run the following command:
@@ -35,21 +41,38 @@ To reload local changes, run the following command:
 make reload
 ```
 
-## Notes
-- In NixOS, only root can add new system-wide packages, so after rebooting VMware Fusion for the first time, run the following commands:
+## Setting up NixOS on a new machine
+
 ```bash
 # login as root
 sudo -i
 
-# install deps
-nix-shell -p git
-nix-shell -p gnumake
+# download repo
+curl -SL https://github.com/tjmaynes/config/archive/master.tar.gz | tar xz
+cd config-main
 
-# clone
-git clone https://github.com/tjmaynes/config.git
+# download dotfiles
+rm -rf dotfiles
+curl -SL https://github.com/tjmaynes/dotfiles/archive/master.tar.gz | tar xz
+mv dotfiles-main dotfiles
+
+# Cannot create partitions through automation
+# -- too much headache and bugs with parted
+
+parted /dev/sda
+
+mklabel gpt
+
+mkpart "BOOT" fat32 1MiB 3MiB \
+  set 1 esp on
+
+mkpart "root" ext4 1000MiB ${NIX_PARTITION}000MiB
+
+mkpart "swap" linux-swap ${NIX_PARTITION}000MiB 100% \
+  set 3 swap on
 
 # run installer
-make install_glaucus
+./scripts/install.sh "glaucus" "nixos" "tjmaynes"
 
 # change password
 passwd "tjmaynes"
@@ -70,5 +93,8 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 pclone config
 make install_glaucus
 ```
+
+## Notes
+
 - I learned quite a bit of NixOS-specific concepts from Malloc47's [config repo](https://github.com/malloc47/config).
 - Learning how to setup nextcloud on NixOS via this [blog post](https://jacobneplokh.com/how-to-setup-nextcloud-on-nixos/).

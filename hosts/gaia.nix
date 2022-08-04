@@ -7,6 +7,8 @@ in {
 
   imports = [ ../modules/darwin ];
 
+  system.stateVersion = 4;
+
   home-manager.users.${config.settings.username} = {
     home = {
       packages = with pkgs; [

@@ -10,6 +10,8 @@ in {
   ];
 
   environment = {
+    shells = with pkgs; [ zsh ];
+    systemPackages = with pkgs; [ vim ];
     pathsToLink = [ "/Applications" ];
   };
 
@@ -27,7 +29,6 @@ in {
   };
 
   services.nix-daemon.enable = true;
-  programs.zsh.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;

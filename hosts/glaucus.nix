@@ -7,9 +7,11 @@ in {
   settings = { hostname = "glaucus"; };
 
   imports = [
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
+    ./hardware-configuration.nix
     ../modules/nixos
   ];
+
+  system.stateVersion = "22.05";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -66,8 +68,6 @@ in {
 
   home-manager.users.${config.settings.username} = {
     home = {
-      stateVersion = "22.05";
-
       packages = with pkgs; [
         alacritty
         bitwarden

@@ -45,6 +45,10 @@ with lib;
         default = "alacritty";
         type = with types; uniq str;
       };
+      onlyHomeManager = mkOption {
+        default = false;
+        type = types.boolean;
+      };
     };
   };
 }

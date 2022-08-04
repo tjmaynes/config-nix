@@ -2,7 +2,7 @@
 
 let
   home = builtins.getEnv "HOME";
-  projectRoot = builtins.getEnv "PWD";
+  projectRoot = "${home}/workspace/${config.settings.gitUsername}/config";
   dotfilesDir = "${projectRoot}/dotfiles";
   shellAliases = {
     ".." = "cd ..";
@@ -19,7 +19,9 @@ let
   environmentVariables = {
     EDITOR = "vim";
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
-    GIT_USERNAME = "${config.settings.gitUsername}";
+    HOST_GIT_USERNAME = "${config.settings.gitUsername}";
+    HOST_USERNAME = "${config.settings.username}";
+    HOST_EMAIL = "${config.settings.email}";
     WORKSPACE_DIR = "${home}/workspace/${config.settings.gitUsername}";
     BACKUP_DIR = "${home}/backups";
   };
@@ -27,6 +29,8 @@ in {
   imports = [ ../common/settings.nix ];
 
   home = {
+    stateVersion = "22.05";
+
     file.".alacritty.yml".source = "${dotfilesDir}/system/.alacritty.yml";
     file.".emacs".source = "${dotfilesDir}/system/.emacs";
     file.".offlineimap.py".source = "${dotfilesDir}/system/.offlineimap.py";
@@ -40,19 +44,24 @@ in {
     packages = with pkgs; [
       bat
       delta
+      docker
       ffmpeg
+      git
       gnumake
       gnupg
-      git
+      go_1_18
       home-manager
       htop
       jq
       lsd
+      pandoc
       procs
       ripgrep
       tmux
       unzip
       vim
+      yarn2nix
+      yarn
       zip
       zsh
     ];
@@ -134,19 +143,22 @@ in {
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
       initExtra = ''
-        . ${home}/.bash_onstart.sh
-        
-        if [[ -f "${home}/.bash_extra.sh" ]]; then
-          . ${home}/.bash_extra.sh
+        if [[ -e "${home}/.nix-profile/etc/profile.d/nix.sh" ]]; then
+          . ${home}/.nix-profile/etc/profile.d/nix.sh
         fi
+
+        . ${home}/.bash_onstart.sh
       '';
     };
 
     bash = {
-      enable = false;
+      enable = true;
       historyFile = "${home}/.config/bash/.bash_history";
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
+      initExtra = ''
+        . ${home}/.bash_onstart.sh
+      '';
     };
   };
 }
