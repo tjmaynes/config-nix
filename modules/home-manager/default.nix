@@ -57,6 +57,7 @@ in {
       pandoc
       procs
       ripgrep
+      tailscale
       tmux
       unzip
       vim
