@@ -19,6 +19,7 @@ in {
       brave
       jetbrains.goland
       mpv
+      vscode
       texlive.combined.scheme-full
     ];
   };

@@ -1,0 +1,84 @@
+version: "3.3"
+
+services:
+  plex-server:
+    image: plexinc/pms-docker:1.28.0.5999-97678ded3
+    container_name: plex-server
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - CLAIM_TOKEN=${PLEX_CLAIM_TOKEN}
+    volumes:
+      - ${PLEX_BASE_DIRECTORY}/config:/config
+      - ${PLEX_BASE_DIRECTORY}/transcode:/transcode
+      - ${MEDIA_DIRECTORY}:/media
+
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:0.6.19
+    container_name: calibre-web
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - ${CALIBRE_WEB_PORT}:8083
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+    volumes:
+      - ${CALIBRE_WEB_BASE_DIRECTORY}/config:/config
+      - ${BOOKS_DIRECTORY}:/books
+
+  gitea-web:
+    image: gitea/gitea:1.16.8
+    container_name: gitea-web
+    user: "1027"
+    privileged: true
+    restart: always
+    networks:
+      - default
+    ports:
+      - ${GITEA_PORT}:3000
+      - ${GITEA_SSH_PORT}:22
+    environment:
+      - USER_UID=${PUID}
+      - USER_GID=${PGID}
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=gitea-db:5432
+      - GITEA__database__NAME=${GITEA_DATABASE}
+      - GITEA__database__USER=${GITEA_USER}
+      - GITEA__database__PASSWD=${GITEA_DATABASE_PASSWORD}
+    volumes:
+      - ${GITEA_BASE_DIRECTORY}/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - gitea-db
+
+  gitea-db:
+    image: postgres:14
+    container_name: gitea-db
+    restart: always
+    networks:
+      - default
+    ports:
+      - ${GITEA_DATABASE_PORT}:5432
+    environment:
+      - POSTGRES_USER=${GITEA_USER}
+      - POSTGRES_PASSWORD=${GITEA_DATABASE_PASSWORD}
+      - POSTGRES_DB=${GITEA_DATABASE}
+    volumes:
+      - ${GITEA_DATABASE_BASE_DIRECTORY}:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${GITEA_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    driver: bridge

@@ -24,7 +24,7 @@ function backup_etc_dir() {
   if [[ -f "/etc/nix/nix.conf" ]]; then
     sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.backup
   fi
-  
+
   if [[ -f "/etc/shells" ]]; then
     sudo mv /etc/shells /etc/shells.backup
   fi
@@ -106,12 +106,12 @@ function install_linux_based_host() {
     echo "Please install 'curl' before running this script"
     exit 1
   fi
-  
+
   if [[ ! -d "/nix" ]]; then
     sudo mkdir /nix
     sudo chown "$HOST_USERNAME" /nix
   fi
-  
+
   export PATH=/usr/sbin:$PATH
   export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
   export NIX_PATH=nixpkgs=/nix/var/nix/profiles/per-user/$HOST_USERNAME/channels/nixpkgs${NIX_PATH:+:}$NIX_PATH
@@ -129,7 +129,7 @@ function install_linux_based_host() {
   install_home_manager
 
   nix-channel --update
-  
+
   if [[ ! "$(readlink $HOME/.config/nixpkgs/home.nix)" -ef "$(pwd)/hosts/$HOST_NAME.nix" ]]; then
     rm -rf "$HOME/.config/nixpkgs"
     (mkdir -p "$HOME/.config/nixpkgs" || true) && ln -s "$(pwd)/hosts/$HOST_NAME.nix" "$HOME/.config/nixpkgs/home.nix"
