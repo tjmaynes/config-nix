@@ -1,0 +1,97 @@
+title: "Kratos Dashboard"
+subtitle: "Welcome and please be kind..."
+documentTitle: "Kratos Startpage"
+logo: "assets/logo.png"
+
+header: true
+footer: ''
+
+columns: "1"
+connectivityCheck: true
+
+defaults:
+  layout: list
+  colorTheme: dark
+
+theme: default
+
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#424242"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+links:
+  - name: "Source Code"
+    icon: "fab fa-github"
+    url: "https://github.com/tjmaynes/config/tree/main/hosts/kratos"
+    target: "_blank"
+
+services:
+  - name: "Media"
+    icon: "fas fa-play"
+    items:
+      - name: "Jellyfin"
+        icon: "fas fa-tv"
+        subtitle: "Media server for movies, music, etc"
+        tag: "app"
+        keywords: "self-hosted media server, plex"
+        url: "%server-host%:%jellyfin-port%"
+        target: "_blank"
+      - name: "Calibre-web"
+        icon: "fas fa-book"
+        subtitle: "Ebook reader for the web"
+        tag: "app"
+        keywords: "self-hosted ebook reader, calibre"
+        url: "%server-host%:%calibre-web-port%"
+  - name: "Automation"
+    icon: "fas fa-magic"
+    items:
+      - name: "Home Assistant"
+        icon: "fas fa-home"
+        subtitle: "Home automation and life support system"
+        tag: "app"
+        keywords: "self-hosted home automation, plex"
+        url: "%server-host%:%home-assistant-port%"
+        target: "_blank"
+  - name: "Development"
+    icon: "fas fa-terminal"
+    items:
+      - name: "Gogs"
+        icon: "fas fa-code"
+        subtitle: "Git server for mirroring my external git services"
+        tag: "app"
+        url: "%server-host%:%gogs-port%"
+        target: "_blank"
+  - name: "Utilities"
+    icon: "fas fa-heartbeat"
+    items:
+      - name: "Admin Portal"
+        icon: "fas fa-lock"
+        subtitle: "Admin interface for Kratos home server"
+        tag: "app"
+        url: "%server-host%:%admin-portal-port%"
+        target: "_blank"

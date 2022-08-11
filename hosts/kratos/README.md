@@ -3,10 +3,11 @@
 
 | Program                                                    | Usage                              | Tools                      | Status |
 | :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :----: |
-| [plex-server](https://hub.docker.com/r/plexinc/pms-docker) | media server                       | docker-compose             | ✅ |
-| [home-assistant-web](https://gogs.io/)                     | home automation server             | docker-compose             | ✅ |
+| [jellyfin](https://jellyfin.org/)                          | media server                       | docker-compose             | ✅ |
+| [home-assistant](https://www.home-assistant.io/)           | home automation server             | docker-compose             | ✅ |
 | [calibre-web](https://github.com/janeczku/calibre-web)     | web-based ebook-reader             | docker-compose             | ✅ |
-| [gogs-web](https://gogs.io/)                               | git server / mirror                | docker-compose             | ✅ |
+| [gogs](https://gogs.io/)                                   | git server / mirror                | docker-compose             | ✅ |
+| [homer](https://github.com/bastienwirtz/homer)             | start-page                         | docker-compose             | ✅ |
 
 ## Requirements
 
@@ -16,7 +17,7 @@
 ## Usage
 To install the home server, run the following command:
 ```bash
-./scripts/install.sh "<some-base-directory>" "<some-plex-claim-token>"
+./scripts/install.sh "<some-base-directory>"
 ```
 
 To uninstall the home server, run the following command:

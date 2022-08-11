@@ -1,19 +1,17 @@
 version: "3.3"
+
 services:
-  plex-server:
-    image: plexinc/pms-docker:1.28.0.5999-97678ded3
-    container_name: plex-server
+  jellyfin-server:
+    image: linuxserver/jellyfin:amd64-10.8.1
+    container_name: jellyfin-server
     restart: unless-stopped
     network_mode: host
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TIMEZONE}
-      - CLAIM_TOKEN=${PLEX_CLAIM_TOKEN}
     volumes:
-      - ${PLEX_BASE_DIRECTORY}/config:/config
-      - ${PLEX_BASE_DIRECTORY}/transcode:/transcode
+      - ${JELLYFIN_BASE_DIRECTORY}/config:/config
       - ${MEDIA_DIRECTORY}:/media
+    environment:
+      - TZ=${TIMEZONE}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_SERVER_URL}
 
   calibre-web:
     image: lscr.io/linuxserver/calibre-web:0.6.19
@@ -77,6 +75,19 @@ services:
       - ${HOME_ASSISTANT_BASE_DIRECTORY}/config:/config
     environment:
       - TZ=${TIMEZONE}
+
+  homer-web:
+    image: b4bz/homer:v22.07.2
+    container_name: homer-web
+    restart: always
+    networks:
+      - default
+    ports:
+      - ${HOMER_WEB_PORT}:8080
+    volumes:
+      - ${HOMER_WEB_BASE_DIRECTORY}/www/assets:/www/assets
+    environment:
+      - INIT_ASSETS=0
 
 networks:
   default:

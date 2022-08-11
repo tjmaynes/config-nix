@@ -3,7 +3,6 @@
 set -e
 
 export BASE_DIRECTORY=$1
-export PLEX_CLAIM_TOKEN=$2
 
 function check_requirements() {
   if [[ -z "$(command -v docker)" ]]; then
@@ -25,9 +24,6 @@ function set_environment_variables() {
   if [[ -z "$BASE_DIRECTORY" ]]; then
     echo "Please an environment variable for 'BASE_DIRECTORY' before running this script"
     exit 1
-  elif [[ -z "$PLEX_CLAIM_TOKEN" ]]; then
-    echo "Please an environment variable for 'PLEX_CLAIM_TOKEN' before running this script"
-    exit 1
   fi
 
   export ENVIRONMENT=development
@@ -35,11 +31,15 @@ function set_environment_variables() {
   export PUID=$UID
   export PGID=$(sudo id -g)
 
+  export SERVER_HOST="$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
+  export ADMIN_PORTAL_PORT=5001
+
   export MEDIA_DIRECTORY=${BASE_DIRECTORY}/media
   export BOOKS_DIRECTORY=${MEDIA_DIRECTORY}/Books
 
-  export PLEX_HOSTNAME=Kratos
-  export PLEX_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/plex-server
+  export JELLYFIN_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/jellyfin-server
+  export JELLYFIN_PORT=8096
+  export JELLYFIN_SERVER_URL="http://${SERVER_HOST}"
 
   export CALIBRE_WEB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/calibre-web
   export CALIBRE_WEB_PORT=8083
@@ -54,6 +54,10 @@ function set_environment_variables() {
   export GOGS_DATABASE_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gogs-db
 
   export HOME_ASSISTANT_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/home-assistant-web
+  export HOME_ASSISTANT_PORT=8123
+
+  export HOMER_WEB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/homer-web
+  export HOMER_WEB_PORT=8080
 }
 
 function main() {
@@ -61,15 +65,28 @@ function main() {
   
   set_environment_variables
 
-  ensure_directory_exists "$PLEX_BASE_DIRECTORY/config"
-  ensure_directory_exists "$PLEX_BASE_DIRECTORY/transcode"
+  ensure_directory_exists "$JELLYFIN_BASE_DIRECTORY/config"
 
   ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
-  
+
   ensure_directory_exists "$GOGS_BASE_DIRECTORY/data"
   ensure_directory_exists "$GOGS_DATABASE_BASE_DIRECTORY"
   
   ensure_directory_exists "$HOME_ASSISTANT_BASE_DIRECTORY/config"
+
+  ensure_directory_exists "$HOMER_WEB_BASE_DIRECTORY/www/assets"
+
+  ENCODED_SERVER_HOST="http:\/\/${SERVER_HOST}"
+
+  sed \
+     -e "s/%server-host%:%jellyfin-port%/${ENCODED_SERVER_HOST}:${JELLYFIN_PORT}/g" \
+     -e "s/%server-host%:%calibre-web-port%/${ENCODED_SERVER_HOST}:${CALIBRE_WEB_PORT}/g" \
+     -e "s/%server-host%:%home-assistant-port%/${ENCODED_SERVER_HOST}:${HOME_ASSISTANT_PORT}/g" \
+     -e "s/%server-host%:%gogs-port%/${ENCODED_SERVER_HOST}:${GOGS_PORT}/g" \
+     -e "s/%server-host%:%admin-portal-port%/${ENCODED_SERVER_HOST}:${ADMIN_PORTAL_PORT}/g" \
+    data/homer.yml > "$HOMER_WEB_BASE_DIRECTORY/www/assets/config.yml"
+
+  cp -f static/homer-logo.png "$HOMER_WEB_BASE_DIRECTORY/www/assets/logo.png"
 
   sudo -E docker-compose up -d
 }
