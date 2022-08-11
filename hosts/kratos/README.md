@@ -4,8 +4,9 @@
 | Program                                                    | Usage                              | Tools                      | Status |
 | :--------------------------------------------------------- | :--------------------------------: | :------------------------: | :----: |
 | [plex-server](https://hub.docker.com/r/plexinc/pms-docker) | media server                       | docker-compose             | ✅ |
+| [home-assistant-web](https://gogs.io/)                     | home automation server             | docker-compose             | ✅ |
 | [calibre-web](https://github.com/janeczku/calibre-web)     | web-based ebook-reader             | docker-compose             | ✅ |
-| [gogs](https://gogs.io/)                                   | git server / mirror                | docker-compose             | ✅ |
+| [gogs-web](https://gogs.io/)                               | git server / mirror                | docker-compose             | ✅ |
 
 ## Requirements
 

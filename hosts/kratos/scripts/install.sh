@@ -52,18 +52,24 @@ function set_environment_variables() {
   export GOGS_DATABASE_PASSWORD=gogs
   export GOGS_DATABASE_PORT=5433
   export GOGS_DATABASE_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gogs-db
+
+  export HOME_ASSISTANT_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/home-assistant-web
 }
 
 function main() {
   check_requirements
+  
   set_environment_variables
 
   ensure_directory_exists "$PLEX_BASE_DIRECTORY/config"
   ensure_directory_exists "$PLEX_BASE_DIRECTORY/transcode"
-  ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
 
+  ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
+  
   ensure_directory_exists "$GOGS_BASE_DIRECTORY/data"
   ensure_directory_exists "$GOGS_DATABASE_BASE_DIRECTORY"
+  
+  ensure_directory_exists "$HOME_ASSISTANT_BASE_DIRECTORY/config"
 
   sudo -E docker-compose up -d
 }

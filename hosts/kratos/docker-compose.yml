@@ -68,6 +68,16 @@ services:
       timeout: 5s
       retries: 5
 
+  home-assistant-web:
+    image: ghcr.io/home-assistant/home-assistant:2022.8.3
+    container_name: home-assistant-web
+    restart: always
+    network_mode: host
+    volumes:
+      - ${HOME_ASSISTANT_BASE_DIRECTORY}/config:/config
+    environment:
+      - TZ=${TIMEZONE}
+
 networks:
   default:
     driver: bridge
