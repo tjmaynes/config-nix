@@ -1,5 +1,4 @@
 version: "3.3"
-
 services:
   plex-server:
     image: plexinc/pms-docker:1.28.0.5999-97678ded3
