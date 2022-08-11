@@ -33,48 +33,38 @@ services:
       - ${CALIBRE_WEB_BASE_DIRECTORY}/config:/config
       - ${BOOKS_DIRECTORY}:/books
 
-  gitea-web:
-    image: gitea/gitea:1.16.8
-    container_name: gitea-web
-    user: "1027"
-    privileged: true
+  gogs-web:
+    image: gogs/gogs:0.12
+    container_name: gogs-web
     restart: always
+    ports:
+      - ${GOGS_PORT}:3000
+      - ${GOGS_SSH_PORT}:22
     networks:
       - default
-    ports:
-      - ${GITEA_PORT}:3000
-      - ${GITEA_SSH_PORT}:22
     environment:
-      - USER_UID=${PUID}
-      - USER_GID=${PGID}
-      - GITEA__database__DB_TYPE=postgres
-      - GITEA__database__HOST=gitea-db:5432
-      - GITEA__database__NAME=${GITEA_DATABASE}
-      - GITEA__database__USER=${GITEA_USER}
-      - GITEA__database__PASSWD=${GITEA_DATABASE_PASSWORD}
+      - RUN_CROND=true
     volumes:
-      - ${GITEA_BASE_DIRECTORY}/data:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      - ${GOGS_BASE_DIRECTORY}/data:/data
     depends_on:
-      - gitea-db
+      - gogs-db
 
-  gitea-db:
+  gogs-db:
     image: postgres:14
-    container_name: gitea-db
+    container_name: gogs-db
     restart: always
     networks:
       - default
     ports:
-      - ${GITEA_DATABASE_PORT}:5432
+      - ${GOGS_DATABASE_PORT}:5432
     environment:
-      - POSTGRES_USER=${GITEA_USER}
-      - POSTGRES_PASSWORD=${GITEA_DATABASE_PASSWORD}
-      - POSTGRES_DB=${GITEA_DATABASE}
+      - POSTGRES_USER=${GOGS_USER}
+      - POSTGRES_PASSWORD=${GOGS_DATABASE_PASSWORD}
+      - POSTGRES_DB=${GOGS_DATABASE}
     volumes:
-      - ${GITEA_DATABASE_BASE_DIRECTORY}:/var/lib/postgresql/data
+      - ${GOGS_DATABASE_BASE_DIRECTORY}:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${GITEA_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U ${GOGS_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5

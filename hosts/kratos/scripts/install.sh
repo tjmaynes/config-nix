@@ -44,14 +44,14 @@ function set_environment_variables() {
   export CALIBRE_WEB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/calibre-web
   export CALIBRE_WEB_PORT=8083
 
-  export GITEA_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gitea-web
-  export GITEA_PORT=3000
-  export GITEA_SSH_PORT=222
-  export GITEA_USER=gitea
-  export GITEA_DATABASE=gitea
-  export GITEA_DATABASE_PASSWORD=gitea
-  export GITEA_DATABASE_PORT=5433
-  export GITEA_DATABASE_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gitea-db
+  export GOGS_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gogs-web
+  export GOGS_PORT=3000
+  export GOGS_SSH_PORT=222
+  export GOGS_USER=gogs
+  export GOGS_DATABASE=gogs
+  export GOGS_DATABASE_PASSWORD=gogs
+  export GOGS_DATABASE_PORT=5433
+  export GOGS_DATABASE_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/gogs-db
 }
 
 function main() {
@@ -62,12 +62,8 @@ function main() {
   ensure_directory_exists "$PLEX_BASE_DIRECTORY/transcode"
   ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
 
-  ensure_directory_exists "$GITEA_BASE_DIRECTORY/data"
-  ensure_directory_exists "$GITEA_DATABASE_BASE_DIRECTORY"
-
-  if ! sudo cat /etc/timezone | grep "$TIMEZONE"; then
-    echo "$TIMEZONE" >> /etc/timezone
-  fi
+  ensure_directory_exists "$GOGS_BASE_DIRECTORY/data"
+  ensure_directory_exists "$GOGS_DATABASE_BASE_DIRECTORY"
 
   sudo -E docker-compose up -d
 }
