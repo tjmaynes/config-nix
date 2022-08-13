@@ -127,7 +127,7 @@ services:
       - CHECK_FREQUENCY=240
     volumes:
       - ${PODGRAB_BASE_DIRECTORY}/config:/config
-      - ${PODGRAB_BASE_DIRECTORY}/assets:/assets
+      - ${PODCASTS_DIRECTORY}:/assets
     ports:
       - ${PODGRAB_PORT}:8080
     restart: unless-stopped

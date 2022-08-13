@@ -104,7 +104,6 @@ function main() {
   ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/config"
   ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/metadata"
   ensure_directory_exists "$PODGRAB_BASE_DIRECTORY/config"
-  ensure_directory_exists "$PODGRAB_BASE_DIRECTORY/assets"
 
   ENCODED_SERVER_HOST="http:\/\/${SERVER_HOST}"
   sed \
