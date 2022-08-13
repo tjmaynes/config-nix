@@ -10,6 +10,7 @@
 | [homer](https://github.com/bastienwirtz/homer)             | start-page                         | docker-compose             | ✅ |
 | [tailscale-agent](https://tailscale.com/)                  | vpn provider                       | docker-compose             | ✅ |
 | [audiobookshelf](https://www.audiobookshelf.org/)          | podcast & audiobooks server        | docker-compose             | ✅ |
+| [podgrab](https://github.com/akhilrex/podgrab)             | podcast downloader                 | docker-compose             | ✅ |
 
 ## Requirements
 

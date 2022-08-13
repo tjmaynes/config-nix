@@ -68,6 +68,9 @@ function set_environment_variables() {
 
   export AUDIOBOOKSHELF_BASE_DIRECTORY=${BASE_DIRECTORY}/audiobookshelf-web
   export AUDIOBOOKSHELF_PORT=13378
+
+  export PODGRAB_BASE_DIRECTORY=${BASE_DIRECTORY}/podgrab-web
+  export PODGRAB_PORT=8098
 }
 
 function download_and_install_jellyfin_plugin() {
@@ -100,6 +103,8 @@ function main() {
   ensure_directory_exists "$TAILSCALE_BASE_DIRECTORY/var/lib"
   ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/config"
   ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/metadata"
+  ensure_directory_exists "$PODGRAB_BASE_DIRECTORY/config"
+  ensure_directory_exists "$PODGRAB_BASE_DIRECTORY/assets"
 
   ENCODED_SERVER_HOST="http:\/\/${SERVER_HOST}"
   sed \
@@ -109,6 +114,7 @@ function main() {
      -e "s/%server-host%:%gogs-port%/${ENCODED_SERVER_HOST}:${GOGS_PORT}/g" \
      -e "s/%server-host%:%audiobookshelf-web-port%/${ENCODED_SERVER_HOST}:${AUDIOBOOKSHELF_PORT}/g" \
      -e "s/%server-host%:%admin-portal-port%/${ENCODED_SERVER_HOST}:${ADMIN_PORTAL_PORT}/g" \
+     -e "s/%server-host%:%podgrab-port%/${ENCODED_SERVER_HOST}:${PODGRAB_PORT}/g" \
     data/homer.yml > "$HOMER_WEB_BASE_DIRECTORY/www/assets/config.yml"
 
   cp -f static/homer-logo.png "$HOMER_WEB_BASE_DIRECTORY/www/assets/logo.png"

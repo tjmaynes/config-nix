@@ -120,6 +120,18 @@ services:
       - ${AUDIOBOOKSHELF_BASE_DIRECTORY}/config:/config
       - ${AUDIOBOOKSHELF_BASE_DIRECTORY}/metadata:/metadata
 
+  podgrab-web:
+    image: akhilrex/podgrab:1.0.0
+    container_name: podgrab-web
+    environment:
+      - CHECK_FREQUENCY=240
+    volumes:
+      - ${PODGRAB_BASE_DIRECTORY}/config:/config
+      - ${PODGRAB_BASE_DIRECTORY}/assets:/assets
+    ports:
+      - ${PODGRAB_PORT}:8080
+    restart: unless-stopped
+
 networks:
   default:
     driver: bridge
