@@ -35,7 +35,7 @@ function set_environment_variables() {
   export PGID=$(sudo id -g)
 
   export SERVER_HOST="$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
-  export ADMIN_PORTAL_PORT=5001
+  export ADMIN_PORTAL_PORT=5000
 
   export MEDIA_DIRECTORY=${BASE_DIRECTORY}/media
   export BOOKS_DIRECTORY=${MEDIA_DIRECTORY}/Books
