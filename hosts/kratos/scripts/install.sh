@@ -61,6 +61,8 @@ function set_environment_variables() {
 
   export HOMER_WEB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/homer-web
   export HOMER_WEB_PORT=8080
+
+  export TAILSCALE_BASE_DIRECTORY=${BASE_DIRECTORY}/tailscale-agent
 }
 
 function download_and_install_jellyfin_plugin() {
@@ -95,6 +97,8 @@ function main() {
 
   ensure_directory_exists "$HOMER_WEB_BASE_DIRECTORY/www/assets"
 
+  ensure_directory_exists "$TAILSCALE_BASE_DIRECTORY/var/lib"
+
   ENCODED_SERVER_HOST="http:\/\/${SERVER_HOST}"
 
   sed \
@@ -108,6 +112,8 @@ function main() {
   cp -f static/homer-logo.png "$HOMER_WEB_BASE_DIRECTORY/www/assets/logo.png"
 
   sudo -E docker-compose up -d
+
+  sudo docker exec tailscale-agent tailscale up
 }
 
 main

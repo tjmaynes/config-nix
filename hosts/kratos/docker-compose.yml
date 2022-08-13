@@ -89,6 +89,21 @@ services:
     environment:
       - INIT_ASSETS=0
 
+  tailscale-agent:
+      image: tailscale/tailscale:v1.29.125
+      container_name: tailscale-agent
+      hostname: kratos
+      privileged: true
+      network_mode: host
+      volumes:
+        - ${TAILSCALE_BASE_DIRECTORY}/var/lib:/var/lib   # State data will be stored in this directory
+        - /dev/net/tun:/dev/net/tun
+      cap_add:
+        - net_admin
+        - sys_module
+      command: tailscaled
+      restart: unless-stopped
+
 networks:
   default:
     driver: bridge
