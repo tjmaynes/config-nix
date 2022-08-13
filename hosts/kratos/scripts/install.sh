@@ -39,6 +39,8 @@ function set_environment_variables() {
 
   export MEDIA_DIRECTORY=${BASE_DIRECTORY}/media
   export BOOKS_DIRECTORY=${MEDIA_DIRECTORY}/Books
+  export AUDIOBOOKS_DIRECTORY=${MEDIA_DIRECTORY}/Audiobooks
+  export PODCASTS_DIRECTORY=${MEDIA_DIRECTORY}/Podcasts
 
   export JELLYFIN_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/jellyfin-server
   export JELLYFIN_PORT=8096
@@ -63,6 +65,9 @@ function set_environment_variables() {
   export HOMER_WEB_PORT=8080
 
   export TAILSCALE_BASE_DIRECTORY=${BASE_DIRECTORY}/tailscale-agent
+
+  export AUDIOBOOKSHELF_BASE_DIRECTORY=${BASE_DIRECTORY}/audiobookshelf-web
+  export AUDIOBOOKSHELF_PORT=13378
 }
 
 function download_and_install_jellyfin_plugin() {
@@ -87,25 +92,22 @@ function main() {
 
   ensure_directory_exists "$JELLYFIN_BASE_DIRECTORY/config"
   ensure_directory_exists "$JELLYFIN_BASE_DIRECTORY/plugins"
-
   ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
-
   ensure_directory_exists "$GOGS_BASE_DIRECTORY/data"
   ensure_directory_exists "$GOGS_DATABASE_BASE_DIRECTORY"
-  
   ensure_directory_exists "$HOME_ASSISTANT_BASE_DIRECTORY/config"
-
   ensure_directory_exists "$HOMER_WEB_BASE_DIRECTORY/www/assets"
-
   ensure_directory_exists "$TAILSCALE_BASE_DIRECTORY/var/lib"
+  ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/config"
+  ensure_directory_exists "$AUDIOBOOKSHELF_BASE_DIRECTORY/metadata"
 
   ENCODED_SERVER_HOST="http:\/\/${SERVER_HOST}"
-
   sed \
      -e "s/%server-host%:%jellyfin-port%/${ENCODED_SERVER_HOST}:${JELLYFIN_PORT}/g" \
      -e "s/%server-host%:%calibre-web-port%/${ENCODED_SERVER_HOST}:${CALIBRE_WEB_PORT}/g" \
      -e "s/%server-host%:%home-assistant-port%/${ENCODED_SERVER_HOST}:${HOME_ASSISTANT_PORT}/g" \
      -e "s/%server-host%:%gogs-port%/${ENCODED_SERVER_HOST}:${GOGS_PORT}/g" \
+     -e "s/%server-host%:%audiobookshelf-web-port%/${ENCODED_SERVER_HOST}:${AUDIOBOOKSHELF_PORT}/g" \
      -e "s/%server-host%:%admin-portal-port%/${ENCODED_SERVER_HOST}:${ADMIN_PORTAL_PORT}/g" \
     data/homer.yml > "$HOMER_WEB_BASE_DIRECTORY/www/assets/config.yml"
 

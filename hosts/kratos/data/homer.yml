@@ -67,6 +67,12 @@ services:
         tag: "app"
         keywords: "self-hosted ebook reader, calibre"
         url: "%server-host%:%calibre-web-port%"
+      - name: "Audiobookshelf"
+        icon: "fas fa-podcast"
+        subtitle: "Listen to podcasts and audiobooks from one place"
+        tag: "app"
+        keywords: "self-hosted podcast & audiobooks server"
+        url: "%server-host%:%audiobookshelf-web-port%"
   - name: "Automation"
     icon: "fas fa-magic"
     items:

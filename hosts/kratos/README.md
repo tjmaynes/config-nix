@@ -9,6 +9,7 @@
 | [gogs](https://gogs.io/)                                   | git server / mirror                | docker-compose             | ✅ |
 | [homer](https://github.com/bastienwirtz/homer)             | start-page                         | docker-compose             | ✅ |
 | [tailscale-agent](https://tailscale.com/)                  | vpn provider                       | docker-compose             | ✅ |
+| [audiobookshelf](https://www.audiobookshelf.org/)          | podcast & audiobooks server        | docker-compose             | ✅ |
 
 ## Requirements
 
