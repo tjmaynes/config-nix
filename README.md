@@ -14,7 +14,6 @@
 | [glaucus](https://en.wikipedia.org/wiki/Glaucus)           | full nixos dev workstation                  | nixos / home-manager        | ✅ |
 | [gaia](https://en.wikipedia.org/wiki/Gaia)                 | macos apple silicon (personal) workstation  | nix-darwin / home-manager   | ✅ |
 | [demeter](https://en.wikipedia.org/wiki/Demeter)           | macos intel (personal) workstation          | nix-darwin / home-manager   | ✅ |
-| [kratos](https://en.wikipedia.org/wiki/Kratos_(mythology)) | home server                                 | docker-compose              | ✅ |
 
 ## Usage
 To install `gaia` on an Silicon Mac, run the following command:
