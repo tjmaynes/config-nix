@@ -8,6 +8,9 @@ function check_requirements() {
   if [[ -z "$(command -v docker)" ]]; then
     echo "Please install 'docker' before running this script"
     exit 1
+  elif [[ -z "$(command -v 7z)" ]]; then
+    echo "Please install '7z' before running this script"
+    exit 1
   fi
 }
 
@@ -60,12 +63,28 @@ function set_environment_variables() {
   export HOMER_WEB_PORT=8080
 }
 
+function download_and_install_jellyfin_plugin() {
+  JELLYFIN_PLUGIN_NAME=$1
+  JELLYFIN_PLUGIN_DLL_FILE=$2
+  JELLYFIN_BOOKSHELF_PLUGIN_URL=$3
+
+  if [[ ! -f "$JELLYFIN_BASE_DIRECTORY/config/data/plugins/configurations/$JELLYFIN_PLUGIN_DLL_FILE" ]]; then
+    echo "Downloading and installing $JELLYFIN_PLUGIN_NAME..."
+
+    curl -SL "$JELLYFIN_BOOKSHELF_PLUGIN_URL" --output $JELLYFIN_PLUGIN_NAME.zip
+    7z x $JELLYFIN_PLUGIN_NAME.zip -otmp/$JELLYFIN_PLUGIN_NAME
+    cp -rf tmp/$JELLYFIN_PLUGIN_NAME/* "$JELLYFIN_BASE_DIRECTORY/config/data/plugins/configurations"
+    rm -rf tmp/$JELLYFIN_PLUGIN_NAME
+  fi
+}
+
 function main() {
   check_requirements
   
   set_environment_variables
 
   ensure_directory_exists "$JELLYFIN_BASE_DIRECTORY/config"
+  ensure_directory_exists "$JELLYFIN_BASE_DIRECTORY/plugins"
 
   ensure_directory_exists "$CALIBRE_WEB_BASE_DIRECTORY/config"
 
