@@ -64,12 +64,12 @@ function set_environment_variables() {
   export HOMER_WEB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/homer-web
   export HOMER_WEB_PORT=8080
 
-  export TAILSCALE_BASE_DIRECTORY=${BASE_DIRECTORY}/tailscale-agent
+  export TAILSCALE_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/tailscale-agent
 
-  export AUDIOBOOKSHELF_BASE_DIRECTORY=${BASE_DIRECTORY}/audiobookshelf-web
+  export AUDIOBOOKSHELF_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/audiobookshelf-web
   export AUDIOBOOKSHELF_PORT=13378
 
-  export PODGRAB_BASE_DIRECTORY=${BASE_DIRECTORY}/podgrab-web
+  export PODGRAB_BASE_DIRECTORY=${BASE_DIRECTORY}/docker/podgrab-web
   export PODGRAB_PORT=8098
 }
 
