@@ -18,7 +18,9 @@ in {
       alacritty
       brave
       jetbrains.goland
+      libreoffice
       mpv
+      obs-studio
       vscode
       texlive.combined.scheme-full
     ];

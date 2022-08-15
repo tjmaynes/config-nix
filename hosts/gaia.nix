@@ -45,7 +45,6 @@ in {
       "ledger-live"
       "macvim"
       "mpv"
-      "nvidia-geforce-now"
       "obs"
       "steam"
       "selfcontrol"
