@@ -41,6 +41,7 @@ in {
       "mpv"
       "notion"
       "obs"
+      "raspberry-pi-imager"
       "selfcontrol"
       "spotify"
       "sysex-librarian"
