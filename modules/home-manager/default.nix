@@ -57,7 +57,7 @@ in {
       pandoc
       procs
       ripgrep
-      tailscale
+      #tailscale
       tmux
       unzip
       vim
@@ -144,6 +144,10 @@ in {
       shellAliases = shellAliases; 
       sessionVariables = environmentVariables;
       initExtra = ''
+        export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+        export NIX_PATH=nixpkgs=/nix/var/nix/profiles/per-user/$HOST_USERNAME/channels/nixpkgs${NIX_PATH:+:}$NIX_PATH
+        export NIX_PATH=home-manager=/nix/var/nix/profiles/per-user/$HOST_USERNAME/channels/home-manager${NIX_PATH:+:}$NIX_PATH
+
         if [[ -e "${home}/.nix-profile/etc/profile.d/nix.sh" ]]; then
           . ${home}/.nix-profile/etc/profile.d/nix.sh
         fi
