@@ -254,6 +254,15 @@ function install_arch_based_host() {
   install_home_manager
 }
 
+function install_docker_based_host() {
+  if [[ ! -f "./hosts/${HOST_NAME}.sh" ]]; then
+    echo "File './hosts/${HOST_NAME}.sh' not found!"
+    exit 1
+  fi
+
+  source ./hosts/${HOST_NAME}.sh
+}
+
 function main() {
   check_requirements
 
@@ -273,6 +282,9 @@ function main() {
       ;;
     "arch")
       install_arch_based_host
+      ;;
+    "docker")
+      install_docker_based_host
       ;;
     *)
       echo "Host type $HOST_TYPE has not been setup yet!"

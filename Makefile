@@ -12,6 +12,9 @@ install_glaucus:
 install_apollo:
 	./scripts/install.sh "apollo" "linux" "$(USERNAME)"
 
+install_kratos:
+	./scripts/install.sh "kratos" "docker" "$(USERNAME)"
+
 reload:
 	./scripts/reload.sh
 
